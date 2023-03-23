@@ -1,0 +1,1883 @@
+---------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Code\HWP
+> C.log
+  log type:  text
+ opened on:  23 Mar 2023, 14:49:24
+
+. clear all
+
+. set more off
+
+. set scheme s1color
+
+. graph set window fontface "Linux Biolinum O"        // set default font (window)
+
+. graph set window fontfacesans "Linux Biolinum O"    // set default sans font (window)
+
+. graph set window fontfaceserif "Linux Libertine O"  // set default serif font (window)
+
+. graph set window fontfacemono "DejaVu Sans Mono"    // set default mono font (window)
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. * Master - choose number of horizons for the IRFs
+. global hf               = 10
+
+. 
+. * Master - choose number of lags for the IRFs
+. global lags     = 2
+
+. 
+. * Master - use matched sample (that is, all horizons with same # obs)
+. global match    = 1
+
+. 
+. * Master - estimation of AR conf bands: set number of gridpoints and conf level
+. global gridd    = 100
+
+. global levell   = 90
+
+. 
+. * Master - choose whether outlier is identified when wage inflation is above 50% in absolute value (fifty=1)
+. *                  or when it is either in top or bottom 1% of the sample (fifty=0) - robustness check
+. global fifty    = 1
+
+. 
+. * Master - produce figure for slides (slides==1) or for paper (slides==0)
+. global slides   = 0
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. use "$hp\Data\JSTdataset_v100.dta", clear
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. use "$hp\Data\JSTdatasetR6.dta", clear
+
+. 
+end of do-file
+
+. use "C:\Users\ricar\sciebo\HWPC\Data\2022\JSTdataset_v100.dta"
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. use "$hp\Data\JSTdatasetR6.dta", clear
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. merge 1:1 iso year using "$hp\Data\OECD_Expectations.dta"
+(note: variable iso was str3, now str4 to accommodate using data's values)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                         1,994
+        from master                     1,994  (_merge==1)
+        from using                          0  (_merge==2)
+
+    matched                               724  (_merge==3)
+    -----------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. drop _merge
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. drop if year>2020
+(0 observations deleted)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. *artificially getting Ireland with id==18 without changing other countries id
+. replace country = "ZIreland" if country == "Ireland"            
+(151 real changes made)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. egen id = group(country)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. xtset id year
+       panel variable:  id (strongly balanced)
+        time variable:  year, 1870 to 2020
+                delta:  1 unit
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. replace country = "Ireland" if country == "ZIreland"                                            
+(151 real changes made)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. gen dp = cpi/l1.cpi-1
+(70 missing values generated)
+
+. replace dp=dp*100
+(2,544 real changes made)
+
+. gen ldp = l.dp
+(88 missing values generated)
+
+. label var dp "Price inflation"
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. gen dwn = wage/l1.wage-1
+(110 missing values generated)
+
+. replace dwn=dwn*100
+(2,525 real changes made)
+
+. label var dwn "Wage inflation %(%)"
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. label var unemp "Unemployment rate"
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. sort year
+
+. cap gen gdp_ppp = rgdpmad*pop
+
+. by year: egen countgdpppp = count(gdp_ppp)  
+
+. by year: egen sumGDP = sum(gdp_ppp) 
+
+. label var sumGDP "World GDP"
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. * Hyperinflation in Germany (1920 to 1925)
+. gen hyper=0
+
+. replace hyper=1 if iso=="DEU" & year>=1920 & year<=1925
+(6 real changes made)
+
+. 
+. * War periods
+. gen war = 0
+
+. replace war = 1 if year>=1914 & year<=1919
+(108 real changes made)
+
+. replace war = 1 if year>=1939 & year<=1945
+(126 real changes made)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. if ($fifty ==1) {
+. * if absolute value of wage inflation is above 50%
+. replace outlier = 1 if abs(dwn)>50
+variable outlier not found
+r(111);
+. }
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. gen outlier=0
+
+. 
+. if ($fifty ==1) {
+. * if absolute value of wage inflation is above 50%
+. replace outlier = 1 if abs(dwn)>50
+(141 real changes made)
+. }
+
+. else if ($fifty ==0) {
+. * alternatively, truncate top 1% and bottom 1% (rob check)
+. xtile pct = dwn, nq(100)
+. replace outlier = 1 if pct <= 1
+. replace outlier = 1 if pct >= 100
+. drop pct
+. }
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. * include hyperinflation in Germany
+. replace outlier = . if dwn == .
+(110 real changes made, 110 to missing)
+
+. replace outlier = 1 if hyper == 1
+(3 real changes made)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. if ($wage_out ==1) {
+==1 invalid name
+r(198);
+
+end of do-file
+
+r(198);
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. global wage_out = 1
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. global wage_out = 0
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. * Identify countries for which we have unemployment proxies during the Gold Standard (rob check)
+. gen CGS=(iso=="AUS" | iso=="DNK" | iso=="FRA" | iso=="DEU" | iso=="NLD" | iso=="NOR" | iso=="SWE" | iso=="CHE" | is
+> o=="GBR" | iso=="USA")
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. * Create a matched sample dummy
+. gen noval=0
+
+. replace noval=1 if unemp==. | dwn==.
+(781 real changes made)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. gen lunemp      = 100*log(1+unemp)                      // unemployment rate
+(769 missing values generated)
+
+. gen lwage       = 100*log(1+wage)                       // wage index
+(88 missing values generated)
+
+. gen lsumgdp = 100*log(sumGDP)                   // (sample) "world" GDP
+
+. gen lrgdp   = 100*log(rgdpbarro)                // real GDP index from Barro
+(54 missing values generated)
+
+. gen lrcon   = 100*log(rconsbarro)               // real consumption index from Barro
+(157 missing values generated)
+
+. gen lcpi    = 100*log(cpi)                              // price index
+(52 missing values generated)
+
+. gen lriy        = 100*log(iy*rgdpbarro)         // investment
+(295 missing values generated)
+
+. gen loansgdp = tloans/gdp*100                   // loans to gdp ratio
+(273 missing values generated)
+
+. gen lspreal = log(stock/cpi)                    // real stock prices index
+stock not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. xtset id year
+       panel variable:  id (strongly balanced)
+        time variable:  year, 1870 to 2020
+                delta:  1 unit
+
+. local varlist lrgdp lrcon lriy lwage lcpi ltrate stir lunemp unemp lspreal loansgdp lsumgdp cay
+
+. foreach var in `varlist'{
+  2.         gen d`var' = d.`var'
+  3. }
+(72 missing values generated)
+(175 missing values generated)
+(329 missing values generated)
+(110 missing values generated)
+(70 missing values generated)
+(112 missing values generated)
+(225 missing values generated)
+(796 missing values generated)
+(796 missing values generated)
+variable lspreal not found
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. use "$hp\Data\JSTdataset_v100.dta", clear
+
+. 
+. merge 1:1 iso year using "$hp\Data\OECD_Expectations.dta"
+(note: variable iso was str3, now str4 to accommodate using data's values)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                         1,994
+        from master                     1,994  (_merge==1)
+        from using                          0  (_merge==2)
+
+    matched                               724  (_merge==3)
+    -----------------------------------------
+
+. drop _merge
+
+. 
+. 
+.                                                         *** Data Management ***
+. 
+. ********************************************************************************
+. * Creation of country ids
+. ********************************************************************************
+. 
+. *artificially getting Ireland with id==18 without changing other countries id
+. replace country = "ZIreland" if country == "Ireland"            
+(151 real changes made)
+
+.                                         
+. egen id = group(country)
+
+. xtset id year
+       panel variable:  id (strongly balanced)
+        time variable:  year, 1870 to 2020
+                delta:  1 unit
+
+. 
+. replace country = "Ireland" if country == "ZIreland"                                            
+(151 real changes made)
+
+. 
+. ********************************************************************************
+. * Creation of control variables
+. ********************************************************************************
+.                                 
+. * price inflation (growth rate of cpi) in %
+. gen dp = cpi/l1.cpi-1
+(70 missing values generated)
+
+. replace dp=dp*100
+(2,544 real changes made)
+
+. gen ldp = l.dp
+(88 missing values generated)
+
+. label var dp "Price inflation (%)"
+
+. 
+. * wage inflation (growth rate of wage index) in %
+. gen dwn = wage/l1.wage-1
+(110 missing values generated)
+
+. replace dwn=dwn*100
+(2,525 real changes made)
+
+. label var dwn "Wage inflation %(%)"
+
+. 
+. * unemployment                                  
+. label var unemp "Unemployment rate"
+
+. 
+. * world GDP growth (following JST (2020) JME)
+. sort year
+
+. cap gen gdp_ppp = rgdpmad*pop
+
+. by year: egen countgdpppp = count(gdp_ppp)  
+
+. by year: egen sumGDP = sum(gdp_ppp) 
+
+. label var sumGDP "World GDP"
+
+. 
+. 
+. ********************************************************************************
+. * List unstable periods and outliers in the sample 
+. ********************************************************************************
+. 
+. * Hyperinflation in Germany (1920 to 1925)
+. gen hyper=0
+
+. replace hyper=1 if iso=="DEU" & year>=1920 & year<=1925
+(6 real changes made)
+
+. 
+. * War periods
+. gen war = 0
+
+. replace war = 1 if year>=1914 & year<=1919
+(108 real changes made)
+
+. replace war = 1 if year>=1939 & year<=1945
+(126 real changes made)
+
+. 
+. 
+. * Identify extreme (outlier) values in the dependent variable (dwn)
+. gen outlier=0
+
+. 
+. if ($fifty ==1) {
+. * if absolute value of wage inflation is above 50%
+. replace outlier = 1 if abs(dwn)>50
+(141 real changes made)
+. }
+
+. else if ($fifty ==0) {
+. * alternatively, truncate top 1% and bottom 1% (rob check)
+. xtile pct = dwn, nq(100)
+. replace outlier = 1 if pct <= 1
+. replace outlier = 1 if pct >= 100
+. drop pct
+. }
+
+. 
+. * include hyperinflation in Germany
+. replace outlier = . if dwn == .
+(110 real changes made, 110 to missing)
+
+. replace outlier = 1 if hyper == 1
+(3 real changes made)
+
+. 
+. 
+. * in order to properly remove the outlier values from the main analysis 
+. * replace wage variable by missing value
+. if ($wage_out ==1) {
+.         replace wage = . if war==1 | outlier==1
+. }
+
+. 
+. 
+. * Identify countries for which we have unemployment proxies during the Gold Standard (rob check)
+. gen CGS=(iso=="AUS" | iso=="DNK" | iso=="FRA" | iso=="DEU" | iso=="NLD" | iso=="NOR" | iso=="SWE" | iso=="CHE" | is
+> o=="GBR" | iso=="USA")
+
+. 
+. * Create a matched sample dummy (i.e. for which there is data for both wages and unemployment)
+. gen noval=0
+
+. replace noval=1 if unemp==. | dwn==.
+(782 real changes made)
+
+. 
+. 
+. ********************************************************************************
+. * Creation of control variables (must come after replace wage by missing values for outliers)
+. ********************************************************************************
+. 
+. 
+. * Taking Logs (following JST (2020) JME)
+. gen lunemp      = 100*log(1+unemp)                      // unemployment rate
+(770 missing values generated)
+
+. gen lwage       = 100*log(1+wage)                       // wage index
+(88 missing values generated)
+
+. gen lsumgdp = 100*log(sumGDP)                   // (sample) "world" GDP
+
+. gen lrgdp   = 100*log(rgdpbarro)                // real GDP index from Barro
+(54 missing values generated)
+
+. gen lrcon   = 100*log(rconsbarro)               // real consumption index from Barro
+(157 missing values generated)
+
+. gen lcpi    = 100*log(cpi)                              // price index
+(52 missing values generated)
+
+. gen lriy        = 100*log(iy*rgdpbarro)         // investment
+(295 missing values generated)
+
+. gen loansgdp = tloans/gdp*100                   // loans to gdp ratio
+(322 missing values generated)
+
+. gen lspreal = log(stock/cpi)                    // real stock prices index
+(468 missing values generated)
+
+. gen cay         = 100*(ca/gdp)                          // current account to gdp ratio
+(234 missing values generated)
+
+. 
+. 
+. * Taking Differences
+. xtset id year
+       panel variable:  id (strongly balanced)
+        time variable:  year, 1870 to 2020
+                delta:  1 unit
+
+. local varlist lrgdp lrcon lriy lwage lcpi ltrate stir lunemp unemp lspreal loansgdp lsumgdp cay
+
+. foreach var in `varlist'{
+  2.         gen d`var' = d.`var'
+  3. }
+(72 missing values generated)
+(175 missing values generated)
+(329 missing values generated)
+(110 missing values generated)
+(70 missing values generated)
+(110 missing values generated)
+(225 missing values generated)
+(797 missing values generated)
+(797 missing values generated)
+(489 missing values generated)
+(352 missing values generated)
+(18 missing values generated)
+(267 missing values generated)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. cap drop sevs
+
+. gen sevs = cond(year >= 1973 & year <= 1980, 1, 0)
+
+. foreach v in dlunemp dunemp dlwage dlrcon dlrgdp dlcpi dlriy dstir dltrate dloansgdp dlspreal unemp dlsumgdp cay{
+  2.         cap drop `v'1 `v'2
+  3.         gen `v'1=`v'*sevs
+  4.         gen `v'2=`v'*(1-sevs)
+  5. }
+(797 missing values generated)
+(797 missing values generated)
+(797 missing values generated)
+(797 missing values generated)
+(110 missing values generated)
+(110 missing values generated)
+(175 missing values generated)
+(175 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(70 missing values generated)
+(70 missing values generated)
+(329 missing values generated)
+(329 missing values generated)
+(225 missing values generated)
+(225 missing values generated)
+(110 missing values generated)
+(110 missing values generated)
+(352 missing values generated)
+(352 missing values generated)
+(489 missing values generated)
+(489 missing values generated)
+(770 missing values generated)
+(770 missing values generated)
+(18 missing values generated)
+(18 missing values generated)
+(234 missing values generated)
+(234 missing values generated)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. **** 1) output gap 
+. cap drop hpsm
+
+. sort iso
+
+. by iso: hprescott rgdpbarro, stub(hp) smooth(100)
+
+. egen double hpsm = rowtotal(hp_rgdpbarro_sm_*)
+
+. drop hp_rgdpbarro_sm_*
+
+. gen outgap=(1-hpsm/rgdpbarro)
+(54 missing values generated)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. **** 2) unemployment gap
+. 
+. * by country replace missing unemployment gaps by average across entire sample
+. gen unempp=unemp
+(770 missing values generated)
+
+. forvalues x=1/18{
+  2.         sum unemp if id==`x'
+  3.         replace unempp = r(mean) if id==`x' & unemp ==.
+  4. }
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |        120    5.483223    3.558776         .9       19.7
+(31 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |         95    5.837108     3.32714         .6       11.9
+(56 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |        105    6.674908     3.67829   .8904737   20.28603
+(46 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |        147    3.851602    2.350124   .7104126    10.7186
+(4 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |         90    5.505908    4.167508         .3    17.0046
+(61 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |        109     6.78328    3.680553          1       15.4
+(42 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |        128    4.536929    3.272808         .2       17.2
+(23 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |         95     7.07684    3.304604   .7002892    12.6828
+(56 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |         82    2.909181    1.393488        1.1        6.8
+(69 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |        151     5.04564    3.571816   .9188592   19.33257
+(0 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |        113     3.58105    2.452858   .5913043       10.8
+(38 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |         68     6.14605    3.218549      1.575    16.1834
+(83 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |         85    9.681598    8.239521         .7    26.0936
+(66 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |        110     4.32546    2.625228        1.1    10.3586
+(41 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |        108    3.242322     3.49815   .0359226   16.87737
+(43 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |        150    5.191091    3.439205         .4       15.6
+(1 real change made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |        131    6.782328    4.495517        1.2       24.9
+(20 real changes made)
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+       unemp |         61    9.473142    4.471675       3.68      18.07
+(90 real changes made)
+
+. * remove periods for each we do not have initial data
+. replace unempp = . if id==1 & year<1901
+(31 real changes made, 31 to missing)
+
+. replace unempp = . if id==2 & year<1921
+(51 real changes made, 51 to missing)
+
+. replace unempp = . if id==3 & year<1916
+(46 real changes made, 46 to missing)
+
+. replace unempp = . if id==4 & year<1874
+(4 real changes made, 4 to missing)
+
+. replace unempp = . if id==5 & year<1920
+(50 real changes made, 50 to missing)
+
+. replace unempp = . if id==6 & year<1895
+(25 real changes made, 25 to missing)
+
+. replace unempp = . if id==7 & year<1887
+(17 real changes made, 17 to missing)
+
+. replace unempp = . if id==8 & year<1919
+(49 real changes made, 49 to missing)
+
+. replace unempp = . if id==9 & year<1930
+(60 real changes made, 60 to missing)
+
+. replace unempp = . if id==11 & year<1904
+(34 real changes made, 34 to missing)
+
+. replace unempp = . if id==12 & year<1953
+(83 real changes made, 83 to missing)
+
+. replace unempp = . if id==13 & year<1933
+(63 real changes made, 63 to missing)
+
+. replace unempp = . if id==14 & year<1911
+(41 real changes made, 41 to missing)
+
+. replace unempp = . if id==15 & year<1913
+(43 real changes made, 43 to missing)
+
+. replace unempp = . if id==17 & year<1890
+(20 real changes made, 20 to missing)
+
+. replace unempp = . if id==18 & year<1960
+(90 real changes made, 90 to missing)
+
+. 
+. cap drop hpsmm
+
+. sort iso
+
+. by iso:  hprescott unempp, stub(hp) smooth(100)
+
+. egen double hpsmm = rowtotal(hp_unempp_sm_*)
+
+. drop hp_unempp_sm_*
+
+. gen unempgap=(1-hpsmm/unemp)
+(770 missing values generated)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. **** 3) Capital Openess
+. * merge Capital Openess from Quinn et al.(2011) extended in Jorda et al.(2020) and by me until 2020
+. merge 1:1 iso year using "$hp\Data\openquinn_IRL.dta"
+file
+    C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\\Data\openquinn
+    > _IRL.dta not found
+r(601);
+
+end of do-file
+
+r(601);
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. merge 1:1 iso year using "$hp\Data\openquinn_extended_IRL.dta"
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           144
+        from master                       144  (_merge==1)
+        from using                          0  (_merge==2)
+
+    matched                             2,574  (_merge==3)
+    -----------------------------------------
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. drop if _merge==2
+(0 observations deleted)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. drop _merge
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. **** 4) Trade Openess measure
+. gen trade = (imports+exports)/gdp
+(137 missing values generated)
+
+. 
+. 
+. **** 5) CB Rates from Zimmermann (2020)
+. merge 1:1 year country using "$hp\Data\cb_rates.dta"
+(note: variable year was int, now float to accommodate using data's values)
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                           230
+        from master                       230  (_merge==1)
+        from using                          0  (_merge==2)
+
+    matched                             2,488  (_merge==3)
+    -----------------------------------------
+
+. drop if _merge==2
+(0 observations deleted)
+
+. drop _merge
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. replace openquinn = 100 if year >2012
+(144 real changes made)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. preserve
+
+. keep iso year stir
+
+. keep if iso=="GBR"
+(2,567 observations deleted)
+
+. keep year stir
+
+. rename stir stir_gbr
+
+. sort year
+
+. save ../Data/stir_gbr.dta, replace
+(note: file ../Data/stir_gbr.dta not found)
+file ../Data/stir_gbr.dta saved
+
+. restore
+
+. 
+. preserve
+
+. keep iso year stir
+
+. keep if iso=="USA"
+(2,567 observations deleted)
+
+. keep year stir
+
+. rename stir stir_usa
+
+. sort year
+
+. save ../Data/stir_usa.dta, replace
+(note: file ../Data/stir_usa.dta not found)
+file ../Data/stir_usa.dta saved
+
+. restore
+
+. 
+. preserve
+
+. keep iso year stir
+
+. keep if iso=="DEU"
+(2,567 observations deleted)
+
+. keep year stir
+
+. rename stir stir_deu
+
+. sort year
+
+. save ../Data/stir_deu.dta, replace
+(note: file ../Data/stir_deu.dta not found)
+file ../Data/stir_deu.dta saved
+
+. restore
+
+. 
+. 
+. * collect ibase data for interwar UK/FR/US and "goldR" from OST IMFER dataset
+. preserve
+
+. use ../Data/interwar3IMF , clear
+file ../Data/interwar3IMF.dta not found
+r(601);
+
+end of do-file
+
+r(601);
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. preserve
+
+. use ../Data/interwar3IMF , clear
+
+. keep if ccode==1
+(360 observations deleted)
+
+. keep year ukmm usmm frmm goldr
+
+. sort year
+
+. save ../Data/stir_ost.dta, replace
+(note: file ../Data/stir_ost.dta not found)
+file ../Data/stir_ost.dta saved
+
+. restore
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. cap drop _merge
+
+. sort year
+
+. merge m:1 year using ../Data/stir_gbr.dta // JST uk rate
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                             2,718  (_merge==3)
+    -----------------------------------------
+
+. drop _merge
+
+. sort year
+
+. merge m:1 year using ../Data/stir_usa.dta // JST us rate
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                             2,718  (_merge==3)
+    -----------------------------------------
+
+. drop _merge
+
+. sort year
+
+. merge m:1 year using ../Data/stir_deu.dta // JST deu rate
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                             0
+    matched                             2,718  (_merge==3)
+    -----------------------------------------
+
+. drop _merge
+
+. sort year
+
+. merge m:1 year using ../Data/stir_ost.dta // OST interwar uk/us/fr rates and peg indictaor
+
+    Result                           # of obs.
+    -----------------------------------------
+    not matched                         2,358
+        from master                     2,358  (_merge==1)
+        from using                          0  (_merge==2)
+
+    matched                               360  (_merge==3)
+    -----------------------------------------
+
+. drop _merge
+
+. sort iso year
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. erase ../Data/stir*
+file ../Data/stir* not found
+r(601);
+
+end of do-file
+
+r(601);
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. erase ../Data/stir_gbr
+file ../Data/stir_gbr not found
+r(601);
+
+end of do-file
+
+r(601);
+
+. cd
+C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Code
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. erase ../Data/stir_gbr.dta
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. erase ../Data/stir_usa.dta
+
+. erase ../Data/stir_deu.dta
+
+. erase ../Data/stir_ost.dta
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. sort  iso year
+
+. tsset id year, yearly
+       panel variable:  id (strongly balanced)
+        time variable:  year, 1870 to 2020
+                delta:  1 year
+
+. 
+. * use base coding from JST dataset
+. capture drop dibase
+
+. gen      dibase = .
+(2,718 missing values generated)
+
+. replace  dibase = d.stir_usa   if peg_base=="USA"
+(720 real changes made)
+
+. replace  dibase = d.stir_gbr   if peg_base=="GBR"
+(747 real changes made)
+
+. replace  dibase = d.stir_deu   if peg_base=="DEU"
+(618 real changes made)
+
+. replace  dibase = d.goldr      if peg_base=="HYBRID" // OST hybrid for interwar
+(266 real changes made)
+
+. replace  dibase = . if hyper == 1 // drop DEU hyperinflation
+(6 real changes made, 6 to missing)
+
+. 
+. 
+. * IV is impulse to short rate due to change in base when pegged in year T and T-1
+. capture drop dibpeg
+
+. gen     dibpeg = dibase * peg * l.peg  
+(374 missing values generated)
+
+. replace dibpeg = dibpeg * (openquinn/100)  // scale by quinn capital openness
+(711 real changes made, 218 to missing)
+
+. replace dibpeg = . if peg==0 | l.peg==0
+(750 real changes made, 750 to missing)
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. sort iso year
+
+. tsset id year, yearly
+       panel variable:  id (strongly balanced)
+        time variable:  year, 1870 to 2020
+                delta:  1 year
+
+. estimates clear                                         
+
+. 
+. * forecasting equation = regressor list uses 1 lag of RHS 7
+. local rhsstirF l.dlrcon l.dltrate l.dstir l.dlrgdp l.dlcpi l.dlriy l.cay
+
+.  
+. * forecast stir for pre-WW2
+. cap drop dstir_hat
+
+. gen dstir_hat =.
+(2,718 missing values generated)
+
+. xtreg   d.stir  `rhsstirF'  ///
+>         if year < 1939 & war==0 & (iso=="USA"|iso=="GBR"|iso=="FRA") & hyper~=1 , fe
+
+Fixed-effects (within) regression               Number of obs     =        179
+Group variable: id                              Number of groups  =          3
+
+R-sq:                                           Obs per group:
+     within  = 0.1286                                         min =         57
+     between = 0.2275                                         avg =       59.7
+     overall = 0.1266                                         max =         61
+
+                                                F(7,169)          =       3.56
+corr(u_i, Xb)  = -0.0758                        Prob > F          =     0.0013
+
+------------------------------------------------------------------------------
+      D.stir |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      dlrcon |
+         L1. |   .0534694   .0351175     1.52   0.130    -.0158561     .122795
+             |
+     dltrate |
+         L1. |   .9721342   .4743872     2.05   0.042     .0356463    1.908622
+             |
+       dstir |
+         L1. |  -.2862754   .0788356    -3.63   0.000    -.4419048   -.1306461
+             |
+      dlrgdp |
+         L1. |  -.0052454   .0328523    -0.16   0.873    -.0700991    .0596083
+             |
+       dlcpi |
+         L1. |  -.0260955   .0250679    -1.04   0.299    -.0755821    .0233911
+             |
+       dlriy |
+         L1. |   .0121894   .0054169     2.25   0.026     .0014959    .0228829
+             |
+         cay |
+         L1. |  -.0096234   .0487704    -0.20   0.844     -.105901    .0866543
+             |
+       _cons |  -.1045553   .1515283    -0.69   0.491    -.4036874    .1945767
+-------------+----------------------------------------------------------------
+     sigma_u |  .09674543
+     sigma_e |  1.4455297
+         rho |  .00445929   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+F test that all u_i=0: F(2, 169) = 0.20                      Prob > F = 0.8158
+
+. cap drop temp
+
+. predict temp ///
+>         if year < 1939 &  war==0 & (iso=="USA"|iso=="GBR"|iso=="FRA") & hyper~=1
+(option xb assumed; fitted values)
+(2,539 missing values generated)
+
+. replace dstir_hat = temp if year < 1939 &  war==0 & (iso=="USA"|iso=="GBR"|iso=="FRA") & hyper~=1
+(179 real changes made)
+
+. 
+. * forecast stir for post-WW2
+. xtreg   d.stir  `rhsstirF'  ///
+>         if year > 1945 &  war==0 & (iso=="DEU"|iso=="USA"|iso=="GBR") & hyper~=1 , fe
+
+Fixed-effects (within) regression               Number of obs     =        219
+Group variable: id                              Number of groups  =          3
+
+R-sq:                                           Obs per group:
+     within  = 0.1445                                         min =         69
+     between = 0.9855                                         avg =       73.0
+     overall = 0.1319                                         max =         75
+
+                                                F(7,209)          =       5.05
+corr(u_i, Xb)  = -0.2394                        Prob > F          =     0.0000
+
+------------------------------------------------------------------------------
+      D.stir |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+      dlrcon |
+         L1. |   .0895141   .0751474     1.19   0.235    -.0586299    .2376582
+             |
+     dltrate |
+         L1. |  -.0757611   .1562149    -0.48   0.628      -.38372    .2321977
+             |
+       dstir |
+         L1. |    .081539   .0865862     0.94   0.347    -.0891553    .2522333
+             |
+      dlrgdp |
+         L1. |   .1363207   .0536923     2.54   0.012     .0304728    .2421686
+             |
+       dlcpi |
+         L1. |  -.0195692   .0364898    -0.54   0.592    -.0915044     .052366
+             |
+       dlriy |
+         L1. |   .0159537   .0136288     1.17   0.243    -.0109139    .0428212
+             |
+         cay |
+         L1. |   .0322183   .0449368     0.72   0.474    -.0563691    .1208057
+             |
+       _cons |  -.4972717   .2218575    -2.24   0.026    -.9346369   -.0599064
+-------------+----------------------------------------------------------------
+     sigma_u |   .2318114
+     sigma_e |  1.4925827
+         rho |  .02355275   (fraction of variance due to u_i)
+------------------------------------------------------------------------------
+F test that all u_i=0: F(2, 209) = 1.04                      Prob > F = 0.3557
+
+. cap drop temp
+
+. predict temp ///
+>         if year > 1945 &  war==0 & (iso=="DEU"|iso=="USA"|iso=="GBR") & hyper~=1
+(option xb assumed; fitted values)
+(2,499 missing values generated)
+
+. replace dstir_hat = temp if year > 1945 &  war==0 & (iso=="DEU"|iso=="USA"|iso=="GBR") & hyper~=1
+(219 real changes made)
+
+. 
+. * make the residualized change in stir that will be the basis for the IV
+. cap drop dstir_resid
+
+. gen dstir_resid = d.stir - dstir_hat
+(2,320 missing values generated)
+
+. 
+. * copy into new series
+. cap drop dibaseF_usa dibaseF_gbr dibaseF_deu dibaseF_fra
+
+. gen dibaseF_usa = dstir_resid if iso=="USA"  // dibase for new IV
+(2,582 missing values generated)
+
+. gen dibaseF_gbr = dstir_resid if iso=="GBR"  // dibase for new IV
+(2,582 missing values generated)
+
+. gen dibaseF_deu = dstir_resid if iso=="DEU"  // dibase for new IV
+(2,649 missing values generated)
+
+. gen dibaseF_fra = dstir_resid if iso=="FRA"  // dibase for new IV
+(2,661 missing values generated)
+
+. 
+. 
+. cap drop temp
+
+. bysort year: egen temp = mean(dibaseF_usa)
+(270 missing values generated)
+
+. replace dibaseF_usa = temp
+(2,312 real changes made)
+
+. cap drop temp
+
+. bysort year: egen temp = mean(dibaseF_gbr)
+(270 missing values generated)
+
+. replace dibaseF_gbr = temp
+(2,312 real changes made)
+
+. cap drop temp
+
+. bysort year: egen temp = mean(dibaseF_deu)
+(1476 missing values generated)
+
+. replace dibaseF_deu = temp
+(1,173 real changes made)
+
+. cap drop temp
+
+. bysort year: egen temp = mean(dibaseF_fra)
+(1692 missing values generated)
+
+. replace dibaseF_fra = temp
+(969 real changes made)
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. sort iso year
+
+. xtset id year
+       panel variable:  id (strongly balanced)
+        time variable:  year, 1870 to 2020
+                delta:  1 year
+
+. 
+. 
+. * use base coding from JST dataset and replicate hybrid construction of OST
+. cap drop dibaseF
+
+. gen      dibaseF = .
+(2,718 missing values generated)
+
+. replace  dibaseF = dibaseF_usa   if peg_base=="USA"
+(630 real changes made)
+
+. replace  dibaseF = dibaseF_gbr   if peg_base=="GBR"
+(718 real changes made)
+
+. replace  dibaseF = dibaseF_deu   if peg_base=="DEU"
+(618 real changes made)
+
+. replace  dibaseF = (dibaseF_usa)/1 ///
+>                         if year>=1919 & year<=1925 & peg_base=="HYBRID"
+(84 real changes made)
+
+. replace  dibaseF = (dibaseF_usa+dibaseF_gbr+dibaseF_fra)/3  ///
+>                         if year>=1926 & year<=1930 & peg_base=="HYBRID"
+(70 real changes made)
+
+. replace  dibaseF = (dibaseF_usa+dibaseF_fra)/2  ///
+>                         if year>=1931 & year<=1932 & peg_base=="HYBRID"
+(28 real changes made)
+
+. replace  dibaseF = (dibaseF_fra)/1  ///
+>                         if year>=1933 & year<=1938 & peg_base=="HYBRID"
+(84 real changes made)
+
+. replace  dibaseF = . if hyper == 1 // drop DEU hyperinflation
+(6 real changes made, 6 to missing)
+
+. 
+. *****************
+. * impulse to short rate due to change in base when pegged in year T and T-1
+. cap drop dibpegF
+
+. gen      dibpegF = .
+(2,718 missing values generated)
+
+. replace  dibpegF = dibaseF * peg * l.peg  
+(2,225 real changes made)
+
+. replace  dibpegF = dibpegF * (openquinn/100)  // scale by quinn capital openness
+(614 real changes made, 115 to missing)
+
+. replace  dibpegF = . if peg==0 | l.peg==0
+(737 real changes made, 737 to missing)
+
+. 
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. corr dibpeg JSTtrilemmaIV if abs(JSTtrilemmaIV)<10
+(obs=1,249)
+
+             |   dibpeg JSTtri~V
+-------------+------------------
+      dibpeg |   1.0000
+JSTtrilemm~V |   1.0000   1.0000
+
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. corr dibpegF JSTtrilemmaIV_R
+(obs=1,246)
+
+             |  dibpegF JSTtri~R
+-------------+------------------
+     dibpegF |   1.0000
+JSTtrilemm~R |   0.9976   1.0000
+
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. noi: corr dibpegF JSTtrilemmaIV_R
+(obs=1,246)
+
+             |  dibpegF JSTtri~R
+-------------+------------------
+     dibpegF |   1.0000
+JSTtrilemm~R |   0.9976   1.0000
+
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. replace JSTtrilemmaIV   = dibpeg
+(1,978 real changes made, 688 to missing)
+
+. replace JSTtrilemmaIV_R = dibpegF
+(2,046 real changes made, 675 to missing)
+
+. label var JSTtrilemmaIV   "JST trilemma instrument (raw base rate changes)"
+
+. label var JSTtrilemmaIV_R  "JST trilemma instrument (residualized base rate changes)"
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. preserve
+
+. keep      year country iso ifs JSTtrilemmaIV JSTtrilemmaIV_R peg peg_type peg_base
+
+. order     year country iso ifs JSTtrilemmaIV JSTtrilemmaIV_R peg peg_type peg_base
+
+. label var peg_type "Peg type: BASE, PEG, or FLOAT"
+
+. label var peg_base "Peg base: GBR, USA, DEU, or HYBRID"
+
+. sort iso year
+
+. save  ../Data/JSTtrilemmaIV2.dta , replace
+(note: file ../Data/JSTtrilemmaIV2.dta not found)
+file ../Data/JSTtrilemmaIV2.dta saved
+
+. restore
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. xtset id year
+       panel variable:  id (strongly balanced)
+        time variable:  year, 1870 to 2020
+                delta:  1 year
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. save "$hp\Data\Data_MScThesis_Analysis.dta", replace
+(note: file C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\\Data\Dat
+> a_MScThesis_Analysis.dta not found)
+file C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\\Data\Data_MScTh
+> esis_Analysis.dta saved
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. use "$hp\Data\JSTdataset_v100.dta", clear
+
+. 
+end of do-file
+
+. sum year
+
+    Variable |        Obs        Mean    Std. Dev.       Min        Max
+-------------+---------------------------------------------------------
+        year |      2,718        1945    43.59701       1870       2020
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. use "$hp\Data\Data_MScThesis_Analysis.dta", clear
+
+. set more off
+
+. 
+. * Graphs management
+. graph drop _all
+
+. set scheme s1mono
+
+. graph set window fontface default
+
+. capture graph set window fontface Helvetica
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. global EXPLICIT=1
+
+. do HistoricalPeriods
+file HistoricalPeriods.do not found
+r(601);
+
+end of do-file
+
+r(601);
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. do HistoricalPeriods
+
+. /*
+> Historical Periods
+> 
+> Here, I construct the historical peridos used in the Descriptives section.
+> This classification is based on Table B.1. in the Appendix of the paper.
+> */
+. 
+. gen period=""
+(2,718 missing values generated)
+
+. 
+.                                                         ** Historical Periods **
+.                                                         
+. *1. Gold Standard
+. gen p1=0
+
+. 
+. replace p1=1 if iso=="AUS" & year<=1915 & year>=1870
+(46 real changes made)
+
+. replace p1=1 if iso=="BEL" & year<=1914 & year>=1878
+(37 real changes made)
+
+. replace p1=1 if iso=="CAN" & year<=1914 & year>=1870
+(45 real changes made)
+
+. replace p1=1 if iso=="DNK" & year<=1917 & year>=1876
+(42 real changes made)
+
+. replace p1=1 if iso=="FIN" & year<=1914 & year>=1877
+(38 real changes made)
+
+. replace p1=1 if iso=="FRA" & year<=1914 & year>=1878
+(37 real changes made)
+
+. replace p1=1 if iso=="DEU" & year<=1914 & year>=1871
+(44 real changes made)
+
+. replace p1=1 if iso=="ITA" & year<=1917 & year>=1884
+(34 real changes made)
+
+. replace p1=1 if iso=="JPN" & year<=1917 & year>=1897
+(21 real changes made)
+
+. replace p1=1 if iso=="NLD" & year<=1914 & year>=1875
+(40 real changes made)
+
+. replace p1=1 if iso=="NOR" & year<=1914 & year>=1875
+(40 real changes made)
+
+. replace p1=1 if iso=="PRT" & year<=1891 & year>=1870
+(22 real changes made)
+
+. *replace p1=0 if iso=="ESP"
+. replace p1=1 if iso=="SWE" & year<=1914 & year>=1873
+(42 real changes made)
+
+. replace p1=1 if iso=="CHE" & year<=1914 & year>=1878
+(37 real changes made)
+
+. replace p1=1 if iso=="GBR" & year<=1914 & year>=1870
+(45 real changes made)
+
+. replace p1=1 if iso=="USA" & year<=1917 & year>=1880
+(38 real changes made)
+
+. 
+. replace period="1. Gold Standard" if p1==1
+variable period was str1 now str16
+(608 real changes made)
+
+. 
+. 
+. *World War Periods
+. gen pwar=0
+
+. replace pwar=1 if war == 1
+(234 real changes made)
+
+. replace period="War Period" if pwar==1
+(234 real changes made)
+
+. 
+. 
+. *2. Interwar Period
+. gen p2=0
+
+. replace p2=1 if year<=1938 & year>=1919
+(360 real changes made)
+
+. replace period="2. Interwar Period" if p2==1
+variable period was str16 now str18
+(360 real changes made)
+
+. 
+. 
+. *3. Bretton Woods
+. gen p3=0
+
+. replace p3=1 if iso=="AUS" & year<=1971 & year>=1949
+(23 real changes made)
+
+. replace p3=1 if iso=="BEL" & year<=1971 & year>=1946
+(26 real changes made)
+
+. replace p3=1 if iso=="CAN" & ((year<=1950 & year>=1946) | (year<=1971 & year>=1962))
+(15 real changes made)
+
+. replace p3=1 if iso=="DNK" & year<=1971 & year>=1946
+(26 real changes made)
+
+. replace p3=1 if iso=="FIN" & year<=1971 & year>=1948
+(24 real changes made)
+
+. replace p3=1 if iso=="FRA" & year<=1971 & year>=1946
+(26 real changes made)
+
+. replace p3=1 if iso=="DEU" & year<=1971 & year>=1952
+(20 real changes made)
+
+. replace p3=1 if iso=="ITA" & year<=1971 & year>=1947
+(25 real changes made)
+
+. replace p3=1 if iso=="JPN" & year<=1971 & year>=1952
+(20 real changes made)
+
+. replace p3=1 if iso=="NLD" & year<=1971 & year>=1946 
+(26 real changes made)
+
+. replace p3=1 if iso=="NOR" & year<=1971 & year>=1946
+(26 real changes made)
+
+. replace p3=1 if iso=="PRT" & year<=1971 & year>=1961
+(11 real changes made)
+
+. replace p3=1 if iso=="ESP" & year<=1971 & year>=1958
+(14 real changes made)
+
+. replace p3=1 if iso=="SWE" & year<=1971 & year>=1951
+(21 real changes made)
+
+. replace p3=1 if iso=="CHE" & year<=1971 & year>=1946
+(26 real changes made)
+
+. replace p3=1 if iso=="GBR" & year<=1971 & year>=1946
+(26 real changes made)
+
+. replace p3=1 if iso=="USA" & year<=1971 & year>=1946
+(26 real changes made)
+
+. replace period="3. Bretton Woods" if p3==1
+(381 real changes made)
+
+. 
+. 
+. 
+. if(${EXPLICIT}==0) {
+. *5. Inflation Targeting (Implicit)
+. gen p5=0
+. replace p5=1 if iso=="AUS" & year>=1993
+. replace p5=1 if iso=="BEL" & year>=1990
+. replace p5=1 if iso=="CAN" & year>=1991
+. replace p5=1 if iso=="DNK" & year>=1986
+. replace p5=1 if iso=="FIN" & year>=1995
+. replace p5=1 if iso=="FRA" & year>=1986
+. replace p5=1 if iso=="DEU" & year>=1986
+. replace p5=1 if iso=="ITA" & year>=1986
+. replace p5=1 if iso=="JPN" & year>=1987
+. replace p5=1 if iso=="NLD" & year>=1986
+. replace p5=1 if iso=="NOR" & year>=1990
+. replace p5=1 if iso=="PRT" & year>=1992
+. replace p5=1 if iso=="ESP" & year>=1990
+. replace p5=1 if iso=="SWE" & year>=1991
+. replace p5=1 if iso=="CHE" & year>=1986
+. replace p5=1 if iso=="GBR" & year>=1991
+. replace p5=1 if iso=="USA" & year>=1988
+. replace period="5. Inflation Targeting" if p5==1
+. }
+
+. if(${EXPLICIT}==1) {
+. *5. Inflation Targeting (Explicit)
+. gen p5=0
+. replace p5=1 if iso=="AUS" & year>=1993
+(28 real changes made)
+. replace p5=1 if iso=="CAN" & year>=1991
+(30 real changes made)
+. replace p5=1 if iso=="JPN" & year>=2012
+(9 real changes made)
+. replace p5=1 if iso=="NOR" & year>=2001
+(20 real changes made)
+. replace p5=1 if iso=="SWE" & year>=1993
+(28 real changes made)
+. replace p5=1 if iso=="GBR" & year>=1992
+(29 real changes made)
+. replace p5=1 if iso=="USA" & year>=2012
+(9 real changes made)
+. replace period="5. Inflation Targeting" if p5==1
+variable period was str18 now str22
+(153 real changes made)
+. }
+
+. 
+. *Period 4: Managed Float
+. gen p4=0
+
+. replace p4=1 if p1==0 & p2==0 & p3==0 & p5==0 & pwar==0
+(1,028 real changes made)
+
+. replace period="4. Managed Float" if p4==1
+(1,028 real changes made)
+
+. 
+. *In between period (between Gold Standard and Inflation Targeting excluding War Periods)
+. gen p6=0
+
+. replace p6=1 if p4==1 | p3==1
+(1,409 real changes made)
+
+. 
+. 
+.                                                         ** Labelling **
+.                                                         
+. label var period "Historical Period"
+
+. label var p1 "Gold Standard" 
+
+. label var p2 "Interwar Period"
+
+. label var p3 "Bretton Woods"
+
+. label var p4 "Managed Float"
+
+. label var p5 "Inflation Targeting"
+
+. label var p6 "In Between Period"
+
+. label var pwar "War Period"
+
+. 
+end of do-file
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. gen window=""
+(2,718 missing values generated)
+
+. replace window="1870-1913" if year<=1913 & year>=1870
+variable window was str1 now str9
+(792 real changes made)
+
+. replace window="1920-1938" if year<=1938 & year>=1920
+(342 real changes made)
+
+. replace window="1946-1971" if year<=1971 & year>=1946
+(468 real changes made)
+
+. replace window="1972-1999" if year<=1999 & year>=1972
+(504 real changes made)
+
+. replace window="2000-2020" if year<=2020 & year>=2000
+(378 real changes made)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD73f4_000000.tmp"
+
+. estpost tabstat unemp dwn dp if noval==0 & outlier==0, by(window) stat(n mean sd min max) col(stat)
+
+Summary statistics: count mean sd min max
+     for variables: unemp dwn dp
+  by categories of: window
+
+      window |  e(count)    e(mean)      e(sd)     e(min)     e(max) 
+-------------+-------------------------------------------------------
+1870-1913    |                                                       
+       unemp |       223   4.079205   2.746125         .2       18.4 
+         dwn |       223   1.682527   2.630929  -6.710671   10.25943 
+          dp |       223   .3863919   3.205294  -10.94235   11.56097 
+-------------+-------------------------------------------------------
+1920-1938    |                                                       
+       unemp |       268   7.169665   4.988088         .6       24.9 
+         dwn |       268   1.256395   8.626197  -27.71604   43.96599 
+          dp |       268   -.288989   7.234616  -18.45018   30.43478 
+-------------+-------------------------------------------------------
+1946-1971    |                                                       
+       unemp |       428   2.602807   1.829869   .0381528   9.923077 
+         dwn |       428   7.773532   5.098241  -10.78282   35.29412 
+          dp |       428   4.084873   3.764423  -6.866704   20.37937 
+-------------+-------------------------------------------------------
+1972-1999    |                                                       
+       unemp |       504   7.071776   4.295835   .0359226    24.2087 
+         dwn |       504   8.298505   6.268544  -1.420051   32.28492 
+          dp |       504    6.56101   5.509912  -.7078078    37.8819 
+-------------+-------------------------------------------------------
+2000-2020    |                                                       
+       unemp |       377   7.048065   3.517984          2    26.0936 
+         dwn |       377   2.323965   1.840532  -6.139177   7.502242 
+          dp |       377    1.63313   1.284443  -4.480427   5.565171 
+-------------+-------------------------------------------------------
+Total        |                                                       
+       unemp |      1800   5.648017   4.123041   .0359226    26.0936 
+         dwn |      1800   5.054206   6.292066  -27.71604   43.96599 
+          dp |      1800   3.155267   5.281178  -18.45018    37.8819 
+
+. esttab using "$Tab\Table_Descriptives.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") 
+> noobs nonumber label replace ///
+>         title("Descriptive statistics \label{T:Descriptives}")
+(output written to C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Ou
+> tput\Tables\Table_Descriptives.tex)
+
+. 
+end of do-file
+
