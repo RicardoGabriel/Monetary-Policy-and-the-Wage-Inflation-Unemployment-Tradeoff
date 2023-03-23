@@ -78,7 +78,7 @@ do Data_Management
 do Descriptives
 
 ** Figure 1
-*do Figure_1
+do Figure_1
 
 *** Main Analysis
 
@@ -92,35 +92,36 @@ do Figure_2
 
 * First Stage Results of Monetary Policy Shocks (Trilemma Instrumental Variable)
 ** Table 3
-*do First_Stage			
+do First_Stage			
 
 
 * Phillips Multiplier
 ** Figures 3 a) and 3 b)
-*do PM_BM
+do PM_BM
 
 
 ** Figure 3 c)
-*do MP_IRFs_BM
+do MP_IRFs_BM
 
 ** Figure A.1
 * Effects of Monetary Policy (as in JST 2020)
-*do MP_IRFs
+do MP_IRFs
 
 * State Dependent Phillips Multipliers
-* Figure 4 and Table A.4
-*do SD_BM
+* Figure 5 and Table A.7
+do SD_BM
 
-*global state 	= "postwar"
-*do SD_BM
+* Figure 4
+global state 	= "postwar"
+do SD_BM
 
 
 *** Other Figures in Appendix 
 * Figure A.2 and Table A.6 (unmatched 15 years)
-*global hf = 15
-*global match = 0
-*global state 	= "lowflat"
-*do SD_BM
+global hf = 15
+global match = 0
+global state 	= "lowflat"
+do SD_BM
 
 
 

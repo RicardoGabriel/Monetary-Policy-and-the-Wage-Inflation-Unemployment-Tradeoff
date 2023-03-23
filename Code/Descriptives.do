@@ -50,7 +50,7 @@ esttab using "$Tab\Table_Descriptives.tex", cells("count(fmt(0)) mean(fmt(2)) sd
 replace noval=1 if unemp==. | dwn==. | dp==.
 
 estpost tabstat unemp dwn dp [aw = pop] if noval==0 & outlier==0, by(window) stat(n mean sd min max) col(stat)
-esttab using "$hp\Output\Tables\Table_Descriptives_W.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
+esttab using "$Tab\Table_Descriptives_W.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
 	title("Descriptive statistics \label{T:DescriptivesW}")	
 	
 ********************************************************************************
@@ -65,7 +65,7 @@ replace window="1972-1999" if year<=1999 & year>=1972
 replace window="2000-2020" if year<=2020 & year>=2000
 
 estpost tabstat unemp dwn dp if hyper==0, by(window) stat(n mean sd min max) col(stat)
-esttab using "$hp\Output\Tables\Table_Descriptives_Full.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
+esttab using "$Tab\Table_Descriptives_Full.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
 	title("Descriptive statistics - full sample \label{T:Descriptives-Full}")
 	
 	
@@ -85,7 +85,7 @@ forvalues x = 1(1)18{
 	eststo: estpost corr dwn unemp if id==`x' & outlier==0	
 	matrix C[`x',3] = e(b)
 }
-outtable using `"$hp\Output\Tables\Correlation_Wage"', mat(C) replace nobox asis center f(%9.3f) caption("Wage Inflation Correlations Table")
+outtable using `"$Tab\Correlation_Wage"', mat(C) replace nobox asis center f(%9.3f) caption("Wage Inflation Correlations Table")
 eststo clear
 
 }					

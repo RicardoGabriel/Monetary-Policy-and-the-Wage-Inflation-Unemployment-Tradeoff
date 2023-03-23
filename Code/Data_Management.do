@@ -1,13 +1,16 @@
 quietly{
-
+					*** Data Management ***
+					
+					
 *import data
 use "$hp\Data\JSTdataset_v100.dta", clear
 
 merge 1:1 iso year using "$hp\Data\OECD_Expectations.dta"
 drop _merge
 
-
-							*** Data Management ***
+* remove Covid-19 years from the sample (referee request)
+drop if year > 2019
+							
 
 ********************************************************************************
 * Creation of country ids

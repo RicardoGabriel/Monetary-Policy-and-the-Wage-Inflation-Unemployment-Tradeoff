@@ -71,10 +71,10 @@ merge m:1 year using ../Data/stir_ost.dta // OST interwar uk/us/fr rates and peg
 drop _merge
 sort iso year
 
-erase ../Data/stir_gbr.dta
-erase ../Data/stir_usa.dta
-erase ../Data/stir_deu.dta
-erase ../Data/stir_ost.dta
+*erase ../Data/stir_gbr.dta
+*erase ../Data/stir_usa.dta
+*erase ../Data/stir_deu.dta
+*erase ../Data/stir_ost.dta
 
 ********** 1. Make IV using the raw change in the base country interest rate
 ********** IV dibpeg = dibase*peg 
