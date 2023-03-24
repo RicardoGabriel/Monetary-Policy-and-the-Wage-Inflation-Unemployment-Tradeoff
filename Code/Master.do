@@ -124,5 +124,13 @@ global state 	= "lowflat"
 do SD_BM
 
 
+*******************************************************************************
+* Quarterly analysis
+do Data_Management_Quarter
 
+* Phillips Multiplier Quarterly Data
+** Figures 3 a) and 3 b)
+do PM_BM_Quarter
 
+** Figure 3 c)
+do MP_IRFs_BM_Quarter

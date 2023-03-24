@@ -3,24 +3,19 @@ Phillips Multiplier - Monetary Policy and the Wage-Inflation Unemployment Trade-
 
 Phillips Multiplier close to Barnichon and Mesters (2020) JME
 Adding two lags of unemployment and wage inflation but also country fixed effects and global gdp growth
-
-Author: Ricardo Duque Gabriel
-First Date: 08/11/2020
-Last Update: 04/05/2022
-
-Produce Figures 3 a) and 3 b)
 */
 
 
 clear all
-
 *Upload data
-use "$hp\Data\Data_MScThesis_Analysis.dta", clear
-
+use "$hp\Data\Data_Analysis_Quarter.dta", clear
 
 ********************************************************************************
-* Setup - locals
+* Setup - locals - recycling year setup and adjusting for quarter lags and horizons
 ********************************************************************************
+
+* Choose number of horizons for the IRFs
+global hf 		= 28
 
 * locals
 local gridd = $gridd
@@ -100,20 +95,21 @@ foreach x of local impulse {
 * W - control variables
 
 * Full set of controls
-local rhslwage	l(1/`Lags').unemp1 l(1/`Lags').dlwage1 l(0/`Lags').dlrcon1 l(0/`Lags').dlrgdp1 l(0/`Lags').dlcpi1 l(1/`Lags').dstir1 l(0/`Lags').dltrate1 ///
-				l(1/`Lags').unemp2 l(1/`Lags').dlwage2 l(0/`Lags').dlrcon2 l(0/`Lags').dlrgdp2 l(0/`Lags').dlcpi2 l(1/`Lags').dstir2 l(0/`Lags').dltrate2 
-				
-				
-* Second set of controls only lagged values of unemp and wage inflation as in BM 2020
-local rhslwage2	l(1/`Lags').unemp1 l(1/`Lags').dlwage1  ///
-				l(1/`Lags').unemp2 l(1/`Lags').dlwage2 
-					
-*** add extra variable to the control set - dlsumgdp to capture world business cycles
-local fe dlsumgdp
-				
-foreach y  in `response' {
+local rhslunemp	l(1/`Lags').unemp l(1/`Lags').dlwage l(0/`Lags').dlrgdp l(0/`Lags').dlcpi l(1/`Lags').dstir
 
-	* controls: (kk=1) full set of controls; (kk=2) only relevant variables [BM]
+local rhslwage	l(1/`Lags').unemp l(1/`Lags').dlwage l(0/`Lags').dlrgdp l(0/`Lags').dlcpi l(1/`Lags').dstir
+
+* Second set of controls only lagged values of unemp, inflation and stir
+local rhslunemp2	l(1/`Lags').unemp l(1/`Lags').dlwage
+					
+local rhslwage2		l(1/`Lags').unemp l(1/`Lags').dlwage
+					
+			
+* add extra variable to the control set - dlsumgdp to capture world business cycles
+local fe dlsumgdp		
+				
+foreach y of local response {
+	* controls: (kk=1) full set of controls; (kk=2) only relevant variables.
 	local cont1`y' `rhs`y'' `fe' i.id
 	local cont2`y' `rhs`y'2' `fe' i.id
 }
@@ -197,12 +193,10 @@ gen Years = _n-1 if _n<=`hh'
 gen arcib=.
 gen arcit=.
 forvalues i = 0/`horizon2' {
-	foreach var in arcibh arcith{
-	forvalues k=1/`kk' {
-		quietly replace `var'`k' = `var'h2`i' if Years==`i'
-		quietly replace `var'`k' = 1 if `var'h2`i' >= 1	& _n == (`i'+1)	
-		quietly replace `var'`k' = -2 if `var'h2`i' <= -2	& _n == (`i'+1)	
-	}
+	foreach var in arcib arcit{
+		quietly replace `var' = `var'h2`i' if Years==`i'
+		quietly replace `var' = 1 if `var'h2`i' >= 1	& _n == (`i'+1)	
+		quietly replace `var' = -1.5 if `var'h2`i' <= -1.5	& _n == (`i'+1)	
 	}
 }
 
@@ -211,21 +205,21 @@ cap drop up* dn*
 forvalues j=1/`jj'{
 foreach x of local impulse {
 	foreach y of local response {
-		forvalues k=1/`kk' {
+		forvalues k=2/`kk' {
 
 gen up`k'_`y'`x'_`p`j'' = b`k'_`y'`x'_`p`j'' + 1.645*se`k'_`y'`x'_`p`j'' if _n <= `hh'
 	replace up`k'_`y'`x'_`p`j'' = 1 if _n <= `hh' & up`k'_`y'`x'_`p`j'' > 1
 
 gen dn`k'_`y'`x'_`p`j'' = b`k'_`y'`x'_`p`j'' - 1.645*se`k'_`y'`x'_`p`j'' if _n <= `hh'
-	replace dn`k'_`y'`x'_`p`j'' = -2 if _n <= `hh' & dn`k'_`y'`x'_`p`j'' < -2
+	replace dn`k'_`y'`x'_`p`j'' = -1.5 if _n <= `hh' & dn`k'_`y'`x'_`p`j'' < -1.5
 
 gen up2`k'_`y'`x'_`p`j'' = b`k'_`y'`x'_`p`j'' + 1*se`k'_`y'`x'_`p`j'' if _n <= `hh'
 	replace up2`k'_`y'`x'_`p`j'' = 1 if _n <= `hh' & up2`k'_`y'`x'_`p`j'' > 1
 
 gen dn2`k'_`y'`x'_`p`j'' = b`k'_`y'`x'_`p`j'' - 1*se`k'_`y'`x'_`p`j'' if _n <= `hh'
-	replace dn2`k'_`y'`x'_`p`j'' = -2 if _n <= `hh' & dn2`k'_`y'`x'_`p`j'' < -2
+	replace dn2`k'_`y'`x'_`p`j'' = -1.5 if _n <= `hh' & dn2`k'_`y'`x'_`p`j'' < -1.5
 
-	replace b`k'_`y'`x'_`p`j'' = . if _n <= `hh' & (b`k'_`y'`x'_`p`j'' > 0.5 | b`k'_`y'`x'_`p`j'' < -2)
+	replace b`k'_`y'`x'_`p`j'' = . if _n <= `hh' & (b`k'_`y'`x'_`p`j'' > 0.5 | b`k'_`y'`x'_`p`j'' < -1)
 
 		}
 	}
@@ -241,16 +235,16 @@ outsheet Years b2_lwagelunemp_full se2_lwagelunemp_full up2_lwagelunemp_full dn2
 forvalues j=1/`jj'{
 foreach x of local impulse {
 	foreach y of local response {
-		forvalues k=1/`kk' {
+		forvalues k=2/`kk' {
 
 		twoway (bar F`k'_`y'`x'_`p`j'' Years, bcolor(olive) barw(1)), ///
-		ytitle("", size()) xtitle("Year", size()) ///
-		graphregion(fcolor(white)) plotregion(color(white)) ylabel(0(5)15, nogrid) ///
+		ytitle("", size()) xtitle("Quarter", size()) ///
+		graphregion(fcolor(white)) plotregion(color(white)) ylabel(0(2)6, nogrid) ///
 		legend(off) ysize(1) xsize(2) scale(2.5)
-		graph export "$Fig\fig_`p`j''_PMBM_F_LPIV`horizon2'_`k'.pdf", replace
+		graph export "$Fig\fig_`p`j''_PMBM_F_LPIV`horizon2'_`k'_Quarter.pdf", replace
 
 		
-		twoway (rarea up`k'_`y'`x'_`p`j'' dn`k'_`y'`x'_`p`j''  Years if Years>2,  ///
+		twoway (rarea up`k'_`y'`x'_`p`j'' dn`k'_`y'`x'_`p`j''  Years if Years>5,  ///
 		fcolor(gs13) lcolor(gs13) lw(none) lpattern(solid)) ///
 		(line b`k'_`y'`x'_`p`j'' Years if Years>2, lcolor(olive) ///
 		lpattern(solid) lwidth(thick)) ///
@@ -259,10 +253,10 @@ foreach x of local impulse {
 		(line zero Years, lcolor(black)), ///
 		/*ylabel(`l`y''(`c`y'')`h`y'', nogrid) */ ///
 		/*title("`t`y''", color(black) size(medsmall))*/ ///
-		ytitle("`ylab_`y''", size()) xtitle("Year", size()) ///
-		graphregion(fcolor(white)) plotregion(color(white)) ylabel(-2(1)1, nogrid) ///
+		ytitle("`ylab_`y''", size()) xtitle("Quarter", size()) ///
+		graphregion(fcolor(white)) plotregion(color(white)) ylabel(-1.5(0.5)1, nogrid) ///
 		/*name(`y'`k'`j'`horizon2', replace)*/ legend(off) scale(2.5) ysize(1.5) xsize(3)
-		graph export "$Fig\fig_`p`j''_PMBM_LPIV`horizon2'_`k'.pdf", replace
+		graph export "$Fig\fig_`p`j''_PMBM_LPIV`horizon2'_`k'_Quarter.pdf", replace
 
 		
 		* add 68% confidence bands: (rarea up2`k'_`y'`x'_`p`j'' dn2`k'_`y'`x'_`p`j''  Years if Years>2,  fcolor(gs15) lcolor(gs15) lw(none) lpattern(solid))  ///
