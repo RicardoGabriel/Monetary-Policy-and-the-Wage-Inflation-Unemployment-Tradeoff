@@ -9,3 +9,4 @@ Folder [Data](https://github.com/RicardoGabriel/Monetary-Policy-and-the-Wage-Inf
 Folder [Code](https://github.com/RicardoGabriel/Monetary-Policy-and-the-Wage-Inflation---Unemployment-Tradeoff/tree/main/Code) stores all Stata and MATLAB codes used to produce the figures and tables in the paper.
 
 Folder [Output](https://github.com/RicardoGabriel/Monetary-Policy-and-the-Wage-Inflation---Unemployment-Tradeoff/tree/main/Output) stores all the final figures and tables produced and used in the final version of the article.
+
