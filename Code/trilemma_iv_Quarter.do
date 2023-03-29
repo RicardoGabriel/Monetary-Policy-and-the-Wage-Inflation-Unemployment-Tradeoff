@@ -3,7 +3,7 @@ trilemma_iv.do
 
 Here, I follow the code from Jordà, Schularick, and Taylor (2020) JME 
 to re-construct the trilemma instrument until 2020.
-*/
+*/ 
 
 *quietly{
 
