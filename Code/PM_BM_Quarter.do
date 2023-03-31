@@ -14,15 +14,14 @@ use "$hp\Data\Data_Analysis_Quarter.dta", clear
 * Setup - locals - recycling year setup and adjusting for quarter lags and horizons
 ********************************************************************************
 
-* Choose number of horizons for the IRFs
-global hf 		= 28
+global hfq 		= 40
 
 * locals
 local gridd = $gridd
 local levell = $levell
 
 * horizon
-local horizon2 = $hf
+local horizon2 = $hfq
 	
 * number of lags
 local Lags = $lags

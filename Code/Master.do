@@ -41,6 +41,9 @@ graph set window fontfacemono "DejaVu Sans Mono"    // set default mono font (wi
 * Master - choose number of horizons for the IRFs
 global hf 		= 10
 
+* Choose number of horizons for the quarterly IRFs
+global hfq 		= 28
+
 * Master - choose number of lags for the IRFs
 global lags 	= 2
 
@@ -67,7 +70,7 @@ global slides	= 0
 	* postwar   -   d
 global state 	= "lowflat"
 ********************************************************************************
-
+/*
 
 * Prepare Data with all observations
 global wage_out = 0
@@ -123,10 +126,14 @@ global match = 0
 global state 	= "lowflat"
 do SD_BM
 
-
+*/
 *******************************************************************************
 * Quarterly analysis
+global wage_out = 1
 do Data_Management_Quarter
+
+* First Stage Results of Monetary Policy Shocks (Trilemma Instrumental Variable)
+do First_Stage_Quarter
 
 * Phillips Multiplier Quarterly Data
 ** Figures 3 a) and 3 b)
@@ -134,3 +141,9 @@ do PM_BM_Quarter
 
 ** Figure 3 c)
 do MP_IRFs_BM_Quarter
+
+/*
+* State Dependent Phillips Multipliers
+* Figure ?? and Table ??
+global state 	= "lowflat"
+do SD_BM_Quarter

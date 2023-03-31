@@ -12,9 +12,11 @@ use "$hp\Data\Data_Analysis_Quarter.dta", clear
 * Setup - locals - recycling year setup and adjusting for quarter lags and horizons
 ********************************************************************************
 
+global hfq 		= 40
+
 * horizon
 local horizon1 = 40
-local horizon2 = $hf
+local horizon2 = $hfq
 	
 * number of lags
 local Lags = 4
@@ -112,8 +114,8 @@ gen sample=1
 forvalues j=1/`jj' {
 
 if ($match) == 1 {
-	xi: ivreg2 lwage$hf `instr' `cont2lwage' ///
-		if `c`j'' & lunemp$hf !=. & lwage$hf !=. , cluster(id)
+	xi: ivreg2 lwage$hfq `instr' `cont2lwage' ///
+		if `c`j'' & lunemp$hfq !=. & lwage$hfq !=. , cluster(id)
 	replace sample = e(sample)
 }
 
@@ -183,8 +185,8 @@ gen dn2`k'_`y'`x'_`p`j'' = b`k'_`y'`x'_`p`j'' - 1*se`k'_`y'`x'_`p`j'' if _n <= `
 cap drop Years
 gen Years = _n-1 if _n<=`hh'
 
-local ylablwage 	"ylab(-0.4(0.2)0.4)"
-local ylablunemp  	"ylab(-0.4(0.2)0.4)"
+local ylablwage 	"ylab(-0.3(0.3)0.6)"
+local ylablunemp  	"ylab(-0.3(0.3)0.6)"
 
 
 * Produce Figures
