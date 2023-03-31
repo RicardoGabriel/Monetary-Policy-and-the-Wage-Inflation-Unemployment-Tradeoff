@@ -18,6 +18,9 @@ clear all
 * Upload data
 use "$hp\Data\Data_Analysis_Quarter.dta", clear
 
+
+global hfq 		= 40
+
 * Call chosen state
 local s1 $state
 
@@ -32,8 +35,9 @@ log using "asym_`s1'.log" , replace
  
 if ("`s1'" == "lowflat") {
 	cap drop dlcpilo dlcpihi
-	gen dlcpilo = cond(dlcpi_yoy< 2 & dlcpi_yoy> -2, 1, 0) if dlcpi_yoy!=. & abs(dlcpi_yoy) < 40
-	gen dlcpihi = cond(dlcpi_yoy>=2, 1, 0) if dlcpi_yoy!=. & abs(dlcpi_yoy) < 40
+	sum dlcpi_yoy, d // `r(p50)'
+	gen dlcpilo = cond(l.dlcpi_yoy< 2.1, 1, 0) if l.dlcpi_yoy!=.
+	gen dlcpihi = cond(l.dlcpi_yoy>=2.1, 1, 0) if l.dlcpi_yoy!=.
 		global a1 dlcpihi
 		global a2 dlcpilo
 		global ta1 high inflation
@@ -119,7 +123,7 @@ tabulate id, gen(id)
 * Generate instrument and controls interacted with state variable
 local varlist JSTtrilemmaIV_R unemp dlwage dlsumgdp dlrgdp dlcpi dstir ///
 			  id1 id2 id3 id4 id5 id6 id7 id8 id9 id10 id11 id12 ///
-			  id13 id14 id15 id16 id17
+			  id13 id14 id15 id16 id17 dlcpi_yoy
 	foreach var in `varlist'{
 		gen `var'_s1 = `var' * state
 		gen `var'_s2 = `var' * (1 - state)

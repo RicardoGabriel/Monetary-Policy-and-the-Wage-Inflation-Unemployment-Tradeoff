@@ -7,9 +7,9 @@
 
 *quietly{
 
+
+
 /*
-
-
 ********************************************************************************
 * 								   Wages
 * Hourly Earnings: Private Sector (LCEA)
@@ -144,6 +144,7 @@ foreach var in wage cpi stir gdp {
 
 * Date
 generate dateq = qofd(daten)
+generate quarter = quarter(daten)
 
 * Cid
 egen id = group(country), label
