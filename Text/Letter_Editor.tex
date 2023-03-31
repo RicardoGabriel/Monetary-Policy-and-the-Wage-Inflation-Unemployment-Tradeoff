@@ -1,0 +1,113 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+%\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{indentfirst}
+%\usepackage{subfigure}
+\usepackage[titletoc,title]{appendix}
+%\usepackage{apacite}
+\usepackage{natbib}
+\setcitestyle{aysep={}}					%remove comma between author and year when using citep{}.
+\usepackage{color}
+\usepackage{longtable}
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{caption}
+\usepackage{subcaption}
+\graphicspath{{../../Output/Figures/}}
+\newcommand{\annote}[1]{\parbox{\textwidth}{\renewcommand{\baselinestretch}{1.0}\vspace{12pt} \footnotesize Notes: #1}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage[xcolor=blue, commandnameprefix=ifneeded]{changes}
+\usepackage{libertine}
+\usepackage{hyperref}
+\hypersetup{
+     colorlinks   = true,
+     urlcolor	  = blue,
+     citecolor    = black,
+     linkcolor 	  = black
+}
+\setlength{\baselineskip}{1.5\baselineskip}
+
+\begin{document}
+
+\noindent Ricardo Duque Gabriel \hfill{1050 Massachusetts Avenue}\newline
+National Bureau of Economic Research \hfill{Cambridge, MA 02138, US}\newline
+\rightline{ricardofilipeduquegabriel@gmail.com}\newline
+
+\bigskip
+
+\rightline{April XX, 2023}
+
+\bigskip \noindent The Editors \newline
+Evi Pappa and Ambrogio Cesa-Bianchi \newline
+\textit{European Economic Review}\newline
+
+\medskip
+
+\noindent Resubmission of revised version of R.D. Gabriel \textquotedblleft Monetary Policy and the Wage Inflation-Unemployment Tradeoff \textquotedblright , Ms. Ref. No.: EEREV-D-22-00516 \newline
+
+\medskip
+
+\noindent Dear Evi and Ambrogio:\newline
+
+
+\noindent I would kindly like to thank you for giving us the opportunity to resubmit a revised version of my paper \textquotedblleft Monetary Policy and the Wage Inflation-Unemployment Tradeoff\textquotedblright for publication in the \textit{European Economic Review}. In revising the paper, I have addressed all of your points as well as those of the three Referees. Below, I explain how I have responded to your comments and suggestions in the revised version following the argument in your decision letter (I also attach separate letters answering each of the Referees point by point).
+\bigskip
+
+\begin{enumerate}
+\item \textbf{\lbrack R1's main comment 1 and R2’s  comment 1.h] Address the concerns regarding the changing monetary policy regimes. I think the paper needs to do more on this. Maybe one possible approach is to use higher frequency data for the more recent period and exploit cross-sectional variation across countries to show that the state-dependent effects are present within a specific monetary regime.}
+
+I tackled this as the most important point of this revision. Different referees' comments all asked for more evidence disentangling the monetary regime versus the low-price inflation motive that I present. As a first try, I identified MP regimes and add an MP regime dummy to my regression estimates with the goal to capture structural differences that are common across countries in the same MP regime. 
+
+I followed your suggestion and collected from scratch quarterly data from 1995q1 until 2020q1 from FRED for 17 out of the 18 countries (Switzerland did not have high-frequency information for average wages in FRED). In order to stay as close as possible to the baseline analysis in the paper, I used the same identification strategy which arguably is a bit weaker, and ran the same specifications or as close as possible in case of missing information. The approach is basically a replication of \cite{Barnichon2019}, who also do a state-dependent analysis by only looking at the post 1990 period using quarterly data for the UK and the US. I take a panel approach and ...
+
+\item \textbf{\lbrack R1's main comment 1] Better explain where the identification comes from.}
+
+
+
+\item \textbf{\lbrack R1's Other comments + R2's comment 1.f, 1.i:] Show robustness / explain a few puzzling results.}
+
+
+\item \textbf{\lbrack Address R1's Expositional and Minor comments]}
+
+\item \textbf{\lbrack Address R2's comment 2.d and 3] - change the anchored language.}
+
+\item \textbf{\lbrack Address R1's Expositional and Minor comments]}
+
+\item \textbf{\lbrack Try to speak to R2's comment 4]}
+
+\end{enumerate}
+
+\noindent  Please find attached the revised version of the paper and replies to the Referees where I explain in detail how I addressed all their comments in the revised version. Please let me know if there are any questions or problems..\\
+
+
+Regarding your first comment: I collected quarterly data for all countries excluding Switzerland (due to data availability on the wage series) from FRED on wages, unemployment, consumer price index as the key variables to estimate the Phillips Multiplier, and also interest rates, GDP, Investment, and Consumption to compute the instrument at the quarterly frequency. Given the lack of available data, I assumed that the capital openness index did not change within the year, so I use the same value for each quarter within the same year from the extended series of the Quinn et al. paper. Only then, I was able to estimate the Phillips multiplier for the sample 1995-2019 and test for eventual state dependencies using the same rule as for the baseline analysis. Results are displayed in Appendix ???
+
+I am not entirely sure all robustness exercises need to be in the printed version paper, for example comments A, B, C do not display significant changes. So, in case this revision goes through, and you agree with my interpretation of some of the robustness checks, I would suggest either created an online appendix with a set of non-essential robustness checks, or I can just add some footnotes regarding these potential challenges and making the results available upon request.
+
+Finally, in an effort to be the change I want to see in the profession, I want to state that I created an open repository in GitHub with the entire workflow from this project including all the codes, data, outputs, documentation, and tex files. This is available to everyone. So, feel free to check it out. The GitHub repository can be found on this \href{https://github.com/RicardoGabriel/Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff}{GitHub repository}.
+
+
+\noindent Sincerely,\smallskip
+
+\noindent Ricardo
+
+\bigskip
+
+\bigskip
+
+
+\singlespace
+\bibliographystyle{chicago}
+\bibliography{Bibliography}
+
+\end{document}
