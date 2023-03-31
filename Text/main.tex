@@ -83,11 +83,8 @@
 \section{Introduction}
 The wage inflation-unemployment tradeoff claims that changes in monetary policy push wage inflation and unemployment in opposite directions \citep{Mankiw2001}. Such relation is traditionally thought of in the form of a Phillips curve and is at the core of monetary policy \citep{Barnichon2019, Eser2020}. Over the last few years, many have questioned the importance of the Phillips curve, arguing that it had flattened out of favor. A flatter Phillips curve suggests that economic activity has a smaller effect on inflation. Under this scenario, central bankers' ability to steer inflation with policy-induced changes becomes weaker. Nevertheless, is this weaker wage inflation-unemployment tradeoff unique to the last two decades? Does the strength of the tradeoff vary over time and differ across states of the economy?
 
-<<<<<<< HEAD
+
 %Most economists recognize its existence, and central bankers rely on it to ``transform" unemployment into inflation by making use of their policy interest rates 
-=======
-%Most economists recognize its existence, and central bankers rely on it to ``transform" unemployment into inflation by making use of their policy interest rates. 
->>>>>>> 68e0031be3368dee242fdaea2af5ac334143f35f
 
 In this study, I revisit the historical relationship between wage inflation and unemployment, which is the focus of Phillips' (\citeyear{Phillips1958}) original work, to answer these two questions. My analysis proceeds in four steps. First, I assemble annual historical data on nominal wages and unemployment rates since 1870 for 18 advanced economies. Second, I uncover considerable variation in the wage Phillips curve slope over time and find that its recent flattening is not a unique feature of the last 150 years. Third, based on identified monetary policy shocks, I show that monetary interventions have large and significant effects on wage inflation and unemployment rates. Finally, I show that changes in the price inflation environment possibly shape the wage inflation-unemployment tradeoff. The data suggest that the tradeoff is weaker in times of low price inflation, which is consistent with a standard New Keynesian model's predictions \citep{Benati2007}.
 
@@ -352,19 +349,55 @@ Figure \ref{F2:Multiplier} displays the estimates of both the baseline and state
 
 Figure \ref{F2:Multiplier_M} displays a smaller Phillips multiplier in times of low inflation and a higher multiplier in times of high inflation. Its difference becomes statistically significant from horizon $t=8$ onward with the weak instrument robust Anderson-Rubin p-values being 0.069, 0.072, and 0.061 for horizons 8, 9, and 10 respectively.\footnote{See Table \ref{T:SDPM} in the Appendix for a more detailed description of this result.} This result is in line with recent work by \cite{Forbes2021} who show that the Phillips curve becomes non-linear when inflation is low.
 
-Figure \ref{F2:Dynamics} indicates that the unemployment rate response is the main driver of the weaker tradeoff in low inflation periods. Although the average wage inflation response is virtually identical in both the baseline and the state dependencies for longer horizons, the average unemployment rate response is much more pronounced during low inflation periods. As a robustness check, I also used an unmatched sample and a longer horizon (see Figure \ref{F:Multiplier_SD_App} and Table \ref{T:SDPM_App} in the Appendix). Regardless of the sample trimming process or the horizon chosen, the results do not qualitatively change.
+Figure \ref{F2:Dynamics} indicates that the unemployment rate response is the main driver of the weaker tradeoff in low inflation periods. Although the average wage inflation response is virtually identical in both the baseline and the state dependencies for longer horizons, the average unemployment rate response is much more pronounced during low inflation periods. As a robustness check, I also used an unmatched sample and a longer horizon (see Figure \ref{F:Multiplier_SD_App} and Table \ref{T:SDPM_App} in the Appendix). Regardless of the sample trimming process or the horizon was chosen, the results do not qualitatively change.
 
-These two exercises together lend empirical substance to the concern that monetary policy effects are time-variant and state-dependent. In particular, during periods of low price inflation, the long-run tradeoff between wage inflation and unemployment is less exploitable. In other words, given the weaker tradeoff, central banks are less able to steer wage inflation when facing a low price inflation environment.
+These two exercises together lend empirical substance to the concern that monetary policy effects are time-variant and state-dependent. In particular, during periods of low price inflation, the long-run tradeoff between wage inflation and unemployment is less exploitable. In other words, given the weaker tradeoff, central banks are less able to steer wage inflation when facing a low-price inflation environment.
 
-%\clearpage
+\subsection{Disentangling the low-price inflation motive from the monetary regime}
+
+The previous two exercises show evidence consistent with the key message of this paper. First, the Phillips multiplier is smaller during the Gold Standard and the last 20 years (Figure \ref{F2:Multiplier_GS}) which are periods associated with lower average price inflation (Table \ref{T_Descriptives}). Second, the Phillips multiplier is smaller when monetary policy is implemented following periods of low and stable inflation (Figure \ref{F2:Multiplier}).
+
+Notwithstanding, these exercises do not allow us to distinguish whether the state-dependent effects of monetary policy for different inflation environments (low or high) are driven or not by different sample periods. That is because different sample periods could capture different monetary policy regimes and hence different Phillips multipliers.
+
+To be more precise about the low inflation mechanism I put forward in this paper, I first run a robustness check by accounting for different monetary policy regimes. I then conduct a thorough analysis using higher frequency data using data since 1995 for 17 out of 18 countries in the baseline sample, to evaluate whether within the same monetary policy regime the low inflation motive is still present.
+
+For the first exercise, I identified different monetary policy regimes as described in Appendix \ref{SS_HistoricalPeriods} and summarized in Table \ref{T_HistoricalPeriodsSource1}. I then add a Monetary Policy regime dummy when estimating equations \eqref{EQ:MULT} and \eqref{EQ:MULT_State} to capture structural differences that are common across countries in the same MP regime. Results... 
+
+For the second exercise, I start by collecting higher frequency data for the same set of baseline countries. I was able to compile information for 17 out of 18 countries, excluding Switzerland, from the Federal Reserve Economic Data (FRED) at the quarter level since 1995. 
+
+To be as close as possible to the baseline exercise, I construct the same instrument based on the trilemma of international finance. 
+
+
+\begin{figure}[h!]
+    \centering
+	\caption{Phillips multiplier and IRFs}
+	\label{F:Multiplie}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{Phillips multiplier}
+		\label{F:Multiplier_M}
+		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_PMBM_LPIV40_2_Quarter.pdf}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{F-Statistic}
+		\label{F:Multiplier_F}
+		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_PMBM_F_LPIV40_2_Quarter.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.9\textwidth}
+		\caption{Impulse Responses}
+		\label{F:Dynamics}
+		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_LPIVBM40_2_Quarter.pdf}
+		\end{subfigure}
+		\annote{Phillips multiplier estimations using the trilemma IV as instrument, using a matched sample of 499 quarterly observations between 1995q1 and 2020q1, and controlling for two lags of unemployment and wage inflation, country fixed effects, and world GDP growth as explained in Equation \eqref{EQ:MULT}. For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator, while the dashed lines correspond to the two-sided 90\% Anderson-Rubin confidence sets robust to weak instruments. The F-statistics (upper-right) are computed using the method presented in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and \textit{average} unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets.}
+	
+\end{figure}
 
 \section{Conclusion \label{S_Conclusion}}
 
-The wage inflation-unemployment tradeoff is a key building block for monetary policy. However, its existence has been questioned with some commentators arguing that it has flattened out of favor. This paper introduces newly assembled data on wages and unemployment rates for a set of 18 advanced economies starting in 1870, in order to revisit the historical relationship between wage inflation and unemployment, the focus of Phillips' (\citeyear{Phillips1958}) original work. The empirical analysis starts by uncovering a historical time-varying Phillips correlation. This paper documents a weaker correlation between wage inflation and unemployment during the Gold Standard and the last 20 years, periods characterized by credibly anchored inflation expectations and a low price inflation environment.
+The wage inflation-unemployment tradeoff is a key building block for monetary policy. However, its existence has been questioned with some commentators arguing that it has flattened out of favor. This paper introduces newly assembled data on wages and unemployment rates for a set of 18 advanced economies starting in 1870, in order to revisit the historical relationship between wage inflation and unemployment, the focus of Phillips' (\citeyear{Phillips1958}) original work. The empirical analysis starts by uncovering a historical time-varying Phillips correlation. This paper documents a weaker correlation between wage inflation and unemployment during the Gold Standard and the last 20 years, periods characterized by credibly anchored inflation expectations and a low-price inflation environment.
 
 I capitalize on the assembled historical data to study a factor that is possibly driving this time-varying pattern. First, in order to account for the possible endogeneity and model misspecification issues arising from the Phillips curve framework, I make use of monetary policy shocks and the Phillips multiplier framework to identify the historical wage inflation-unemployment tradeoff. The results provide evidence in favor of the hypothesis that the observed time-variation pattern is due to the price inflation environment: the tradeoff is weaker in periods of low price inflation.
 
-These results add a new perspective to the current debate about the existence of the wage inflation-unemployment tradeoff and its state dependency. In particular, this paper's empirical evidence points to an impaired ability in exploring the tradeoff in times of low inflation driven by a stronger unemployment rate and a  muted wage inflation responses to a monetary policy surprise. 
+These results add a new perspective to the current debate about the existence of the wage inflation-unemployment tradeoff and its state dependency. In particular, this paper's empirical evidence points to an impaired ability in exploring the tradeoff in times of low inflation driven by a stronger unemployment rate and a muted wage inflation responses to a monetary policy surprise. 
 
 %Such a finding uncovers a hidden dichotomy: central banks cannot simultaneously target a low price inflation (2\%) and expect conventional monetary policy tools to work to their full extent.
 
@@ -432,6 +465,25 @@ N                   &        1316         &         505         &         811   
 \bottomrule
 \end{tabular} 
 \annote{This table presents the first-stage estimates of the trilemma IV on the country's interest rate. The standard errors are in parentheses and the T-statistics are in square brackets. The full sample covers 1870–2020, excluding the World Wars and the German hyperinflation episode. The pre-WW2 sample covers 1870–1938, excluding 1914–1919, while the post-WW2 sample covers 1948–2020. The estimates in the last three columns (with controls) include country fixed effects and two lags of wage inflation and unemployment rate. In addition, I include world GDP growth to capture global cycles.}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\caption{First-Stage of trilemma IV - Quarterly Data} \label{T:First_Stage_Quarter}
+\vspace{1ex}
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{lccc}
+\toprule
+Dependent & \multicolumn{1}{c}{No controls} && \multicolumn{1}{c}{With controls} \\
+variable: $\Delta r_{it}$       \\
+\midrule
+trilemma $z_{i,t}$     &       0.89\sym{***}&&        0.73\sym{***}\\
+                    &      (0.03)         &&      (0.03)  \\
+$ t $-statistic     &      [28.03]         & &     [21.20] \\
+N                   &        926         &  &       860  \\
+\bottomrule
+\end{tabular} 
+\annote{This table presents the first-stage estimates of the trilemma IV on the country's interest rate for quarterly data. The standard errors are in parentheses and the T-statistics are in square brackets. The full sample covers 1995q1–2020q1. The estimates in the last column (with controls) include country fixed effects and two lags of wage inflation and unemployment rate. In addition, I include world GDP growth to capture global cycles.}
 \end{table}
 
 \begin{table}[ht]
