@@ -7,7 +7,7 @@ fixed effects and global gdp growth.
 
 Author: Ricardo Duque Gabriel
 First Date: 15/11/2020
-Last Update: 04/05/2022
+Last Update: 31/03/2023
 
 Calls SD_BM_Reg.do and Sd_BM_Graphs.do to produce Figures 3 and A.3 and table A.4
 according to different specifications as called in Master.do file
@@ -16,7 +16,7 @@ according to different specifications as called in Master.do file
 clear all
 
 * Upload data
-use "$hp\Data\Data_MScThesis_Analysis.dta", clear
+use "$hp\Data\Data_Analysis_Quarter.dta", clear
 
 * Call chosen state
 local s1 $state
@@ -32,8 +32,8 @@ log using "asym_`s1'.log" , replace
  
 if ("`s1'" == "lowflat") {
 	cap drop dlcpilo dlcpihi
-	gen dlcpilo = cond(l.dlcpi< 2 & l.dlcpi> -2, 1, 0) if l.dlcpi!=. & abs(l.dlcpi) < 40
-	gen dlcpihi = cond(l.dlcpi>=2, 1, 0) if l.dlcpi!=. & abs(l.dlcpi) < 40
+	gen dlcpilo = cond(dlcpi_yoy< 2 & dlcpi_yoy> -2, 1, 0) if dlcpi_yoy!=. & abs(dlcpi_yoy) < 40
+	gen dlcpihi = cond(dlcpi_yoy>=2, 1, 0) if dlcpi_yoy!=. & abs(dlcpi_yoy) < 40
 		global a1 dlcpihi
 		global a2 dlcpilo
 		global ta1 high inflation
@@ -117,10 +117,9 @@ global what _`s1'
 tabulate id, gen(id)
 	
 * Generate instrument and controls interacted with state variable
-local varlist JSTtrilemmaIV_R unemp1 unemp2 dlwage1 dlwage2 dlsumgdp dlrcon1 ///
-			  dlrcon2 dlrgdp1 dlrgdp2 dlcpi1 dlcpi2 dstir1 dstir2 dltrate1 ///
-			  dltrate2 id1 id2 id3 id4 id5 id6 id7 id8 id9 id10 id11 id12 ///
-			  id13 id14 id15 id16 id17 id18
+local varlist JSTtrilemmaIV_R unemp dlwage dlsumgdp dlrgdp dlcpi dstir ///
+			  id1 id2 id3 id4 id5 id6 id7 id8 id9 id10 id11 id12 ///
+			  id13 id14 id15 id16 id17
 	foreach var in `varlist'{
 		gen `var'_s1 = `var' * state
 		gen `var'_s2 = `var' * (1 - state)
@@ -130,8 +129,8 @@ local varlist JSTtrilemmaIV_R unemp1 unemp2 dlwage1 dlwage2 dlsumgdp dlrcon1 ///
 * Estimation and Production of graphs
 ********************************************************************************
 
-do SD_BM_Reg						// LP regressions, asymmetries
-do SD_BM_Graphs  					// LP graphs by asymmetry
+do SD_BM_Reg_Quarter						// LP regressions, asymmetries
+do SD_BM_Graphs_Quarter  					// LP graphs by asymmetry
 		
 eststo clear
 cap log close

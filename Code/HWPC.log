@@ -72113,3 +72113,33 @@ Wald statistic in last row is based on ivreg2 estimation and is not robust to we
 . 
 end of do-file
 
+. do "C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Code\SD_BM_Quarter.do"
+
+. /*
+> State Dependencies - Monetary Policy and the Wage-Inflation Unemployment Trade-off
+> 
+> SD Phillips Multiplier and IRFs close to Barnichon and Mesters (2020):
+> Adding two lags of unemployment and wage inflation but also country 
+> fixed effects and global gdp growth.
+> 
+> Author: Ricardo Duque Gabriel
+> First Date: 15/11/2020
+> Last Update: 04/05/2022
+> 
+> Calls SD_BM_Reg.do and Sd_BM_Graphs.do to produce Figures 3 and A.3 and table A.4
+> according to different specifications as called in Master.do file
+> */
+. 
+. clear all
+
+. 
+. * Upload data
+. use "$hp\Data\Data_Analysis_Quarter.dta", clear
+
+. 
+. * Call chosen state
+. local s1 $state
+
+. 
+. * Log from here
+. cap log close

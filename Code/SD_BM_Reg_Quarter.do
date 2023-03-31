@@ -14,7 +14,7 @@ Last Update: 30/01/2021
 
 * horizon
 local horizon1 5
-local horizon2 = $hf
+local horizon2 = $hfq
 local hh = `horizon2' + 1
 
 * number of lags
@@ -43,8 +43,8 @@ local gridd = $gridd
 local levell = $levell
 
 * force sort tsset again
-sort id year
-tsset id year, yearly
+sort id dateq
+tsset id dateq, quarter
 estimates clear	
 
 
@@ -93,19 +93,18 @@ local rhslwage	l(1/`Lags').unemp1 l(1/`Lags').dlwage1 l(0/`Lags').dlrcon1 l(0/`L
 				l(1/`Lags').unemp2 l(1/`Lags').dlwage2 l(0/`Lags').dlrcon2 l(0/`Lags').dlrgdp2 l(0/`Lags').dlcpi2 l(1/`Lags').dstir2 l(0/`Lags').dltrate2 
 
 * Second set of controls only lagged values of unemp, inflation like BM (2020)
-local rhslunemp2	l(1/`Lags').unemp1_s1 l(1/`Lags').dlwage1_s1 l(1/`Lags').unemp1_s2 l(1/`Lags').dlwage1_s2 ///
-					l(1/`Lags').unemp2_s1 l(1/`Lags').dlwage2_s1 l(1/`Lags').unemp2_s2 l(1/`Lags').dlwage2_s2
+local rhslunemp2	l(1/`Lags').unemp_s1 l(1/`Lags').dlwage_s1 l(1/`Lags').unemp_s2 l(1/`Lags').dlwage_s2
 					
-local rhslwage2		l(1/`Lags').unemp1_s1 l(1/`Lags').dlwage1_s1 l(1/`Lags').unemp1_s2 l(1/`Lags').dlwage1_s2 ///
-					l(1/`Lags').unemp2_s1 l(1/`Lags').dlwage2_s1 l(1/`Lags').unemp2_s2 l(1/`Lags').dlwage2_s2
+local rhslwage2		l(1/`Lags').unemp_s1 l(1/`Lags').dlwage_s1 l(1/`Lags').unemp_s2 l(1/`Lags').dlwage_s2
+					
 					
 			
 * add extra variable to the control set - dlsumgdp to capture world business cycles(with state interaction)
 local fe dlsumgdp_s1 dlsumgdp_s2
 
 * add extra variable to control for state * country FE
-local cfe id1_s1 id2_s1 id3_s1 id4_s1 id5_s1 id6_s1 id7_s1 id8_s1 id9_s1 id10_s1 id11_s1 id12_s1 id13_s1 id14_s1 id15_s1 id16_s1 id17_s1 id18_s1 ///
-		  id1_s2 id2_s2 id3_s2 id4_s2 id5_s2 id6_s2 id7_s2 id8_s2 id9_s2 id10_s2 id11_s2 id12_s2 id13_s2 id14_s2 id15_s2 id16_s2 id17_s2 id18_s2
+local cfe id1_s1 id2_s1 id3_s1 id4_s1 id5_s1 id6_s1 id7_s1 id8_s1 id9_s1 id10_s1 id11_s1 id12_s1 id13_s1 id14_s1 id15_s1 id16_s1 id17_s1 ///
+		  id1_s2 id2_s2 id3_s2 id4_s2 id5_s2 id6_s2 id7_s2 id8_s2 id9_s2 id10_s2 id11_s2 id12_s2 id13_s2 id14_s2 id15_s2 id16_s2 id17_s2
 
 foreach y of local response {
 	* controls: (kk=1) full set of controls; (kk=2) only relevant variables.
@@ -138,8 +137,7 @@ forvalues j=1/`jj' {
 forvalues n=1/2{
 
 if ($match) == 1 {
-	xi: ivreg2 lwage`horizon2' (d.`impulse' = `inst') `cont2lwage' ///
-		if `c`j'' & lunemp$hf !=. & lwage$hf !=. & `a`n''==1, cluster(id)
+	xi: ivreg2 lwage`horizon2' (d.`impulse' = `inst') `cont2lwage' if `c`j'' & lunemp$hf !=. & lwage$hf !=. & `a`n''==1, cluster(id)
 	replace sample = e(sample)
 }
 
@@ -147,8 +145,7 @@ foreach y of local response {
 		forvalues k=`kk'/`kk' { 				
 			forvalues i=0/`horizon2' {	
 		
-		xi: ivreg2 `y'`i' (d.`impulse' =  `inst') `cont`k'`y'' ///
-			if `c`j'' & `a`n''==1 & sample==1, cluster(id)
+		xi: ivreg2 `y'`i' (d.`impulse' =  `inst') `cont`k'`y'' if `c`j'' & `a`n''==1 & sample==1, cluster(id)
 		
 		replace b`k'_`y'_`a`n''`j'  = (_b[D.`impulse']) if _n == `i'+1
 		replace se`k'_`y'_`a`n''`j' = _se[D.`impulse'] if _n == `i'+1 
@@ -186,8 +183,7 @@ replace sample=1
 forvalues j=1/`jj' {
 
 if ($match) == 1 {
-	xi: ivreg2 lwage`horizon2' (d.`impulse' = `inst') `cont2lwage' ///
-		if `c`j'' & lunemp$hf !=. & lwage$hf !=.  & (`a1' == 1 | `a2' == 1) , cluster(id)
+	xi: ivreg2 lwage`horizon2' (d.`impulse' = `inst') `cont2lwage' if `c`j'' & lunemp$hf !=. & lwage$hf !=.  & (`a1' == 1 | `a2' == 1) , cluster(id)
 	replace sample = e(sample)
 }
 
@@ -196,8 +192,7 @@ foreach y of local response {
 		forvalues k=`kk'/`kk' { 				
 			forvalues i=0/`horizon2' {	
 
-	xi: ivreg2 `y'`i' (d.`x' =  `inst') `cont`k'`y'' ///
-		if `c`j'' & lunemp`i' !=. & lwage`i'!= . & sample==1  & (`a1'==1 | `a2' == 1) , cluster(id)
+	xi: ivreg2 `y'`i' (d.`x' =  `inst') `cont`k'`y'' if `c`j'' & lunemp`i' !=. & lwage`i'!= . & sample==1  & (`a1'==1 | `a2' == 1) , cluster(id)
 		
 	replace b`k'_`y'`x'_`p`j'' = (_b[D.`x']) if _n == `i'+1
 	replace se`k'_`y'`x'_`p`j'' = _se[D.`x'] if _n == `i'+1 
@@ -281,8 +276,7 @@ local inst JSTtrilemmaIV_R
 forvalues j=1/`jj' {
 
 if ($match) == 1 {
-	xi: ivreg2 F`horizon2'lwage (F`horizon2'lunemp=`inst') `cont2lwage' ///
-		if `c`j'' & F`horizon2'lunemp !=. & F`horizon2'lwage !=. & (`a1'==1 | `a2' == 1) , cluster(id)
+	xi: ivreg2 F`horizon2'lwage (F`horizon2'lunemp=`inst') `cont2lwage'	if `c`j'' & F`horizon2'lunemp !=. & F`horizon2'lwage !=. & (`a1'==1 | `a2' == 1) , cluster(id)
 	replace sample = e(sample)
 }
 
@@ -378,8 +372,7 @@ foreach y of local response {
 				
 		* here do match inside the loop so that it is a different matched sample for each n
 		if ($match) == 1 {
-			quietly: ivreg2 F`horizon2'lwage (F`horizon2'lunemp=`inst') `cont2lwage' ///
-				if `c`j'' & F`horizon2'lunemp !=. & F`horizon2'lwage !=. & (`a`n''==1) , cluster(id)
+			quietly: ivreg2 F`horizon2'lwage (F`horizon2'lunemp=`inst') `cont2lwage' if `c`j'' & F`horizon2'lunemp !=. & F`horizon2'lwage !=. & (`a`n''==1) , cluster(id)
 			replace sample = e(sample)
 		}
 		
@@ -453,7 +446,7 @@ foreach x in lunemp {
 		ytitle("", size()) xtitle("", size()) ///
 		graphregion(fcolor(white)) plotregion(color(white)) ylabel(0(5)15) ///
 		legend(off) ysize(1) xsize(2) scale(2.5)
-		graph export "$Fig\fig_`p`j''_PMBM_F_LPIV`horizon2'_`k'_asym`what'.pdf", replace
+		graph export "$Fig\fig_`p`j''_PMBM_F_LPIV`horizon2'_`k'_asym`what'_Quarter.pdf", replace
 		}
 	}
 }

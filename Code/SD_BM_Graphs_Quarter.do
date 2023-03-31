@@ -17,7 +17,7 @@ Produce Figures 3 a) and 3 c) and Table A.4
 ********************************************************************************
 
 local jj=1
-local horizon2=$hf
+local horizon2=$hfq
 local hh = `horizon2' + 1
 
 * file extension 
@@ -152,7 +152,7 @@ foreach x in lunemp {
 		graphregion(fcolor(white)) plotregion(color(white)) ///
 		legend(off) /*legend( region(ls(none)) size(vsmall) col(1) order(3 4 5) label(3 "Baseline") label(4 "`ta1'") label(5 "`ta2'") )*/ ///
 		scale(2) ysize(1.5) xsize(3) `ylab`y'2' 	
-		graph export "$Fig\fig_`p`j''_SDPMBM_LPIV`horizon2'_`k'_asym`what'.pdf", replace
+		graph export "$Fig\fig_`p`j''_SDPMBM_LPIV`horizon2'_`k'_asym`what'_Quarter.pdf", replace
 
 		restore
 		
@@ -172,7 +172,7 @@ graph combine lunemp21 lwage21, ///
 
 graph display, ysize(1) xsize(3)
 
-graph export "$Fig\fig_`p`j''_SDLPIVBM`horizon2'_`k'_asym`what'.pdf", replace
+graph export "$Fig\fig_`p`j''_SDLPIVBM`horizon2'_`k'_asym`what'_Quarter.pdf", replace
 }
 }
 }
@@ -189,7 +189,7 @@ list periods b2_lwagelunemp_full b2_lwagelunemp_`a1'1 b2_lwagelunemp_`a2'1 arph_
 quietly{		
 * open log file
 cap log cl
-log using "$Tab\Table_asym`what'_`horizon2'_`match'.tex", t replace
+log using "$Tab\Table_asym`what'_`horizon2'_`match'_Quarter.tex", t replace
 set linesize 255
 
 * start writing the Table in LaTeX

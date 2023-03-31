@@ -42,7 +42,7 @@ graph set window fontfacemono "DejaVu Sans Mono"    // set default mono font (wi
 global hf 		= 10
 
 * Choose number of horizons for the quarterly IRFs
-global hfq 		= 28
+global hfq 		= 40
 
 * Master - choose number of lags for the IRFs
 global lags 	= 2

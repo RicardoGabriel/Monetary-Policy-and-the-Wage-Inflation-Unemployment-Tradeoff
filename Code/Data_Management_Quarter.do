@@ -285,6 +285,7 @@ gen lsumgdp = 100*log(sumGDP)			// (sample) "world" GDP
 gen lrgdp   = 100*log(gdp)				// real GDP
 gen lcpi    = 100*log(cpi)				// price index
 
+
 /*
 gen lriy 	= 100*log(iy*rgdpbarro)		// investment
 gen loansgdp = tloans/gdp*100			// loans to gdp ratio
@@ -301,6 +302,7 @@ foreach var in `varlist'{
 	gen d`var' = d.`var'
 }
 
+	gen dlcpi_yoy = 100*log(cpi)-100*log(l4.cpi)
 
 
 ********************************************************************************
