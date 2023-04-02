@@ -12,7 +12,7 @@ Last Update: 30/01/2021
 * Setup - locals
 ********************************************************************************
 
-global lags 	= 8
+global lags 	= 4
 
 * horizon
 local horizon1 5
@@ -50,6 +50,8 @@ tsset id dateq, quarter
 estimates clear	
 
 
+
+
 ********************************************************************************
 * Setup - defining main variables (y, x, z) and controls (W)
 ********************************************************************************
@@ -81,7 +83,7 @@ foreach y of local response {
 	local impulse stir
 	
 	* z
-	local inst JSTtrilemmaIV_R
+	local inst JSTtrilemmaIV
 
 
 * W - control variables (now with state interaction)
@@ -95,15 +97,14 @@ local rhslwage	l(1/`Lags').unemp1 l(1/`Lags').dlwage1 l(0/`Lags').dlrcon1 l(0/`L
 				l(1/`Lags').unemp2 l(1/`Lags').dlwage2 l(0/`Lags').dlrcon2 l(0/`Lags').dlrgdp2 l(0/`Lags').dlcpi2 l(1/`Lags').dstir2 l(0/`Lags').dltrate2 
 
 * Second set of controls only lagged values of unemp, inflation like BM (2020)
-local rhslunemp2	l(1/`Lags').unemp_s1 l(1/`Lags').dlwage_s1 l(1/`Lags').unemp_s2 l(1/`Lags').dlwage_s2 // l(1/`Lags').dlsumgdp_s1 l(1/`Lags').dlsumgdp_s2 l(1/`Lags').dlcpi_yoy_s1 l(1/`Lags').dlcpi_yoy_s2
+local rhslunemp2	l(1/`Lags').unemp_s1 l(1/`Lags').dlwage_s1 l(1/`Lags').unemp_s2 l(1/`Lags').dlwage_s2 
 					
-local rhslwage2		l(1/`Lags').unemp_s1 l(1/`Lags').dlwage_s1 l(1/`Lags').unemp_s2 l(1/`Lags').dlwage_s2 // l(1/`Lags').dlsumgdp_s1 l(1/`Lags').dlsumgdp_s2 l(1/`Lags').dlcpi_yoy_s1 l(1/`Lags').dlcpi_yoy_s2
-					
+local rhslwage2		l(1/`Lags').unemp_s1 l(1/`Lags').dlwage_s1 l(1/`Lags').unemp_s2 l(1/`Lags').dlwage_s2 
 					
 			
 * add extra variable to the control set - dlsumgdp to capture world business cycles(with state interaction)
-local fe dlsumgdp_s1 dlsumgdp_s2 i.quarter 
-*dlcpi_yoy_s1 dlcpi_yoy_s2
+local fe dlsumgdp_s1 dlsumgdp_s2 
+*GR_s1 GR_s2 dlcpi_yoy_s1 dlcpi_yoy_s2 i.quarter l(1/`Lags').JSTtrilemmaIV_s1 l(1/`Lags').JSTtrilemmaIV_s2 l(1/`Lags').dlcpi_yoy_s1 l(1/`Lags').dlcpi_yoy_s2
 
 * add extra variable to control for state * country FE
 local cfe id1_s1 id2_s1 id3_s1 id4_s1 id5_s1 id6_s1 id7_s1 id8_s1 id9_s1 id10_s1 id11_s1 id12_s1 id13_s1 id14_s1 id15_s1 id16_s1 id17_s1 ///
@@ -273,7 +274,7 @@ foreach x of local impulse {
 }
 
 * z
-local inst JSTtrilemmaIV_R
+local inst JSTtrilemmaIV
 
 	
 * Estimation: 

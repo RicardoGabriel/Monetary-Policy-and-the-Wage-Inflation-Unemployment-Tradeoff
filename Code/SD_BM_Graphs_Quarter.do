@@ -72,9 +72,9 @@ forvalues j=1/`jj'{
 	local a1 $a1
 	local a2 $a2
 
-local ylablwage 	"ylab(-1(0.5)1)"
-local ylablunemp  	"ylab(-1(0.5)1)"
-local ylablwage2	"ylab(-2(1)1)"
+local ylablwage 	"ylab(-0.2(0.2)0.2)"
+local ylablunemp  	"ylab(-1(1)3)"
+local ylablwage2	"ylab(-0.2(0.1)0.2)"
 
 
 if "`a1'" == "positive" {
@@ -101,7 +101,7 @@ foreach x of local impulse {
 		(line zero Years, lcolor(black)), ///
 		/// ylabel(`l`y''(`c`y'')`h`y'', nogrid) ///
 		title("`t`y''", color(black) size(medsmall)) ///
-		ytitle("Percentage Points", size(medsmall)) xtitle("Year", size(medsmall)) ///
+		ytitle("Percentage Points", size(medsmall)) xtitle("Quarter", size(medsmall)) ///
 		graphregion(fcolor(white)) plotregion(color(white)) ///
 		legend(off) ///	
 		name(`y'`k'`j', replace) nodraw xsize(2) ysize(3) ///
@@ -124,7 +124,7 @@ foreach x of local impulse {
 		(line zero Years, lcolor(black)), ///
 		/// ylabel(`l`y''(`c`y'')`h`y'', nogrid) ///
 		title("`t`y''", color(black) size(medsmall)) ///
-		ytitle("Percentage Points", size(medsmall)) xtitle("Year", size(medsmall)) ///
+		ytitle("Percentage Points", size(medsmall)) xtitle("Quarter", size(medsmall)) ///
 		graphregion(fcolor(white)) plotregion(color(white)) ///
 		/*legend(off)*/ legend( c(1) region(ls(none)) size(vsmall) col(2) order(3 4) label(3 "`ta1'") label(4 "`ta2'") ring(0) position(2)) ///	
 		name(`y'`k'`j', replace) nodraw xsize(2) ysize(3) ///
@@ -139,13 +139,13 @@ foreach x in lunemp {
 		forvalues k=2/2 {
 		
 		preserve
-		twoway (rarea up`k'_`y'`x'_`p`j'' dn`k'_`y'`x'_`p`j''  Years if Years>2,  ///
+		twoway (rarea up`k'_`y'`x'_`p`j'' dn`k'_`y'`x'_`p`j''  Years if Years>12,  ///
 		fcolor(gs15) lcolor(gs15) lw(none) lpattern(solid))  ///
-		(line b`k'_`y'`x'_`p`j'' Years if Years>2, lcolor(olive) ///
+		(line b`k'_`y'`x'_`p`j'' Years if Years>12, lcolor(olive) ///
 		lpattern(solid) lwidth(thick)) ///
-		(line b`k'_`y'`x'_`a1'`j' Years if Years>2, lcolor(dkgreen) ///
+		(line b`k'_`y'`x'_`a1'`j' Years if Years>12, lcolor(dkgreen) ///
 		lpattern(longdash) lwidth(thick)) /// 
-		(line b`k'_`y'`x'_`a2'`j' Years if Years>2, lcolor(dkorange) ///
+		(line b`k'_`y'`x'_`a2'`j' Years if Years>12, lcolor(dkorange) ///
 		lpattern(dash) lwidth(thick)) ///  
 		(line zero Years, lcolor(black)), ///
 		ytitle("", size()) xtitle("", size()) ///
