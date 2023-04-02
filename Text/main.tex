@@ -100,7 +100,7 @@ In the current empirical literature, there is a large amount of sampling uncerta
 
 This work also contributes to the literature about the effects of monetary policy using long run panel data \citep{Alpanda2019, Jorda2019}. By using the trilemma instrumental variable (IV) to identify the effect of monetary policy, I build not only on the seminal work of \cite{DiGiovanni2009} but also on recent studies by \cite{Jorda2019} and \cite{Schularick2020}. Moreover, this paper applies the Phillips multiplier statistic which was first presented in the study of \cite{Barnichon2019} and applied by \cite{Eser2020}, who estimated it respectively for the US and the UK, and the Eurozone. This paper's novelty lies in applying the state-of-art methodology to a historical setting with long run data series that allows testing the response of wage inflation and unemployment rates to a monetary policy surprise, and whether these responses are state-dependent.
 
-Finally, this paper's empirical findings resonate with recent theoretical developments that link the wage inflation-unemployment tradeoff to the level of price inflation. According to a standard New Keynesian model, an increase (decrease) in trend inflation should cause an increase (decrease) in the frequency of price adjustment, leading to a decrease (increase) in the steepness of the wage Phillips curve \citep{Benati2007}. . This rationale that low price inflation weakens the wage inflation-unemployment tradeoff is consistent with two other strands of the literature, namely the state-dependent pricing \citep{Alvarez2019, Costain2022} and the nominal price rigidities literatures \citep{Tobin1972, Benigno2011, Daly2014}. 
+Finally, this paper's empirical findings resonate with recent theoretical developments that link the wage inflation-unemployment tradeoff to the level of price inflation. According to a standard New Keynesian model, an increase (decrease) in trend inflation should cause an increase (decrease) in the frequency of price adjustment, leading to a decrease (increase) in the steepness of the wage Phillips curve \citep{Benati2007}. This rationale that low price inflation weakens the wage inflation-unemployment tradeoff is consistent with two other strands of the literature, namely the state-dependent pricing \citep{Alvarez2019, Costain2022} and the nominal price rigidities literatures \citep{Tobin1972, Benigno2011, Daly2014}. Moreover, this rationale is also consistent with the recent view that post-Covid, as the frequency of price changes has increased, we are moving from a flatter to a steeper Phillips curve \citep{Waller2023}.
 
 Since \cite{Ball1988}, the empirical literature has not paid enough attention to this low price inflation mechanism. Some notable exceptions are \cite{Benati2007}, who documented a positive correlation between the time-varying average gain of real activity and inflation, \cite{Vavra2014B}, who rejected a New Keynesian Phillips curve with constant inflation output tradeoff in favor of a slope that increases with microeconomic volatility, \cite{Gertler2018}, who found a weak money-inflation link in regimes characterized by low inflation, and \cite{Ascari2021, Ascari2022} who provide evidence supporting non-linear effects in the response of the price level depending on the trend inflation regime, though using only aggregate US data. I complement these findings by showing a negative and strong historical correlation between a time-varying Phillips curve and price inflation, and also by estimating a weaker wage inflation-unemployment tradeoff in times of low price inflation due to a weaker response of wage inflation to monetary policy.
 
@@ -171,7 +171,7 @@ There are three key features from Figure \ref{F:RWIV} which deserve to be highli
 
 Second, the wage Phillips curve was also flatter during the Gold Standard period and the beginning of the Bretton Woods epoch. This novel finding suggests that the recent weakening of the wage inflation-unemployment tradeoff is not a unique feature of the last 20 years.
 
-Third, it seems that during periods of low price inflation, the slope of the wage Phillips curve becomes flatter. One potential explanation for this correlation is the \textit{low inflation hypothesis} which will be tested in Section \ref{S_Results}. During the majority of the three periods shaded in gray, inflation was strongly anchored either to the price of gold or to a composite price measure (CPI), and thus, countries experienced a persistent low price inflation environment (as we saw in Table \ref{T_Descriptives}). Consequently, firms adjusted prices and wages less often \citep{Gagnon2009, Nakamura2018, Alvarez2019} and promoted a disconnect between wage inflation and movements in the labor market.%\footnote{For a more detailed and analytical explanation, check Appendix \ref{SS_FPA}.}
+Third, it seems that during periods of low price inflation, the slope of the wage Phillips curve becomes flatter. One potential explanation for this correlation is the \textit{low inflation hypothesis} which will be tested in Section \ref{S_Results}. During the majority of the three periods shaded in gray, inflation was strongly anchored either to the price of gold or to a composite price measure (CPI), and thus, countries experienced a persistent low price inflation environment (as we saw in Table \ref{T_Descriptives}). Consequently, firms adjusted prices and wages less often \citep{Gagnon2009, Nakamura2018, Alvarez2019} and promoted a disconnect between wage inflation and movements in the labor market.\footnote{For a more detailed and analytical explanation, check Appendix \ref{SS_FPA}.}
 
 A major element of modern Phillips curve estimations are \textit{inflation expectations}. \cite{Hazell2021} show that not accounting for the decline in long-run inflation expectations during the Volcker disinflation may introduce an upward bias in estimates of the slope of the United States (price) Phillips curve during that period. Taking this into account might question the use of \cite{Gali2011} framework that may be overly restrictive on the nonexistent role of inflation expectations. Moreover, even though this work focuses only on the relationship between wage inflation and unemployment, it is still important to acknowledge that there is a strong correlation between price and wage inflation (Table \ref{T_Correlation}) and therefore it might be important to have this issue into account. While the absence of historical data on inflation expectations makes it impossible to add it as a control variable, I collect OECD data on inflation forecast starting in the 1990s for the European countries and starting in the 1960s for the remaining ones to 2020 and run the same analysis for this sub-sample.
 
@@ -386,6 +386,33 @@ To be as close as possible to the baseline exercise, I construct the same instru
 		\caption{Impulse Responses}
 		\label{F:Dynamics}
 		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_LPIVBM40_2_Quarter.pdf}
+		\end{subfigure}
+		\annote{Phillips multiplier estimations using the trilemma IV as instrument, using a matched sample of 499 quarterly observations between 1995q1 and 2020q1, and controlling for two lags of unemployment and wage inflation, country fixed effects, and world GDP growth as explained in Equation \eqref{EQ:MULT}. For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator, while the dashed lines correspond to the two-sided 90\% Anderson-Rubin confidence sets robust to weak instruments. The F-statistics (upper-right) are computed using the method presented in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and \textit{average} unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets.}
+	
+\end{figure}
+
+
+
+
+
+\begin{figure}[h!]
+    \centering
+	\caption{Phillips multiplier and IRFs}
+	\label{F:Multiplie}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{Phillips multiplier}
+		\label{F:Multiplier_M}
+		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_SDPMBM_LPIV40_2_asym_lowflat_Quarter.pdf}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{F-Statistic}
+		\label{F:Multiplier_F}
+		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_PMBM_F_LPIV40_2_asym_lowflat_Quarter.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.9\textwidth}
+		\caption{Impulse Responses}
+		\label{F:Dynamics}
+		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_SDLPIVBM40_2_asym_lowflat_Quarter.pdf}
 		\end{subfigure}
 		\annote{Phillips multiplier estimations using the trilemma IV as instrument, using a matched sample of 499 quarterly observations between 1995q1 and 2020q1, and controlling for two lags of unemployment and wage inflation, country fixed effects, and world GDP growth as explained in Equation \eqref{EQ:MULT}. For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator, while the dashed lines correspond to the two-sided 90\% Anderson-Rubin confidence sets robust to weak instruments. The F-statistics (upper-right) are computed using the method presented in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and \textit{average} unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets.}
 	
