@@ -363,12 +363,9 @@ To be more precise about the low inflation mechanism I put forward in this paper
 
 For the first exercise, I identified different monetary policy regimes as described in Appendix \ref{SS_HistoricalPeriods} and summarized in Table \ref{T_HistoricalPeriodsSource1}. I then add a Monetary Policy regime dummy when estimating equations \eqref{EQ:MULT} and \eqref{EQ:MULT_State} to capture structural differences that are common across countries in the same MP regime. Results... 
 
-For the second exercise, I start by collecting higher frequency data for the same set of baseline countries. I was able to compile information for 17 out of 18 countries, excluding Switzerland, from the Federal Reserve Economic Data (FRED) at the quarter level since 1995. 
+For the second exercise, I start by collecting higher frequency data for the same set of baseline countries. I was able to compile information for 17 out of 18 countries, excluding Switzerland, from the Federal Reserve Economic Data (FRED) at the quarter level since 1995. Then, I estimate equation \eqref{EQ:MULT}, using the non-residualized version of the instrument defined by Equation \eqref{EQ:trilemmaIV}.
 
-To be as close as possible to the baseline exercise, I construct the same instrument based on the trilemma of international finance. 
-
-In most regards, this exercise is a replication of \cite{Barnichon2019} Phillips multiplier computation based on their Proposition 1 (equation 4) differing 3 key dimensions. First, the sample composition is different as I am analyzing a panel of countries in a fixed exchange rate regime instead of the United States and the United Kingdom separately. Second, I based my identification on the trilemma of international finance instead of narrative identification to characterize monetary policy shocks. Finally,  
-
+In many ways, this exercise is a replication of \cite{Barnichon2019} Phillips multiplier computation based on their Proposition 1 (equation 4) differing in three dimensions. First, I am analyzing a panel of countries in a fixed exchange rate regime instead of the United States and the United Kingdom separately. Second, I based my identification on the trilemma of international finance instead of narrative identification to characterize monetary policy shocks. Finally, my sample is based on the period between 1995q1 and 2019q4, incorporating the Great Recession Period but excluding the Covid pandemic. Like \cite{Barnichon2019}, I use quarterly data, include four lags of inflation and unemployment as control variables, and rely on weak instrument robust methods for computing the confidence sets for the Phillips multiplier \citep{Anderson1949}.
 
 \begin{figure}[h!]
     \centering
@@ -389,12 +386,13 @@ In most regards, this exercise is a replication of \cite{Barnichon2019} Phillips
 		\label{F:Dynamics}
 		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_LPIVBM40_2_Quarter.pdf}
 		\end{subfigure}
-		\annote{Phillips multiplier estimations using the trilemma IV as instrument, using a matched sample of 499 quarterly observations between 1995q1 and 2020q1, and controlling for two lags of unemployment and wage inflation, country fixed effects, and world GDP growth as explained in Equation \eqref{EQ:MULT}. For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator, while the dashed lines correspond to the two-sided 90\% Anderson-Rubin confidence sets robust to weak instruments. The F-statistics (upper-right) are computed using the method presented in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and \textit{average} unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets.}
+		\annote{Phillips multiplier estimations using the trilemma IV as instrument, using a matched sample of 465 quarterly observations between 1995q1 and 2019q1, and controlling for two lags of unemployment and wage inflation, country fixed effects, and world GDP growth as explained in Equation \eqref{EQ:MULT}. For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator, while the dashed lines correspond to the two-sided 90\% Anderson-Rubin confidence sets robust to weak instruments. The F-statistics (upper-right) are computed using the method presented in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and \textit{average} unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets.}
 	
 \end{figure}
 
+Phillips multiplier estimates - interpretation. Talk about horizon - same as baseline. F-statistic being small The asymptotic distribution of the Anderson-Rubin confidence sets does not depend on the strength of the instrument, however, the confidence bands of the Phillips multiplier are larger when the instruments are weaker \cite{Barnichon2019}. 
 
-Talk about similarities of results in \cite{Barnichon2019} when splitting their sample and focusing on the post-1990 sample period for both the United Kingdom and the United States - muted wage response which is line with the main hypothesis of this paper.
+Talk about similarities of results in \cite{Barnichon2019} when splitting their sample and focusing on the post-1990 sample period for the United States they also find a muted wage response which is line with the main hypothesis of this paper.
 
 To go one step further, test whether the Phillips multiplier is weaker in periods of low inflation within a specific monetary policy response. Here, refer to some summary statistics about cpi inflation during the quarterly sample? and introduce state-dependent estimation.
 
@@ -417,9 +415,12 @@ To go one step further, test whether the Phillips multiplier is weaker in period
 		\label{F:Dynamics}
 		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_SDLPIVBM40_2_asym_lowflat_Quarter.pdf}
 		\end{subfigure}
-		\annote{Phillips multiplier estimations using the trilemma IV as instrument, using a matched sample of 499 quarterly observations between 1995q1 and 2020q1, and controlling for two lags of unemployment and wage inflation, country fixed effects, and world GDP growth as explained in Equation \eqref{EQ:MULT}. For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator, while the dashed lines correspond to the two-sided 90\% Anderson-Rubin confidence sets robust to weak instruments. The F-statistics (upper-right) are computed using the method presented in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and \textit{average} unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets.}
+		\annote{Phillips multiplier estimations using the trilemma IV as an instrument, using a matched sample of 465 quarterly observations between 1995q1 and 2019q1, and controlling for two lags of unemployment and wage inflation, country fixed effects, and world GDP growth as explained in Equation \eqref{EQ:MULT} but now at the quarterly frequency. 230 (235) observations are assigned to high (low) inflation environments following the classification  For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator, while the dashed lines correspond to the two-sided 90\% Anderson-Rubin confidence sets robust to weak instruments. The F-statistics (upper-right) are computed using the method presented in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and \textit{average} unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets.}
 	
 \end{figure}
+
+
+
 
 \section{Conclusion \label{S_Conclusion}}
 
