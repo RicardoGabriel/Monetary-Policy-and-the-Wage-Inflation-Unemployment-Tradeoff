@@ -212,4 +212,7 @@ do trilemma_iv
 * Saving the Data
 ********************************************************************************
 xtset id year
+
+drop if year>=2020
+
 save "$hp\Data\Data_MScThesis_Analysis.dta", replace

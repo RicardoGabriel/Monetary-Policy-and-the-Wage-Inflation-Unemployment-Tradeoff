@@ -194,14 +194,16 @@ gen zero = 0 if _n <= `hh'
 cap drop Years
 gen Years = _n-1 if _n<=`hh'
 
-gen arcib=.
-gen arcit=.
+gen arcibh1=.
+gen arcith1=.
+gen arcibh2=.
+gen arcith2=.
 forvalues i = 0/`horizon2' {
 	foreach var in arcibh arcith{
 	forvalues k=1/`kk' {
-		quietly replace `var'`k' = `var'h2`i' if Years==`i'
-		quietly replace `var'`k' = 1 if `var'h2`i' >= 1	& _n == (`i'+1)	
-		quietly replace `var'`k' = -2 if `var'h2`i' <= -2	& _n == (`i'+1)	
+		quietly replace `var'`k' = `var'`k'`i' if Years==`i'
+		quietly replace `var'`k' = 1 if `var'`k'`i' >= 1	& _n == (`i'+1)	
+		quietly replace `var'`k' = -2 if `var'`k'`i' <= -2	& _n == (`i'+1)	
 	}
 	}
 }
@@ -232,8 +234,8 @@ gen dn2`k'_`y'`x'_`p`j'' = b`k'_`y'`x'_`p`j'' - 1*se`k'_`y'`x'_`p`j'' if _n <= `
 }
 }
 
-list Years b2_lwagelunemp_full se2_lwagelunemp_full up2_lwagelunemp_full dn2_lwagelunemp_full arcib arcit if Years<=`hh'
-outsheet Years b2_lwagelunemp_full se2_lwagelunemp_full up2_lwagelunemp_full dn2_lwagelunemp_full arcib arcit using junk.csv if Years<=`hh', comma replace
+list Years b2_lwagelunemp_full se2_lwagelunemp_full up2_lwagelunemp_full dn2_lwagelunemp_full arcibh2 arcith2 if Years<=`hh'
+outsheet Years b2_lwagelunemp_full se2_lwagelunemp_full up2_lwagelunemp_full dn2_lwagelunemp_full arcibh2 arcith2 using junk.csv if Years<=`hh', comma replace
 
 
 * Produce Figures
@@ -254,8 +256,8 @@ foreach x of local impulse {
 		fcolor(gs13) lcolor(gs13) lw(none) lpattern(solid)) ///
 		(line b`k'_`y'`x'_`p`j'' Years if Years>2, lcolor(olive) ///
 		lpattern(solid) lwidth(thick)) ///
-		(line arcit Years, lcolor(olive) lpattern(dash)) ///
-		(line arcib Years, lcolor(olive) lpattern(dash)) ///
+		(line arcith`k' Years, lcolor(olive) lpattern(dash)) ///
+		(line arcibh`k' Years, lcolor(olive) lpattern(dash)) ///
 		(line zero Years, lcolor(black)), ///
 		/*ylabel(`l`y''(`c`y'')`h`y'', nogrid) */ ///
 		/*title("`t`y''", color(black) size(medsmall))*/ ///

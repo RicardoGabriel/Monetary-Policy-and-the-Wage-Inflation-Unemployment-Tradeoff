@@ -347,4 +347,5 @@ do trilemma_iv_Quarter
 * Saving the Data
 ********************************************************************************
 xtset id dateq, quarter
+drop if dateq==240
 save "$hp\Data\Data_Analysis_Quarter.dta", replace

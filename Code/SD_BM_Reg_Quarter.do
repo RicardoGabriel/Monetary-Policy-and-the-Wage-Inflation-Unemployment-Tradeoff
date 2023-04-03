@@ -12,15 +12,13 @@ Last Update: 30/01/2021
 * Setup - locals
 ********************************************************************************
 
-global lags 	= 4
-
 * horizon
 local horizon1 5
 local horizon2 = $hfq
 local hh = `horizon2' + 1
 
 * number of lags
-local Lags = $lags
+local Lags = $lagsq
 
 * (jj=1) full sample; (jj=2) only post-Bretton Woods
 local jj = 1
@@ -83,7 +81,7 @@ foreach y of local response {
 	local impulse stir
 	
 	* z
-	local inst JSTtrilemmaIV
+	local inst JSTtrilemmaIV_R
 
 
 * W - control variables (now with state interaction)

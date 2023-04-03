@@ -12,14 +12,12 @@ use "$hp\Data\Data_Analysis_Quarter.dta", clear
 * Setup - locals - recycling year setup and adjusting for quarter lags and horizons
 ********************************************************************************
 
-global hfq 		= 40
-
 * horizon
 local horizon1 = 40
 local horizon2 = $hfq
 	
 * number of lags
-local Lags = 4
+local Lags = $lagsq
 
 * (jj=1) full sample
 local jj = 1
@@ -78,7 +76,7 @@ foreach x of local impulse {
 }
 	
 	* z
-	local instr JSTtrilemmaIV_R
+	local instr JSTtrilemmaIV
 
 
 * W - control variables

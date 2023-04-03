@@ -14,8 +14,6 @@ use "$hp\Data\Data_Analysis_Quarter.dta", clear
 * Setup - locals - recycling year setup and adjusting for quarter lags and horizons
 ********************************************************************************
 
-global hfq 		= 40
-
 * locals
 local gridd = $gridd
 local levell = $levell
@@ -24,7 +22,7 @@ local levell = $levell
 local horizon2 = $hfq
 	
 * number of lags
-local Lags = $lags
+local Lags = $lagsq
 
 * (jj=1) full sample; (jj=2) only post-Bretton Woods
 local jj = 1
@@ -51,7 +49,7 @@ local p2 post
 	local impulse lunemp
 	
 	** z - instrument
-	local inst JSTtrilemmaIV_R 
+	local inst JSTtrilemmaIV
 	
 	
 	*use level unemployment

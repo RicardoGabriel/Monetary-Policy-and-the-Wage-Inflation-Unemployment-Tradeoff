@@ -20,17 +20,12 @@ clear all
 use "$hp\Data\Data_Analysis_Quarter.dta", clear
 
 
-global hfq 		= 40
-
 * Call chosen state
 local s1 $state
 
 * Log from here
 cap log close
 log using "asym_`s1'.log" , replace
-
-* Generate Great Recession Dummy
-gen GR = inrange(year,2008,2012)
 
 
 ********************************************************************************
@@ -39,7 +34,6 @@ gen GR = inrange(year,2008,2012)
  
 if ("`s1'" == "lowflat") {
 	cap drop dlcpilo dlcpihi
-	*sum dlcpi_yoy, d // `r(p50)'
 	gen dlcpilo = cond(l.dlcpi_yoy< 2.1, 1, 0) if l.dlcpi_yoy!=.
 	gen dlcpihi = cond(l.dlcpi_yoy>=2.1, 1, 0) if l.dlcpi_yoy!=.
 		global a1 dlcpihi
@@ -125,7 +119,7 @@ global what _`s1'
 tabulate id, gen(id)
 	
 * Generate instrument and controls interacted with state variable
-local varlist JSTtrilemmaIV GR unemp dlwage dlsumgdp dlrgdp dlcpi dstir ///
+local varlist JSTtrilemmaIV unemp dlwage dlsumgdp dlrgdp dlcpi dstir ///
 			  id1 id2 id3 id4 id5 id6 id7 id8 id9 id10 id11 id12 ///
 			  id13 id14 id15 id16 id17 dlcpi_yoy
 	foreach var in `varlist'{

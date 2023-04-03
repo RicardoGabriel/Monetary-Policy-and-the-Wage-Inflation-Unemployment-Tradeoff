@@ -3,8 +3,8 @@
 *
 * Project: Monetary Policy and the Wage-Inflation Unemployment Trade-off
 * Author: Ricardo Duque Gabriel
-* First Date: 30/06/2019
-* Last Update: 03/23/2023
+* First Date: 06/30/2019
+* Last Update: 04/03/2023
 * Predicted running time: 10 minutes
 * to run a faster specification change global grid to 50
 *
@@ -19,6 +19,9 @@
 * ssc install ftools
 * ssc install graph3d
 ********************************************************************************
+
+timer clear
+timer on 1
 
 * Paths (store your folder directory in a global)
 do paths
@@ -46,6 +49,7 @@ global hfq 		= 40
 
 * Master - choose number of lags for the IRFs
 global lags 	= 2
+global lagsq	= 4
 
 * Master - use matched sample (that is, all horizons with same # obs)
 global match 	= 1
@@ -70,8 +74,8 @@ global slides	= 0
 	* postwar   -   d
 global state 	= "lowflat"
 ********************************************************************************
-/*
 
+/*
 * Prepare Data with all observations
 global wage_out = 0
 do Data_Management
@@ -90,7 +94,7 @@ global wage_out = 1
 do Data_Management
 
 *Produce Rolling Window graphs
-** Figure 2
+* Figure 2
 do Figure_2
 
 * First Stage Results of Monetary Policy Shocks (Trilemma Instrumental Variable)
@@ -114,6 +118,7 @@ do MP_IRFs
 * Figure 5 and Table A.7
 do SD_BM
 
+
 * Figure 4
 global state 	= "postwar"
 do SD_BM
@@ -129,20 +134,21 @@ do SD_BM
 */
 *******************************************************************************
 * Quarterly analysis
+global match = 1
 global wage_out = 1
 do Data_Management_Quarter
 
 * First Stage Results of Monetary Policy Shocks (Trilemma Instrumental Variable)
-do First_Stage_Quarter
+*do First_Stage_Quarter
 
 * Phillips Multiplier Quarterly Data
 ** Figures 3 a) and 3 b)
-do PM_BM_Quarter
+*do PM_BM_Quarter
 
 ** Figure 3 c)
-do MP_IRFs_BM_Quarter
+*do MP_IRFs_BM_Quarter
 
-/*
+
 * State Dependent Phillips Multipliers
 * Figure ?? and Table ??
 global state 	= "lowflat"

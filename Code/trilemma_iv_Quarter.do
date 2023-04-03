@@ -88,12 +88,11 @@ estimates clear
 *  yearly data) - l.dlrcon l.dltrate l.dstir l.dlrgdp l.dlcpi l.dlriy l.cay
 local rhsstirF L(1/4).dlrgdp L(1/4).dstir L(1/4).dlcpi
 
-
 cap drop dstir_hat
 gen dstir_hat =.
 
-* forecast stir for post-WW2
-xtreg   d.stir  `rhsstirF' if (iso=="DEU"|iso=="USA"), fe
+* forecast stir
+xtreg d.stir `rhsstirF' i.quarter if (iso=="DEU"|iso=="USA"), fe
 cap drop temp
 predict temp if (iso=="DEU"|iso=="USA")
 replace dstir_hat = temp if (iso=="DEU"|iso=="USA")
