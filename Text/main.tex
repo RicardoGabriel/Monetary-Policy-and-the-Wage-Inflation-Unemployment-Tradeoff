@@ -56,7 +56,7 @@
 \maketitle
 
 \begin{abstract}
-\normalsize Using newly assembled data for 18 advanced economies between 1870 and 2020, I study how monetary policy affects wage inflation and unemployment and document two key findings regarding their tradeoff. First, the wage Phillips curve displays a time-varying slope. Second, the tradeoff becomes weaker in low price inflation environments due to a more pronounced unemployment response to monetary policy. These findings lend support to the idea that monetary policy has state-dependent effects with the central banks' ability in exploring the tradeoff being impaired by a low price inflation environment.
+\normalsize Using newly assembled data for 18 advanced economies between 1870 and 2019, I study how monetary policy affects wage inflation and unemployment and document two key findings regarding their tradeoff. First, the wage Phillips curve displays a time-varying slope. Second, the tradeoff becomes weaker in low price inflation environments due to a more pronounced unemployment response to monetary policy. These findings lend support to the idea that monetary policy has state-dependent effects with the central banks' ability in exploring the tradeoff being impaired by a low price inflation environment.
 
 %Using newly assembled data for 17 advanced economies between 1870 and 2016 and local projection methods to study how monetary policy affects wage inflation and unemployment, I document two key findings regarding the inflation-unemployment tradeoff. First, the wage Phillips curve displays a time-varying slope. Second, the tradeoff becomes weaker in low price inflation environments due to a muted wage inflation response to monetary policy. These findings lend support to the idea that monetary policy has state-dependent effects with the central banks' ability in exploring the tradeoff being impaired by a low price inflation environment.
 
@@ -110,7 +110,7 @@ The remainder of this paper is structured as follows. Section \ref{S_Data} intro
 \section{Data and Descriptive Statistics \label{S_Data}}
 \subsection{Data}
 
-I construct a new historical dataset composed of wage inflation and unemployment rates series that go as far as the nineteenth century in order to uncover the historical tradeoff between wage inflation and unemployment. The newly assembled yearly data include a wage index measure and the unemployment rate for 18 advanced economies — Australia, Belgium, Canada, Denmark, Finland, France, Germany, Ireland, Italy, Japan, the Netherlands, Norway, Portugal, Spain, Sweden, Switzerland, the United Kingdom, and the United States. The sample spans from 1870 to 2020 and draws on more than 60 different sources.\footnote{Table A.1 in the online Appendix summarizes the data coverage by country. All data sources and further description of their construction are provided in the online Data Appendix.} Before the Bretton Woods epoch, available data is mostly at an annual frequency for both variables, so using panel data to study the wage inflation-unemployment tradeoff is of paramount importance. With the exception of wage inflation and unemployment, the macroeconomic data series used in this paper, such as price inflation, come from the Macrohistory Database \citep{Jorda2017}.
+I construct a new historical dataset composed of wage inflation and unemployment rates series that go as far as the nineteenth century in order to uncover the historical tradeoff between wage inflation and unemployment. The newly assembled yearly data include a wage index measure and the unemployment rate for 18 advanced economies — Australia, Belgium, Canada, Denmark, Finland, France, Germany, Ireland, Italy, Japan, the Netherlands, Norway, Portugal, Spain, Sweden, Switzerland, the United Kingdom, and the United States. The sample spans from 1870 to 2019 and draws on more than 60 different sources.\footnote{Table A.1 in the online Appendix summarizes the data coverage by country. All data sources and further description of their construction are provided in the online Data Appendix.} Before the Bretton Woods epoch, available data is mostly at an annual frequency for both variables, so using panel data to study the wage inflation-unemployment tradeoff is of paramount importance. With the exception of wage inflation and unemployment, the macroeconomic data series used in this paper, such as price inflation, come from the Macrohistory Database \citep{Jorda2017}.
 
 When possible, the \textit{unemployment rate} is defined as the percentage of unemployed in the total labor force. According to \cite{Rasmussen2018}, most countries had no unemployment insurance system until after the World Wars. Hence, citizens without a job had little incentive to enroll in a labor bureau since there was no compulsory unemployment insurance. 
 
@@ -163,7 +163,7 @@ Figure \ref{F:RWIV} shows the time-varying estimates of its slope $(\varphi)$ ba
     \centering
     \caption{Panel-OLS 20-year Rolling Window}
     \includegraphics[scale=1]{../Output/Figures/RW_dwn_OLS}
-    \annote{\footnotesize This figure plots a time-varying estimate of the slope of the wage Phillips curve (parameter $\varphi$, in Equation \eqref{EQ:Baseline}), using OLS and annual data from 1870 to 2020 for all 18 countries. It is computed based on a rolling OLS regression using a 20-year window and displays a 90\% confidence band. In Appendix, Figure \ref{F:RWIV_gamma} shows the estimate for the persistence coefficient ($\gamma$) while Figure \ref{F:RWIV2} presents the same regression when adding year fixed effects.}
+    \annote{\footnotesize This figure plots a time-varying estimate of the slope of the wage Phillips curve (parameter $\varphi$, in Equation \eqref{EQ:Baseline}), using OLS and annual data from 1870 to 2019 for all 18 countries. It is computed based on a rolling OLS regression using a 20-year window and displays a 90\% confidence band. In Appendix, Figure \ref{F:RWIV_gamma} shows the estimate for the persistence coefficient ($\gamma$) while Figure \ref{F:RWIV2} presents the same regression when adding year fixed effects.}
     \label{F:RWIV}
 \end{figure}
 
@@ -173,7 +173,7 @@ Second, the wage Phillips curve was also flatter during the Gold Standard period
 
 Third, it seems that during periods of low price inflation, the slope of the wage Phillips curve becomes flatter. One potential explanation for this correlation is the \textit{low inflation hypothesis} which will be tested in Section \ref{S_Results}. During the majority of the three periods shaded in gray, inflation was strongly anchored either to the price of gold or to a composite price measure (CPI), and thus, countries experienced a persistent low price inflation environment (as we saw in Table \ref{T_Descriptives}). Consequently, firms adjusted prices and wages less often \citep{Gagnon2009, Nakamura2018, Alvarez2019} and promoted a disconnect between wage inflation and movements in the labor market.\footnote{For a more detailed and analytical explanation, check Appendix \ref{SS_FPA}.}
 
-A major element of modern Phillips curve estimations are \textit{inflation expectations}. \cite{Hazell2021} show that not accounting for the decline in long-run inflation expectations during the Volcker disinflation may introduce an upward bias in estimates of the slope of the United States (price) Phillips curve during that period. Taking this into account might question the use of \cite{Gali2011} framework that may be overly restrictive on the nonexistent role of inflation expectations. Moreover, even though this work focuses only on the relationship between wage inflation and unemployment, it is still important to acknowledge that there is a strong correlation between price and wage inflation (Table \ref{T_Correlation}) and therefore it might be important to have this issue into account. While the absence of historical data on inflation expectations makes it impossible to add it as a control variable, I collect OECD data on inflation forecast starting in the 1990s for the European countries and starting in the 1960s for the remaining ones to 2020 and run the same analysis for this sub-sample.
+A major element of modern Phillips curve estimations are \textit{inflation expectations}. \cite{Hazell2021} show that not accounting for the decline in long-run inflation expectations during the Volcker disinflation may introduce an upward bias in estimates of the slope of the United States (price) Phillips curve during that period. Taking this into account might question the use of \cite{Gali2011} framework that may be overly restrictive on the nonexistent role of inflation expectations. Moreover, even though this work focuses only on the relationship between wage inflation and unemployment, it is still important to acknowledge that there is a strong correlation between price and wage inflation (Table \ref{T_Correlation}) and therefore it might be important to have this issue into account. While the absence of historical data on inflation expectations makes it impossible to add it as a control variable, I collect OECD data on inflation forecast starting in the 1990s for the European countries and starting in the 1960s for the remaining ones to 2019 and run the same analysis for this sub-sample.
 
 Empirically, \cite{Ciccarelli2010} have estimated a common factor in countries' price inflation that accounts for nearly 70\% of their variance. They include 22 OECD countries in their sample - the 18 countries in my sample plus Austria, Greece, Luxembourg, and New Zealand - from 1960 to 2008. With this in mind, it seems worthwhile to include time fixed effects as a way to control not only for the dynamics of global inflation but also to control for the common component (across countries) of inflation expectations.
 
@@ -281,7 +281,7 @@ where $\mathcal{I}_{c,t}$ is the indicator variable different for each sub-sampl
 
 \subsubsection{The Phillips multiplier is smaller during the Gold Standard and the last 20 years}
 
-Motivated by Figure \ref{F:RWIV}, I now test in a more robust empirical setting whether the wage inflation-unemployment tradeoff is different across sub-samples. To be precise, I am going to aggregate the years where inflation was more credibly anchored - the last 20 years (2000-2020) and the Gold Standard epoch (1870-1913) - and compare them against the post-war period (1946-1999) leaving the between-war period (1920-1938) out of this analysis.
+Motivated by Figure \ref{F:RWIV}, I now test in a more robust empirical setting whether the wage inflation-unemployment tradeoff is different across sub-samples. To be precise, I am going to aggregate the years where inflation was more credibly anchored - the last 20 years (2000-2019) and the Gold Standard epoch (1870-1913) - and compare them against the post-war period (1946-1999) leaving the between-war period (1920-1938) out of this analysis.
 
 Therefore, I estimate equation \ref{EQ:MULT_State} where $\mathcal{I}_{c,t}$ is an indicator of the post-war period defined as a dummy variable, which is equal to 1 for the years between 1946 and 1999 and equal to 0 for the years where inflation was more credibly anchored. This exercise allows comparing the evolution of the Phillips multiplier in these sub-samples and directly test whether $\mathcal{P}_h^{(\mathcal{I})} = \mathcal{P}_h^{(1-\mathcal{I})}$.
 
@@ -306,7 +306,7 @@ Figure \ref{F2:Multiplier_GS} displays the estimates of both the baseline and st
 		\label{F2:Dynamics_GS}
 		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_SDLPIVBM10_2_asym_postwar.pdf}
 		\end{subfigure}
-		\annote{Phillips multiplier estimated using the trilemma IV as instrument according to Equation \eqref{EQ:MULT}. For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator. The F-statistics (upper-right) are computed as discussed in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets. Across all figures, one can distinguish the state by its color and shape, short-dashed orange shape for the period with more credible anchored inflation (1870-1913 \& 2000-2020) and long-dashed green shape for the post-war period (1946-1999).}
+		\annote{Phillips multiplier estimated using the trilemma IV as instrument according to Equation \eqref{EQ:MULT}. For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator. The F-statistics (upper-right) are computed as discussed in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets. Across all figures, one can distinguish the state by its color and shape, short-dashed orange shape for the period with more credible anchored inflation (1870-1913 \& 2000-2019) and long-dashed green shape for the post-war period (1946-1999).}
 	
 \end{figure}
 
@@ -495,7 +495,7 @@ $ t $-statistic     &      [7.65]         &      [4.42]         &      [7.99]   
 N                   &        1316         &         505         &         811         &  &      1011         &         215         &         796         \\
 \bottomrule
 \end{tabular} 
-\annote{This table presents the first-stage estimates of the trilemma IV on the country's interest rate. The standard errors are in parentheses and the T-statistics are in square brackets. The full sample covers 1870–2020, excluding the World Wars and the German hyperinflation episode. The pre-WW2 sample covers 1870–1938, excluding 1914–1919, while the post-WW2 sample covers 1948–2020. The estimates in the last three columns (with controls) include country fixed effects and two lags of wage inflation and unemployment rate. In addition, I include world GDP growth to capture global cycles.}
+\annote{This table presents the first-stage estimates of the trilemma IV on the country's interest rate. The standard errors are in parentheses and the T-statistics are in square brackets. The full sample covers 1870–2019, excluding the World Wars and the German hyperinflation episode. The pre-WW2 sample covers 1870–1938, excluding 1914–1919, while the post-WW2 sample covers 1948–2019. The estimates in the last three columns (with controls) include country fixed effects and two lags of wage inflation and unemployment rate. In addition, I include world GDP growth to capture global cycles.}
 \end{table}
 
 \begin{table}[ht]
@@ -508,24 +508,48 @@ N                   &        1316         &         505         &         811   
 Dependent & \multicolumn{1}{c}{No controls} && \multicolumn{1}{c}{With controls} \\
 variable: $\Delta r_{it}$       \\
 \midrule
-trilemma $z_{i,t}$     &       0.89\sym{***}&&        0.73\sym{***}\\
+trilemma $z_{i,t}$     &       0.89\sym{***}&&        0.68\sym{***}\\
                     &      (0.03)         &&      (0.03)  \\
-$ t $-statistic     &      [28.03]         & &     [21.20] \\
-N                   &        926         &  &       860  \\
+$ t $-statistic     &      [28.01]         & &     [20.95] \\
+N                   &        917         &  &       852  \\
 \bottomrule
 \end{tabular} 
-\annote{This table presents the first-stage estimates of the trilemma IV on the country's interest rate for quarterly data. The standard errors are in parentheses and the T-statistics are in square brackets. The full sample covers 1995q1–2020q1. The estimates in the last column (with controls) include country fixed effects and two lags of wage inflation and unemployment rate. In addition, I include world GDP growth to capture global cycles.}
+\annote{This table presents the first-stage estimates of the trilemma IV on the country's interest rate for quarterly data. The standard errors are in parentheses and the T-statistics are in square brackets. The full sample covers 1995q1–2019q4. The estimates in the last column (with controls) include country fixed effects and two lags of wage inflation and unemployment rate. In addition, I include world GDP growth to capture global cycles.}
 \end{table}
 
 \begin{table}[ht]
 \centering
+\caption{First-Stage of trilemma IV - Quarterly Data} \label{T:First_Stage_Quarter}
+\vspace{1ex}
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{lccc}
+\toprule
+Dependent & \multicolumn{1}{c}{No controls} && \multicolumn{1}{c}{With controls} \\
+variable: $\Delta r_{it}$       \\
+\midrule
+trilemma $z_{i,t}$     &       0.89\sym{***}&&        0.68\sym{***}\\
+                    &      (0.03)         &&      (0.03)  \\
+$ t $-statistic     &      [28.01]         & &     [20.95] \\
+N                   &        917         &  &       852  \\
+\bottomrule
+\end{tabular} 
+\annote{This table presents the first-stage estimates of the trilemma IV on the country's interest rate for quarterly data. The standard errors are in parentheses and the T-statistics are in square brackets. The full sample covers 1995q1–2019q4. The estimates in the last column (with controls) include country fixed effects and two lags of wage inflation and unemployment rate. In addition, I include world GDP growth to capture global cycles.}
+\end{table}
+
+\begin{singlespace}
+\begin{table}[ht]
+\footnotesize
+\centering
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \caption{Estimates of multipliers across sub-samples \label{T:SDPM_GS}}
 \input{../Output/Tables/Table_asym_postwar_10_1_fix.tex}
-\annote{\footnotesize This table presents the multiplier estimates corresponding to the ones in Figure \ref{F2:Multiplier_M_GS}. The values in parentheses under the multipliers indicate the correspondent standard errors. The last column indicates the weak instrument robust Anderson-Rubin p-values for the difference in multipliers across states.}
+\annote{\footnotesize This table presents the multiplier estimates corresponding to the ones in Figure \ref{F2:Multiplier_M_GS}. The values in parentheses under the multipliers indicate the corresponding standard errors. The last column indicates the weak instrument robust Anderson-Rubin p-values for the difference in multipliers across states.}
 \end{table}
 
+
+
 \begin{table}[ht]
+\footnotesize
 \centering
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \caption{Estimates of multipliers across states of inflation \label{T:SDPM}}
@@ -534,13 +558,16 @@ N                   &        926         &  &       860  \\
 \end{table}
 
 
+
 \begin{table}[ht]
+\footnotesize
 \centering
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \caption{Estimates of multipliers across states of inflation \label{T:SDPM_App}}
 \input{../Output/Tables/Table_asym_lowflat_15_0.tex}
 \annote{\footnotesize This table presents the multiplier estimates corresponding to the ones in Figure \ref{F2:Multiplier_MM}. The values in parentheses under the multipliers indicate the standard errors. The last column indicates the weak instrument robust Anderson-Rubin p-values for the difference in multipliers across states.}
 \end{table}
+\end{singlespace}
 
 \clearpage
 
@@ -557,7 +584,7 @@ N                   &        926         &  &       860  \\
     \centering
     \caption{Panel-OLS 20-year Rolling Window}
     \includegraphics[scale=0.9]{../Output/Figures/RW_cpi_OLS}
-    \annote{\footnotesize This figure plots a time-varying estimate of the persistence coefficient of the wage Phillips curve (parameter $\gamma$, in Equation \eqref{EQ:Baseline}), using OLS and annual data from 1870 to 2020 for all 18 countries. In blue, I estimate the parameter $\gamma$ also controling for inflation expectations by estimating: $\pi_{c,t}^w = \mu_c + \pi_{t+1}^e + \varphi u_{c,t} + \gamma \pi_{c,t-1}^p + \epsilon_{c,t}$. It is computed based on a rolling OLS regression using a 20-year window and displays a 90\% confidence band.}
+    \annote{\footnotesize This figure plots a time-varying estimate of the persistence coefficient of the wage Phillips curve (parameter $\gamma$, in Equation \eqref{EQ:Baseline}), using OLS and annual data from 1870 to 2019 for all 18 countries. In blue, I estimate the parameter $\gamma$ also controling for inflation expectations by estimating: $\pi_{c,t}^w = \mu_c + \pi_{t+1}^e + \varphi u_{c,t} + \gamma \pi_{c,t-1}^p + \epsilon_{c,t}$. It is computed based on a rolling OLS regression using a 20-year window and displays a 90\% confidence band.}
     \label{F:RWIV_gamma}
 \end{figure}
 
@@ -565,7 +592,7 @@ N                   &        926         &  &       860  \\
     \centering
     \caption{Panel-OLS 20-year Rolling Window with year fixed effects}
     \includegraphics[scale=0.9]{../Output/Figures/RW_dwn_OLS_year}
-    \annote{\footnotesize This figure plots a time-varying estimate of the slope of the wage Phillips curve for two different specifications of Equation \eqref{EQ:Baseline}. In brown, I estimate the parameter $\varphi$  by estimating: $\pi_{c,t}^w = \mu_c + \delta_t + \varphi u_{c,t} + \gamma \pi_{c,t-1}^p + \epsilon_{c,t}$. In blue, I estimate the parameter $\varphi$  by estimating: $\pi_{c,t}^w = \mu_c + \pi_{t+1}^e + \varphi u_{c,t} + \gamma \pi_{c,t-1}^p + \epsilon_{c,t}$. In both specifications I am using Panel-OLS and annual data from 1870 to 2020 for all 18 countries. It is computed based on a rolling OLS regression using a 20-year window with year fixed effects ($\delta_t$) and displays a 90\% confidence band.}
+    \annote{\footnotesize This figure plots a time-varying estimate of the slope of the wage Phillips curve for two different specifications of Equation \eqref{EQ:Baseline}. In brown, I estimate the parameter $\varphi$  by estimating: $\pi_{c,t}^w = \mu_c + \delta_t + \varphi u_{c,t} + \gamma \pi_{c,t-1}^p + \epsilon_{c,t}$. In blue, I estimate the parameter $\varphi$  by estimating: $\pi_{c,t}^w = \mu_c + \pi_{t+1}^e + \varphi u_{c,t} + \gamma \pi_{c,t-1}^p + \epsilon_{c,t}$. In both specifications I am using Panel-OLS and annual data from 1870 to 2019 for all 18 countries. It is computed based on a rolling OLS regression using a 20-year window with year fixed effects ($\delta_t$) and displays a 90\% confidence band.}
     \label{F:RWIV2}
 \end{figure}
 
