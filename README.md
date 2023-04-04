@@ -4,8 +4,6 @@ In an effort to be the change I want to see in the profession, I created an open
 
 Folder [Text](https://github.com/RicardoGabriel/Monetary-Policy-and-the-Wage-Inflation---Unemployment-Tradeoff/tree/main/Text) presents the Tex version of the written article.
 
-%and also the response to the editors and two referee reports from the first revision at the European Economic Review
-
 Folder [Data](https://github.com/RicardoGabriel/Monetary-Policy-and-the-Wage-Inflation---Unemployment-Tradeoff/tree/main/Data) stores all data.
 
 Folder [Code](https://github.com/RicardoGabriel/Monetary-Policy-and-the-Wage-Inflation---Unemployment-Tradeoff/tree/main/Code) stores all Stata and MATLAB codes used to produce the figures and tables in the paper.
