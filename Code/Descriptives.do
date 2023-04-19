@@ -38,7 +38,7 @@ replace window="2000-2020" if year<=2020 & year>=2000
 replace noval=1 if unemp==. | dwn==. | dp==.
 
 estpost tabstat unemp dwn dp if noval==0 & outlier==0, by(window) stat(n mean sd min max) col(stat)
-esttab using "$Tab\Table_Descriptives.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
+esttab using "$Tab\Table_Descriptives_Fix.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
 	title("Descriptive statistics \label{T:Descriptives}")
 
 texdoc init "$Tab\Table_Descriptives_Fix.tex", append force
@@ -53,7 +53,7 @@ texdoc close
 replace noval=1 if unemp==. | dwn==. | dp==.
 
 estpost tabstat unemp dwn dp [aw = pop] if noval==0 & outlier==0, by(window) stat(n mean sd min max) col(stat)
-esttab using "$Tab\Table_Descriptives_W.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
+esttab using "$Tab\Table_Descriptives_W_Fix.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
 	title("Descriptive statistics \label{T:DescriptivesW}")	
 
 texdoc init "$Tab\Table_Descriptives_W_Fix.tex", append force
@@ -75,7 +75,7 @@ estpost tabstat unemp dwn dp if hyper==0, by(window) stat(n mean sd min max) col
 esttab using "$Tab\Table_Descriptives_Full_Fix.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
 	title("Descriptive statistics - full sample \label{T:Descriptives-Full}")
 
-texdoc init "$Tab\Table_Descriptives_Full.tex", append force
+texdoc init "$Tab\Table_Descriptives_Full_Fix.tex", append force
 tex \annote{\footnotesize All statistics are expressed in percent. The hyperinflation period in Germany (1920-1925) is not included. All remaining observations available in the dataset are used in this Table.}
 texdoc close
 ********************************************************************************
