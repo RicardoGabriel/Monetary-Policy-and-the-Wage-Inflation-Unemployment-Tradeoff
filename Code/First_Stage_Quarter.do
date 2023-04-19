@@ -44,10 +44,17 @@ global Tstat_2 = round(_b[JSTtrilemmaIV_R]/_se[JSTtrilemmaIV_R],.01)
 
 * save values
 texdoc init "$Tab\First_Stage_Quarter.tex", replace force
-tex trilemma \$ z_{i,t}\$ & ${b_1} \sym{${star_1}} && ${b_2} \sym{${star_2}}  \\ 
+tex \begin{tabular}{lccc}
+tex \toprule
+tex Dependent & \multicolumn{1}{c}{No controls} && \multicolumn{1}{c}{With controls} \\
+tex variable: \$\Delta r_{it}\$       \\
+tex \midrule
+tex trilemma \$ z_{i,t}\$ & ${b_1}\sym{${star_1}} && ${b_2}\sym{${star_2}}  \\ 
 tex  & (${se_1} ) && (${se_2} )   \\
 tex t-statistic & [${Tstat_1}] && [${Tstat_2}] \\
 tex  \# Obs & ${N_1} && ${N_2} \\
+tex \bottomrule
+tex \end{tabular} 
 texdoc close
 
 
