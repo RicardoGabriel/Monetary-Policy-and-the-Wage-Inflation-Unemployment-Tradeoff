@@ -1160,3 +1160,296 @@ end of do-file
 
 end of do-file
 
+. do "C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Cod
+> e\First_Stage_Quarter.do"
+
+. /*
+> First Stage Results - Monetary Policy and the Wage-Inflation Unemployment Trade-off
+> 
+> Part of this code comes from Jordà, Schularick, and Taylor (2020) JME
+> 
+> Author: Ricardo Duque Gabriel
+> First Date: 07/11/2020
+> Last Update: 04/05/2022
+> 
+> Produces Table 3
+> */
+. quietly{
+
+. 
+. 
+. * save values
+. texdoc init "$Tab\First_Stage_Quarter.tex", replace force
+(texdoc output file is C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemploy
+> ment-Tradeoff\\Output\Tables\First_Stage_Quarter.tex)
+
+. tex \toprule
+
+. tex Dependent & \multicolumn{1}{c}{No controls} && \multicolumn{1}{c}{With controls} \\
+
+. tex variable: \$\Delta r_{it}\$       \\
+
+. tex \midrule
+
+. tex trilemma \$ z_{i,t}\$ & ${b_1}\sym{${star_1}} && ${b_2}\sym{${star_2}}  \\ 
+
+. tex  & (${se_1} ) && (${se_2} )   \\
+
+. tex t-statistic & [${Tstat_1}] && [${Tstat_2}] \\
+
+. tex  \# Obs & ${N_1} && ${N_2} \\
+
+. tex \bottomrule
+
+. texdoc close
+(texdoc output written to C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemp
+> loyment-Tradeoff\\Output\Tables\First_Stage_Quarter.tex)
+
+. 
+. 
+. 
+. 
+. /*
+> esttab using "$Tab\First_Stage_Quarter.tex",  title("Regressions of dstir on JSTtrilemmaIV_R with and 
+> without controls") ///
+>         keep(JSTtrilemmaIV_R _cons) stats(Tstat N, layout("[@]" @) fmt(2 0) labels("$ t $-statistic"))
+>   ///
+>         f replace se  b(2) se(2) sfmt(2) label  ///
+>         star(* 0.1 ** 0.05 *** 0.01)    
+
+end of do-file
+
+. do "C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Cod
+> e\First_Stage_Quarter.do"
+
+. /*
+> First Stage Results - Monetary Policy and the Wage-Inflation Unemployment Trade-off
+> 
+> Part of this code comes from Jordà, Schularick, and Taylor (2020) JME
+> 
+> Author: Ricardo Duque Gabriel
+> First Date: 07/11/2020
+> Last Update: 04/05/2022
+> 
+> Produces Table 3
+> */
+. quietly{
+
+. 
+. 
+. * save values
+. texdoc init "$Tab\First_Stage_Quarter.tex", replace force
+(texdoc output file is C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemploy
+> ment-Tradeoff\\Output\Tables\First_Stage_Quarter.tex)
+
+. tex \begin{tabular}{lccc}
+
+. tex \toprule
+
+. tex Dependent & \multicolumn{1}{c}{No controls} && \multicolumn{1}{c}{With controls} \\
+
+. tex variable: \$\Delta r_{it}\$       \\
+
+. tex \midrule
+
+. tex trilemma \$ z_{i,t}\$ & ${b_1}\sym{${star_1}} && ${b_2}\sym{${star_2}}  \\ 
+
+. tex  & (${se_1} ) && (${se_2} )   \\
+
+. tex t-statistic & [${Tstat_1}] && [${Tstat_2}] \\
+
+. tex  \# Obs & ${N_1} && ${N_2} \\
+
+. tex \bottomrule
+
+. tex \end{tabular} 
+
+. texdoc close
+(texdoc output written to C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemp
+> loyment-Tradeoff\\Output\Tables\First_Stage_Quarter.tex)
+
+. 
+. 
+. 
+. 
+. /*
+> esttab using "$Tab\First_Stage_Quarter.tex",  title("Regressions of dstir on JSTtrilemmaIV_R with and 
+> without controls") ///
+>         keep(JSTtrilemmaIV_R _cons) stats(Tstat N, layout("[@]" @) fmt(2 0) labels("$ t $-statistic"))
+>   ///
+>         f replace se  b(2) se(2) sfmt(2) label  ///
+>         star(* 0.1 ** 0.05 *** 0.01)    
+
+end of do-file
+
+. do "C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Cod
+> e\First_Stage.do"
+
+. /*
+> First Stage Results - Monetary Policy and the Wage-Inflation Unemployment Trade-off
+> 
+> Part of this code comes from Jordà, Schularick, and Taylor (2020) JME
+> 
+> Author: Ricardo Duque Gabriel
+> First Date: 07/11/2020
+> Last Update: 04/05/2022
+> 
+> Produces Table 3
+> */
+. quietly{
+
+. 
+. 
+. * save values
+. texdoc init "$Tab\First_Stage.tex", replace force
+(texdoc output file is C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemploy
+> ment-Tradeoff\\Output\Tables\First_Stage.tex)
+
+. tex \begin{tabular}{lccccccc}
+
+. tex \toprule
+
+. tex Dependent & \multicolumn{3}{c}{No controls} && \multicolumn{3}{c}{With controls} \\  \cline{2-4} \
+> cline{6-8}
+
+. tex variable: \$\Delta r_{it}\$                    &\multicolumn{1}{c}{All years}&\multicolumn{1}{c}{P
+> re-WW2}&\multicolumn{1}{c}{Post-WW2}& &\multicolumn{1}{c}{All years}&\multicolumn{1}{c}{Pre-WW2}&\mult
+> icolumn{1}{c}{Post-WW2}\\
+
+. tex \midrule
+
+. tex trilemma \$ z_{i,t}\$ & ${b_1}\sym{${star_1}} & ${b_2}\sym{${star_2}} & ${b_3}\sym{${star_3}} && $
+> {b_4}\sym{${star_4}} & ${b_5}\sym{${star_5}} & ${b_6}\sym{${star_6}} \\ 
+
+. tex  & (${se_1} ) && (${se_2} )   \\
+
+. tex t-statistic & [${Tstat_1}] & [${Tstat_2}] & [${Tstat_3}] && [${Tstat_4}] & [${Tstat_5}] & [${Tstat
+> _6}] \\
+
+. tex  \# Obs & ${N_1} & ${N_2} & ${N_3} & & ${N_4} & ${N_5} & ${N_6} \\
+
+. tex \bottomrule
+
+. tex \end{tabular} 
+
+. texdoc close
+(texdoc output written to C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemp
+> loyment-Tradeoff\\Output\Tables\First_Stage.tex)
+
+. 
+end of do-file
+
+. do "C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Cod
+> e\First_Stage.do"
+
+. /*
+> First Stage Results - Monetary Policy and the Wage-Inflation Unemployment Trade-off
+> 
+> Part of this code comes from Jordà, Schularick, and Taylor (2020) JME
+> 
+> Author: Ricardo Duque Gabriel
+> First Date: 07/11/2020
+> Last Update: 04/05/2022
+> 
+> Produces Table 3
+> */
+. quietly{
+
+. 
+. 
+. * save values
+. texdoc init "$Tab\First_Stage.tex", replace force
+(texdoc output file is C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemploy
+> ment-Tradeoff\\Output\Tables\First_Stage.tex)
+
+. tex \begin{tabular}{lccccccc}
+
+. tex \toprule
+
+. tex Dependent & \multicolumn{3}{c}{No controls} && \multicolumn{3}{c}{With controls} \\  \cline{2-4} \
+> cline{6-8}
+
+. tex variable: \$\Delta r_{it}\$                    &\multicolumn{1}{c}{All years}&\multicolumn{1}{c}{P
+> re-WW2}&\multicolumn{1}{c}{Post-WW2}& &\multicolumn{1}{c}{All years}&\multicolumn{1}{c}{Pre-WW2}&\mult
+> icolumn{1}{c}{Post-WW2}\\
+
+. tex \midrule
+
+. tex trilemma \$ z_{i,t}\$ & ${b_1}\sym{${star_1}} & ${b_2}\sym{${star_2}} & ${b_3}\sym{${star_3}} && $
+> {b_4}\sym{${star_4}} & ${b_5}\sym{${star_5}} & ${b_6}\sym{${star_6}} \\ 
+
+. tex  & (${se_1} ) & (${se_2} ) & (${se_3} ) && (${se_4} ) & (${se_5} ) & (${se_6} )   \\
+
+. tex t-statistic & [${Tstat_1}] & [${Tstat_2}] & [${Tstat_3}] && [${Tstat_4}] & [${Tstat_5}] & [${Tstat
+> _6}] \\
+
+. tex  \# Obs & ${N_1} & ${N_2} & ${N_3} & & ${N_4} & ${N_5} & ${N_6} \\
+
+. tex \bottomrule
+
+. tex \end{tabular} 
+
+. texdoc close
+(texdoc output written to C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemp
+> loyment-Tradeoff\\Output\Tables\First_Stage.tex)
+
+. 
+end of do-file
+
+. do "C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Cod
+> e\First_Stage.do"
+
+. /*
+> First Stage Results - Monetary Policy and the Wage-Inflation Unemployment Trade-off
+> 
+> Part of this code comes from Jordà, Schularick, and Taylor (2020) JME
+> 
+> Author: Ricardo Duque Gabriel
+> First Date: 07/11/2020
+> Last Update: 04/05/2022
+> 
+> Produces Table 3
+> */
+. quietly{
+
+. 
+. 
+. * save values
+. texdoc init "$Tab\First_Stage.tex", replace force
+(texdoc output file is C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemploy
+> ment-Tradeoff\\Output\Tables\First_Stage.tex)
+
+. tex \begin{tabular}{lccccccc}
+
+. tex \toprule
+
+. tex Dependent & \multicolumn{3}{c}{No controls} && \multicolumn{3}{c}{With controls} \\  \cline{2-4} \
+> cline{6-8}
+
+. tex variable: \$\Delta r_{it}\$                    &\multicolumn{1}{c}{All years}&\multicolumn{1}{c}{P
+> re-WW2}&\multicolumn{1}{c}{Post-WW2}& &\multicolumn{1}{c}{All years}&\multicolumn{1}{c}{Pre-WW2}&\mult
+> icolumn{1}{c}{Post-WW2}\\
+
+. tex \midrule
+
+. tex trilemma \$ z_{i,t}\$ & ${b_1}\sym{${star_1}} & ${b_2}\sym{${star_2}} & ${b_3}\sym{${star_3}} && $
+> {b_4}\sym{${star_4}} & ${b_5}\sym{${star_5}} & ${b_6}\sym{${star_6}} \\ 
+
+. tex  & (${se_1} ) & (${se_2} ) & (${se_3} ) && (${se_4} ) & (${se_5} ) & (${se_6} )   \\
+
+. tex t-statistic & [${Tstat_1}] & [${Tstat_2}] & [${Tstat_3}] && [${Tstat_4}] & [${Tstat_5}] & [${Tstat
+> _6}] \\
+
+. tex  \# Obs & ${N_1} & ${N_2} & ${N_3} & & ${N_4} & ${N_5} & ${N_6} \\
+
+. tex \bottomrule
+
+. tex \end{tabular} 
+
+. texdoc close
+(texdoc output written to C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemp
+> loyment-Tradeoff\\Output\Tables\First_Stage.tex)
+
+. 
+end of do-file
+
