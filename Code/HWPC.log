@@ -230,3 +230,17 @@ end of do-file
 . 
 end of do-file
 
+. do "C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflati
+> on-Unemployment-Tradeoff\Code\Descriptives.do"
+
+. /*
+> Table Descriptives 
+> 
+> Produce Tables 1, A.2, and A.3
+> */
+. 
+. quietly{
+
+. 
+end of do-file
+
