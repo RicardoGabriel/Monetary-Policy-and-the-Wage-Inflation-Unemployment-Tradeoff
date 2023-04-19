@@ -42,7 +42,7 @@ esttab using "$Tab\Table_Descriptives_Fix.tex", cells("count(fmt(0)) mean(fmt(2)
 	title("Descriptive statistics \label{T:Descriptives}")
 
 texdoc init "$Tab\Table_Descriptives_Fix.tex", append force
-tex \annote{\footnotesize All statistics are expressed in percent. The war periods (1914-1919 and 1939-1945) and the German hyperinflation episode (1920-1925) are not included. This table only uses \textit{weighted} by population country-year observations for which there is data for the unemployment rate, and price and wage inflation. Table \ref{T_Descriptives_Full} presents descriptive statistics for the unrestricted sample.}
+tex \annote{\footnotesize All statistics are expressed in percent. The war periods (1914-1919 and 1939-1945) and the German hyperinflation episode (1920-1925) are not included. This table only uses \textit{weighted} by population country-year observations for which there is data for the unemployment rate, and price and wage inflation. Table \ref{T:Descriptives-Full} presents descriptive statistics for the unrestricted sample.}
 texdoc close
 
 ********************************************************************************
@@ -57,7 +57,7 @@ esttab using "$Tab\Table_Descriptives_W_Fix.tex", cells("count(fmt(0)) mean(fmt(
 	title("Descriptive statistics \label{T:DescriptivesW}")	
 
 texdoc init "$Tab\Table_Descriptives_W_Fix.tex", append force
-tex \annote{\footnotesize All statistics are expressed in percent. The war periods (1914-1919 and 1939-1945) and the German hyperinflation episode (1920-1925) are not included. This table only uses \textit{weighted} by population country-year observations for which there is data for the unemployment rate, and price and wage inflation. Table \ref{T_Descriptives_Full} presents descriptive statistics for the unrestricted sample.}
+tex \annote{\footnotesize All statistics are expressed in percent. The war periods (1914-1919 and 1939-1945) and the German hyperinflation episode (1920-1925) are not included. This table only uses \textit{weighted} by population country-year observations for which there is data for the unemployment rate, and price and wage inflation. Table \ref{T:Descriptives-Full} presents descriptive statistics for the unrestricted sample.}
 texdoc close
 
 ********************************************************************************
@@ -83,7 +83,7 @@ texdoc close
 ********************************************************************************
 matrix C = J(18,3,0)
 matrix rownames C = "Australia" "Belgium" "Canada" "Denmark" "Finland" "France" "Germany" "Italy" "Japan" "Netherlands" "Norway" "Portugal" "Spain" "Sweden" "Switzerland" "UK" "USA" "Ireland"
-matrix colnames C = "$\pi_t^p$" "$\pi_{t-1}^p$" "$\u_t$"
+matrix colnames C = "$\pi_t^p$" "$\pi_{t-1}^p$" "$u_t$"
 
 xtset id year
 forvalues x = 1(1)18{
