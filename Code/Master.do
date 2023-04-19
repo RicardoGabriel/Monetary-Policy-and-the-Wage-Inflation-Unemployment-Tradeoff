@@ -12,6 +12,7 @@
 * ssc install hprescott
 * ssc install weakivtest
 * ssc install estout
+* ssc install outtable
 * ssc install rangerun
 * ssc install rangestat
 * ssc install ivreghdfe
@@ -133,7 +134,7 @@ global state 	= "lowflat"
 do SD_BM
 
 */
-
+/*
 *******************************************************************************
 * Quarterly analysis
 global match = 1
