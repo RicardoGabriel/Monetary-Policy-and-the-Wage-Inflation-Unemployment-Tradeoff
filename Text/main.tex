@@ -124,13 +124,13 @@ An important caveat should be
 
 \subsection{Descriptive Statistics}
 
-Table \ref{T_Descriptives} lists selected summary statistics of the dataset for the entire sample and five separate periods. Both wage and price inflation series are computed as growth rates of nominal indices. The average wage inflation rate for the entire sample is 5.05\%, almost two percentage points above the average price inflation. On average, the unemployment rate throughout the sample is 5.65\%.
+Table \ref{T:Descriptives} lists selected summary statistics of the dataset for the entire sample and five separate periods. Both wage and price inflation series are computed as growth rates of nominal indices. The average wage inflation rate for the entire sample is 5.05\%, almost two percentage points above the average price inflation. On average, the unemployment rate throughout the sample is 5.65\%.
 
 \input{../Output/Tables/Table_Descriptives_Fix}
 
 In the wake of the Great Recession, it was surprising to observe how stable and low the inflation rates were \citep{Miles2017}. In fact, to observe such a pattern, one has to go back more than 100 years when most of the studied countries were part of the Gold Standard agreement.
 
-Moreover, although only 8 out of the 18 countries in the sample are explicit inflation targeters \citep{Svensson2010}, Table \ref{T_Descriptives} indicates that using price inflation as the nominal anchor instead of the price of gold makes the volatility of price and wage inflation smaller albeit the higher means.\footnote{The higher means should come without surprise given that targeting the price of gold implicitly yields a zero inflation expectation, contrary to a 2\% inflation target.} Hence, the inflation targeting regime successfully keeps inflation under control with the lowest volatility ever observed.
+Moreover, although only 8 out of the 18 countries in the sample are explicit inflation targeters \citep{Svensson2010}, Table \ref{T:Descriptives} indicates that using price inflation as the nominal anchor instead of the price of gold makes the volatility of price and wage inflation smaller albeit the higher means.\footnote{The higher means should come without surprise given that targeting the price of gold implicitly yields a zero inflation expectation, contrary to a 2\% inflation target.} Hence, the inflation targeting regime successfully keeps inflation under control with the lowest volatility ever observed.
 
 In addition, Figure \ref{F_median} summarizes the data cross-country trends by plotting a time-varying estimate of the mean wage inflation and the mean unemployment rate for the 18 countries using a 10-year rolling window. We observe stable wage inflation and unemployment series during the Gold Standard epoch, until 1913. That picture dramatically changes once we enter the war period with a large swing in the inflation series. The period from 1946 to 1971 corresponds to the Bretton Woods epoch and shows persistently low unemployment and high wage inflation rates. Then, after 1972, we can observe a peak in the inflation series, partly driven by the two oil price shocks in 1973 and 1979. This peak is followed by a general decrease in inflation and an increase in unemployment stemming from the Great Moderation period.
 
@@ -171,7 +171,7 @@ There are three key features from Figure \ref{F:RWIV} which deserve to be highli
 
 Second, the wage Phillips curve was also flatter during the Gold Standard period and the beginning of the Bretton Woods epoch. This novel finding suggests that the recent weakening of the wage inflation-unemployment tradeoff is not a unique feature of the last 20 years.
 
-Third, it seems that during periods of low price inflation, the slope of the wage Phillips curve becomes flatter. One potential explanation for this correlation is the \textit{low inflation hypothesis} which will be tested in Section \ref{S_Results}. During the majority of the three periods shaded in gray, inflation was strongly anchored either to the price of gold or to a composite price measure (CPI), and thus, countries experienced a persistent low price inflation environment (as we saw in Table \ref{T_Descriptives}). Consequently, firms adjusted prices and wages less often \citep{Gagnon2009, Nakamura2018, Alvarez2019} and promoted a disconnect between wage inflation and movements in the labor market.\footnote{For a more detailed and analytical explanation, check Appendix \ref{SS_FPA}.}
+Third, it seems that during periods of low price inflation, the slope of the wage Phillips curve becomes flatter. One potential explanation for this correlation is the \textit{low inflation hypothesis} which will be tested in Section \ref{S_Results}. During the majority of the three periods shaded in gray, inflation was strongly anchored either to the price of gold or to a composite price measure (CPI), and thus, countries experienced a persistent low price inflation environment (as we saw in Table \ref{T:Descriptives}). Consequently, firms adjusted prices and wages less often \citep{Gagnon2009, Nakamura2018, Alvarez2019} and promoted a disconnect between wage inflation and movements in the labor market.\footnote{For a more detailed and analytical explanation, check Appendix \ref{SS_FPA}.}
 
 A major element of modern Phillips curve estimations is \textit{inflation expectations}. \cite{Hazell2021} show that not accounting for the decline in long-run inflation expectations during the Volcker disinflation may introduce an upward bias in estimates of the slope of the United States (price) Phillips curve during that period. Taking this into account might question the use of \cite{Gali2011} framework that may be overly restrictive on the nonexistent role of inflation expectations. Moreover, even though this work focuses only on the relationship between wage inflation and unemployment, it is still important to acknowledge that there is a strong correlation between price and wage inflation (Table \ref{T_Correlation}) and therefore it might be important to have this issue into account. While the absence of historical data on inflation expectations makes it impossible to add it as a control variable, I collect OECD data on inflation forecasts starting in the 1990s for the European countries and starting in the 1960s for the remaining ones to 2019 and run the same analysis for this sub-sample.
 
@@ -355,7 +355,7 @@ These two exercises together lend empirical substance to the concern that moneta
 
 \subsection{Disentangling the low-price inflation motive from the monetary regime}
 
-The previous two exercises show evidence consistent with the key message of this paper. First, the Phillips multiplier is smaller during the Gold Standard and the last 20 years (Figure \ref{F2:Multiplier_GS}) which are periods associated with lower average price inflation (Table \ref{T_Descriptives}). Second, the Phillips multiplier is smaller when monetary policy is implemented following periods of low and stable inflation (Figure \ref{F2:Multiplier}).
+The previous two exercises show evidence consistent with the key message of this paper. First, the Phillips multiplier is smaller during the Gold Standard and the last 20 years (Figure \ref{F2:Multiplier_GS}) which are periods associated with lower average price inflation (Table \ref{T:Descriptives}). Second, the Phillips multiplier is smaller when monetary policy is implemented following periods of low and stable inflation (Figure \ref{F2:Multiplier}).
 
 Notwithstanding, these exercises do not allow us to distinguish whether the state-dependent effects of monetary policy for different inflation environments (low or high) are driven or not by different sample periods. That is because different sample periods could capture different monetary policy regimes and hence different Phillips multipliers.
 
@@ -432,10 +432,13 @@ These results add a new perspective to the current debate about the existence of
 
 %Such a finding uncovers a hidden dichotomy: central banks cannot simultaneously target a low price inflation (2\%) and expect conventional monetary policy tools to work to their full extent.
 
-% \clearpage
+\clearpage
 
+\begin{singlespace}
 \bibliographystyle{chicago}
-\bibliography{Bibliography}
+\bibliography{Bibliography}   
+\end{singlespace}
+
 
 \clearpage
 
@@ -786,7 +789,7 @@ In this work, given its historical perspective, I assumed that the model paramet
 	\centering
 	\caption{Slope of the NKWPC \label{F:NKWPCslope}}
 	\includegraphics[width=0.7\textwidth]{../Output/Figures/NKWPCslope.pdf} 
-	\annote{\footnotesize Calibration. The discount factor, $\beta$ is set to 0.99 and the persistence of the natural wage markup gap $\rho^w$ is set to 0.5. The Calvo wage stickiness parameter, $\theta$, imply an average duration of individual wages of one year, in a way consistent with much of the micro evidence \cite{Nakamura2008}. The curvature of labor disutility, $\phi$, is set to be 5, a value consistent with a Frisch labor elasticity of 0.2. \cite{Gali2011} shows that $\phi$, $\epsilon$, and the steady-state unemployment rate $u$ have the following relationship: $\phi u = log(\epsilon / (\epsilon -1))$. Given that $\phi$ is set to 5, the value of $\epsilon$ is set to 2.15. This is consistent with a steady-state unemployment rate of 5.4 percent, the average unemployment rate in the full sample (Table \ref{T_Descriptives}). }
+	\annote{\footnotesize Calibration. The discount factor, $\beta$ is set to 0.99 and the persistence of the natural wage markup gap $\rho^w$ is set to 0.5. The Calvo wage stickiness parameter, $\theta$, imply an average duration of individual wages of one year, in a way consistent with much of the micro evidence \cite{Nakamura2008}. The curvature of labor disutility, $\phi$, is set to be 5, a value consistent with a Frisch labor elasticity of 0.2. \cite{Gali2011} shows that $\phi$, $\epsilon$, and the steady-state unemployment rate $u$ have the following relationship: $\phi u = log(\epsilon / (\epsilon -1))$. Given that $\phi$ is set to 5, the value of $\epsilon$ is set to 2.15. This is consistent with a steady-state unemployment rate of 5.4 percent, the average unemployment rate in the full sample (Table \ref{T:Descriptives}). }
 \end{figure}
 
 
