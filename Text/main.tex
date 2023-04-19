@@ -484,17 +484,7 @@ These results add a new perspective to the current debate about the existence of
 \caption{First-Stage of trilemma IV} \label{T:First_Stage}
 \vspace{1ex}
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\begin{tabular}{lccccccc}
-\toprule
-Dependent & \multicolumn{3}{c}{No controls} && \multicolumn{3}{c}{With controls} \\  \cline{2-4} \cline{6-8}
-variable: $\Delta r_{it}$                    &\multicolumn{1}{c}{All years}&\multicolumn{1}{c}{Pre-WW2}&\multicolumn{1}{c}{Post-WW2}& &\multicolumn{1}{c}{All years}&\multicolumn{1}{c}{Pre-WW2}&\multicolumn{1}{c}{Post-WW2}\\
-\midrule
-trilemma $z_{i,t}$     &       0.60\sym{***}&        0.41\sym{***}&        0.68\sym{***}& &       0.65\sym{***}&        0.64\sym{***}&        0.65\sym{***}\\
-                    &      (0.08)         &      (0.09)         &      (0.09)         &  &    (0.08)         &      (0.15)         &      (0.09)         \\
-$ t $-statistic     &      [7.65]         &      [4.42]         &      [7.99]         &    &  [8.47]         &      [4.29]         &      [7.58]         \\
-N                   &        1316         &         505         &         811         &  &      1011         &         215         &         796         \\
-\bottomrule
-\end{tabular} 
+\input{Output/Tables/First_Stage}
 \annote{This table presents the first-stage estimates of the trilemma IV on the country's interest rate. The standard errors are in parentheses and the T-statistics are in square brackets. The full sample covers 1870–2019, excluding the World Wars and the German hyperinflation episode. The pre-WW2 sample covers 1870–1938, excluding 1914–1919, while the post-WW2 sample covers 1948–2019. The estimates in the last three columns (with controls) include country fixed effects and two lags of wage inflation and unemployment rate. In addition, I include world GDP growth to capture global cycles.}
 \end{table}
 
@@ -503,37 +493,7 @@ N                   &        1316         &         505         &         811   
 \caption{First-Stage of trilemma IV - Quarterly Data} \label{T:First_Stage_Quarter}
 \vspace{1ex}
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\begin{tabular}{lccc}
-\toprule
-Dependent & \multicolumn{1}{c}{No controls} && \multicolumn{1}{c}{With controls} \\
-variable: $\Delta r_{it}$       \\
-\midrule
-trilemma $z_{i,t}$     &       0.89\sym{***}&&        0.68\sym{***}\\
-                    &      (0.03)         &&      (0.03)  \\
-$ t $-statistic     &      [28.01]         & &     [20.95] \\
-N                   &        917         &  &       852  \\
 \input{Output/Tables/First_Stage_Quarter}
-\bottomrule
-\end{tabular} 
-\annote{This table presents the first-stage estimates of the trilemma IV on the country's interest rate for quarterly data. The standard errors are in parentheses and the T-statistics are in square brackets. The full sample covers 1995q1–2019q4. The estimates in the last column (with controls) include country fixed effects and two lags of wage inflation and unemployment rate. In addition, I include world GDP growth to capture global cycles.}
-\end{table}
-
-\begin{table}[ht]
-\centering
-\caption{First-Stage of trilemma IV - Quarterly Data} \label{T:First_Stage_Quarter}
-\vspace{1ex}
-\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\begin{tabular}{lccc}
-\toprule
-Dependent & \multicolumn{1}{c}{No controls} && \multicolumn{1}{c}{With controls} \\
-variable: $\Delta r_{it}$       \\
-\midrule
-trilemma $z_{i,t}$     &       0.89\sym{***}&&        0.68\sym{***}\\
-                    &      (0.03)         &&      (0.03)  \\
-$ t $-statistic     &      [28.01]         & &     [20.95] \\
-N                   &        917         &  &       852  \\
-\bottomrule
-\end{tabular} 
 \annote{This table presents the first-stage estimates of the trilemma IV on the country's interest rate for quarterly data. The standard errors are in parentheses and the T-statistics are in square brackets. The full sample covers 1995q1–2019q4. The estimates in the last column (with controls) include country fixed effects and two lags of wage inflation and unemployment rate. In addition, I include world GDP growth to capture global cycles.}
 \end{table}
 
