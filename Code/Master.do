@@ -18,6 +18,7 @@
 * ssc install reghdfe
 * ssc install ftools
 * ssc install graph3d
+* ssc install texdoc
 ********************************************************************************
 
 timer clear
@@ -132,6 +133,7 @@ global state 	= "lowflat"
 do SD_BM
 
 */
+
 *******************************************************************************
 * Quarterly analysis
 global match = 1
@@ -139,7 +141,7 @@ global wage_out = 1
 do Data_Management_Quarter
 
 * First Stage Results of Monetary Policy Shocks (Trilemma Instrumental Variable)
-*do First_Stage_Quarter
+do First_Stage_Quarter
 
 * Phillips Multiplier Quarterly Data
 ** Figures 3 a) and 3 b)
@@ -151,5 +153,5 @@ do Data_Management_Quarter
 
 * State Dependent Phillips Multipliers
 * Figure ?? and Table ??
-global state 	= "lowflat"
-do SD_BM_Quarter
+*global state 	= "lowflat"
+*do SD_BM_Quarter
