@@ -244,3 +244,38 @@ end of do-file
 . 
 end of do-file
 
+. do "C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflati
+> on-Unemployment-Tradeoff\Code\Descriptives.do"
+
+. /*
+> Table Descriptives 
+> 
+> Produce Tables 1, A.2, and A.3
+> */
+. 
+. quietly{
+
+. 
+end of do-file
+
+. help tabstat
+
+. do "C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Code\Des
+> criptives.do"
+
+. /*
+> Table Descriptives 
+> 
+> Produce Tables 1, A.2, and A.3
+> */
+. 
+. quietly{
+
+. 
+. 
+. ********************************************************************************
+. * Figure Scatter plots for unemployment and wage series for all countries
+. ********************************************************************************
+. 
+end of do-file
+
