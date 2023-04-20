@@ -37,7 +37,7 @@ replace window="2000-2020" if year<=2020 & year>=2000
 *include the variable noval in the tabstat command (now also with price inflation)
 replace noval=1 if unemp==. | dwn==. | dp==.
 
-estpost tabstat unemp dwn dp if noval==0 & outlier==0, by(window) stat(n mean sd min max) col(stat)
+estpost tabstat unemp dwn dp if noval==0 & outlier==0, by(window) stat(n mean med sd min max) col(stat)
 esttab using "$Tab\Table_Descriptives_Fix.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
 	title("Descriptive statistics \label{T:Descriptives}")
 
@@ -52,9 +52,9 @@ texdoc close
 *include the variable noval in the tabstat command (now also with price inflation)
 replace noval=1 if unemp==. | dwn==. | dp==.
 
-estpost tabstat unemp dwn dp [aw = pop] if noval==0 & outlier==0, by(window) stat(n mean sd min max) col(stat)
+estpost tabstat unemp dwn dp [aw = pop] if noval==0 & outlier==0, by(window) stat(n mean med sd min max) col(stat)
 esttab using "$Tab\Table_Descriptives_W_Fix.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
-	title("Descriptive statistics \label{T:DescriptivesW}")	
+	title("Descriptive statistics - weighted sample \label{T:DescriptivesW}")	
 
 texdoc init "$Tab\Table_Descriptives_W_Fix.tex", append force
 tex \annote{\footnotesize All statistics are expressed in percent. The war periods (1914-1919 and 1939-1945) and the German hyperinflation episode (1920-1925) are not included. This table only uses \textit{weighted} by population country-year observations for which there is data for the unemployment rate, and price and wage inflation. Table \ref{T:Descriptives-Full} presents descriptive statistics for the unrestricted sample.}
@@ -71,7 +71,7 @@ replace window="1946-1971" if year<=1971 & year>=1946
 replace window="1972-1999" if year<=1999 & year>=1972
 replace window="2000-2020" if year<=2020 & year>=2000
 
-estpost tabstat unemp dwn dp if hyper==0, by(window) stat(n mean sd min max) col(stat)
+estpost tabstat unemp dwn dp if hyper==0, by(window) stat(n mean med sd min max) col(stat)
 esttab using "$Tab\Table_Descriptives_Full_Fix.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
 	title("Descriptive statistics - full sample \label{T:Descriptives-Full}")
 
@@ -102,3 +102,8 @@ texdoc init "$Tab\Correlation_Wage_Fix.tex", append force
 tex \annote{\footnotesize Correlation between wage inflation and price inflation, lagged price inflation, and unemployment by country in the main sample excluding outliers as defined in the text.}
 texdoc close
 }					
+
+
+********************************************************************************
+* Figure Scatter plots for unemployment and wage series for all countries
+********************************************************************************
