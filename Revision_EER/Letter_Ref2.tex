@@ -1,0 +1,165 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{indentfirst}
+%\usepackage{subfigure}
+\usepackage[titletoc,title]{appendix}
+%\usepackage{apacite}
+\usepackage{changes}
+\usepackage{natbib}
+\setcitestyle{aysep={}}					%remove comma between author and year when using citep{}.
+\usepackage{color}
+\usepackage{longtable}
+\usepackage{lscape}
+\usepackage{pdflscape}
+\usepackage{caption}
+\usepackage{subcaption}
+\graphicspath{{Outputs/Figures/}}
+\newcommand{\annote}[1]{\parbox{\textwidth}{\renewcommand{\baselinestretch}{1.0}\vspace{12pt} \footnotesize Notes: #1}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\usepackage{libertine}
+\usepackage{hyperref}
+\hypersetup{
+     colorlinks   = true,
+     urlcolor	  = blue,
+     citecolor    = black,
+     linkcolor 	  = black
+}
+
+\begin{document}
+
+
+\noindent Revision of R.D. Gabriel, `Monetary Policy and the Wage Inflation-Unemployment Tradeoff' \\
+\noindent European Economic Review, Ms. Ref. No.:  EEREV-D-22-00516 \bigskip
+
+\begin{center}
+\textbf{Reply to Referee 2}
+\end{center}
+
+\bigskip
+
+\noindent Dear Referee:
+
+\noindent I would like to kindly thank you for the detailed comments and suggestions in your review of our paper\ submitted to the \textit{European Economic Review}. The Editors have given me the opportunity to resubmit a revised version of the paper. I have prepared a revision of the manuscript paying particular attention to the comments made by you and one other Referee. In this reply, I explain how I have addressed your comments and suggestions in the revised version. I follow the argument in your report and transcribe your comments for your convenience.
+
+\bigskip
+
+\paragraph{Main Comments}
+
+\begin{enumerate}
+\item \textbf{The Data}
+
+\begin{itemize}
+    \item[a.] \textbf{How much do you miss for not having shorter business cycles? Could you resort instead to a shorter time series and use quarterly or monthly data, and expand your panel?} \\
+
+Honestly, I am not sure I am missing much for not having shorter business cycles because the key message of my paper is focused on the long-run impact of monetary policy. As you can see from the key Figures 4, 5, and 6, I am trying to look at the trade-off in the medium to longer run: 3 to 10 years horizon. In order to do that, the trade-off between having a bigger set of countries but a shorter time horizon is clear – I need a longer time horizon.
+
+Moreover, the novelty of my findings hinges on having a longer time horizon that allows me to explore the wage inflation-unemployment relation in periods other than the post-World War II years which has been extensively researched, by using these long-run data series, I can reduce the results’ sensitivity to the data vintage and mitigate the large amount of sampling uncertainty coming from different researchers using different data vintages to compute Phillips curves, as the study by \cite{Mavroeidis2014} points out.
+
+Nevertheless, I collect quarterly information for the same panel of countries (for comparability of my baseline results) and for the sample period (1995q1-2020q1) to focus on only one monetary policy regime and also due to data availability, especially for wage inflation. I re-run the two main exercises the Phillips Multiplier and its state dependency on the price inflation environment. I find that...
+
+    \item[b.] \textbf{Figure 1 suggests a significant change in the series for wages before and after mid-1900s. It looks like there was a substantial change to the nature of the series since 1970s. This could be a change in wage inflation or simply a change to the methodology. I suspect it's the latter since the variation in mean wages is much larger in periods "where inflation is low".}
+
+I agree. The reason why I think that is the case is due to the data availability. As it is evident from the online data appendix, I only have truly comparable wage series data across countries and over time post World War II where I rely on the IMF International Financial Statistics database as my main source. Before that I need to rely on subsamples of the population for each country or relying on research articles that would measure the average wage or unemployment rates across the economy.
+
+It is also true that methodologies change so the way one would compute average wages or unemployment for a subset of the population in the early 1990s is very different from the sophisticated methods that are employed nowadays.
+
+This is one of the many caveats of using this long-run data series, but it is also one caveat I try to mitigate by using the most comparable series available and by chain-linking the old data on the new. No extrapolation exercise is done which allows me to be as confident as possible on the final data series.
+
+Adding regime fixed effects helps here ?
+
+
+    \item[c.] \textbf{Figure 2 again suggest a substantial change in the volatility of the series in the early part of the sample relative to the post-1920's. How much of this is due to a change in the methodology versus a change in the relationships?}
+
+Previous papers (cite whom?) have documented that the Gold Standard period was very stable in terms of economic growth and inflation. So, I think this rather confirms that the historical data is accurately capturing the expected behavior, and thus capturing a change in the relationships.
+
+However, I can’t be 100\% sure because there are reasons supporting an artificial change. 
+
+A possibility comes from the effect of the two World Wars on the computation of the 10-year rolling window.
+
+One other possibility for the substantial change might also be the change in the sample composition because all countries are equally weighted when data is available. To plot Figure 2, I am relying on a matched sample, that is, only using data from countries with available information on both unemployment and wages. From Table A.1, one can see that 12 out of 18 countries only have unemployment data starting in the 20th century, which might partially explain the puzzling behavior.
+
+Notwithstanding, allow me to mitigate eventual concerns arising from this discussion. The key result of this paper in Figure 5 still goes through if one excludes the Gold Standard period or uses a constant set of countries (Figures ?? and ??) and Tables (?? And ??).
+
+Moreover, Figure ?? plots the same graph but now with a weighted average based on each country’s GDP and Figure ?? plots an estimation of a 20-year rolling window instead. Both help understanding that the puzzle is partially due to using a rolling window and weighting all countries equally. Nevertheless, the negative co-movement between the two variables is always present.
+
+
+    \item[d.] \textbf{How do you define periods in which inflation is low? Your first table shows a significant heterogeneity across countries., with wage ranging from -10 to 11 in the first subsample, for example.}
+
+This exercise is presented in subsection 4.2.2. I rewrote the exposition paragraph where I define low price. The periods of low price inflation are different across countries and vary over time as described by the indicator variable $I_{c,t}$.
+
+Low price inflation defined as a dummy variable, $\mathcal{I}_{c,t}$ is an indicator of low price inflation defined as a dummy variable, which is equal to one for periods when countries experienced lagged price inflation below the threshold of 2\% and above -2\% ($\mathcal{I}_{c,t} = 1 \hspace{1ex} \text{if} \hspace{1ex} -2\% < \pi^p_{c,t-1} < 2\%$) and equal to 0 when countries experienced high price inflation ($\mathcal{I}_{c,t} = 0 \hspace{1ex} \text{if} \hspace{1ex} 2\% \leq \pi^p_{c,t-1} < 40\%$). The choice of the 2 \% was motivated by the recent inflation targets of many central banks in the sample and the lower and upper bounds were defined to exclude episodes of extreme inflation or deflation based on the percentile 1 and 99 of my sample.
+
+
+    \item[e.] \textbf{How can you argue for anchoring of inflation in some subperiods (as you do in the second paragraph of page 8), when you have such large heterogeneity in inflation rates? Do you have a specific country in mind? It's hard to argue that a country with 11\% inflation has any strong anchoring. And anchoring to what?}
+
+I add a new appendix where I identify the monetary policy regimes. Besides the classification, Table ?? also displays all sources of information that I used for the classification itself. I was backing up my argument on different papers arguing for different subperiods of inflation being anchored either to the price of gold during the Gold Standard (literature) or anchored to a composite price measure (literature).
+
+Notwithstanding, I agree that I can't claim that inflation was anchored when it displays high values, so I rewrote the paragraphs in which I was referring to the anchoring of inflation by removing the reference to inflation anchoring and focusing on the monetary policy goal of either targeting the price of gold or a composite price measure instead.
+
+
+    \item[f.] \textbf{Given this wide range, it would be interesting to report median values as well.}
+
+
+I added median values to all descriptive Tables, from which I would highlight Table 1 in the main text. Medians for unemployment, wage and price inflation are very close and usually smaller than the mean estimates.
+
+    \item[g.] \textbf{How are the mean stats calculated? Do you weight by countries' GDP (or other variables)? Is there a country that drives statistics?}
+
+The mean stats are not weighted in Table 1. I now make that even clearer in the table notes. I also added a robustness exercise where I produce a weighted version of Table 1 using population as the weight. You can find it in Table A.3.
+
+It is not clear from Table A.3 that there is a country driving the statistics, so I also present scatter plots for each country that allow an investigation of whether a specific country is driving the statistics. Despite the level differences (evidence that motivates the use of country-fixed effects in my regression analysis) and sporadic episodes of very high wage inflation, the pattern does not uncover a specific country driving the statistics and supports the evidence provided in Figure 1 of a negative co-movement between wage inflation and unemployment, even at the country level without any smoothing parameter.
+
+
+
+    \item[h.] \textbf{The one issue that arises with such a long-time sample is that you include in the same regression several different monetary policy frameworks. Monetary policy during Bretton Woods was quite different from ore recently, for example. This is true for the US and for the remaining of the sample too. Moreover, the 2000s came with significant changes to monetary policy for the bulk of the countries in your sample, with the introduction of the euro. How do these structural breaks affect your findings and how are they controlled for?}
+
+I agree that Monetary policy was different during Bretton Woods compared to the recent years. Moreover, in the first years of the sample some countries did not even had an established and independent central bank. Nevertheless, I am only using countries in a fixed exchange rate regime. I believe that this already mitigates the potential heterogeneous effects of different monetary policies being conducted in different countries because the monetary policy shocks that I am using are not coming from national authorities. Notwithstanding, I acknowledge that these structural breaks present in the base countries like the U.S. and even Germany might affect the response of other countries to these “imported” monetary policy shocks.
+
+Thus, I ran a robustness check in which I included monetary policy regime dummies based on the new Table ?? in Appendix that allocates countries to specific monetary regimes identified based on previous research pieces. Results are robust and presented in Figure ??.
+
+
+    \item[i.] \textbf{2020 seems to be included in the sample. This was a year in which we saw massive swings in unemployment, inflation, and other statistics. It may be best to just stop your sample in 2019.}
+
+I am now stopping my sample in 2019, but I did extend all series until 2022 and will make them available online.
+
+\end{itemize}
+
+
+
+\item \textbf{Figure 3 shows results for the Philips multiplier and IRFs for the unemployment rate and wage inflation. How can monetary shocks have effects 10 years from impact?} 
+
+The results display cumulative IRFs, hence the cumulative effects of monetary policy shocks which can be persistent as already documented by \cite{Jorda2019}. I am plotting the typical IRF in graph ??
+
+\item \textbf{Go back to point 1e and ask what makes you define one period as "anchored" versus an "unanchored"? Is this preestablished with some statistical test? Is it unanchored in the (recent) common meaning of unanchored inflation expectations? From reading your paper it seems that you simply look at the charts, pick where things correlate one way or another and run a regression to confirm that they correlate one way or another. Instead, your sample split should be based on exogeneous drivers.} 
+
+Connect discussion to 1. e). Emphasize that the sample split is exogenous and defined by historical events documented in research articles - Gold Standard where countries were targeting the price of Gold; Interwar period; Bretton Woods where countries were targeting the price of gold and that was interrupted unilaterally by the U.S. and that forced countries to change their monetary policy regime. The only historical division not as clearly defined as the previous ones and also not as standard for all the countries in the sample is the post-Bretton Woods era. To that end, I rely on established research articles and information available on the Central Banks website to document the years in which countries started targeting inflation either explicitly like Australia in 1993 or implicitly like Germany in 1986 \citep{vonHagen1999}.
+
+\item \textbf{Finally, and more importantly, how much of the flattening is about low inflation (luck) versus (good) monetary policy?} 
+
+I honestly do not think that the econometric tools employed in my paper are suitable to answer this question. Given the nature of the trilemma instrument, I am taking advantage of the fact that economies with fixed exchange rates under perfect capital mobility are unable to implement independent monetary policies. Thus, a monetary policy surprise in a country with a fixed exchange rate regime is directly linked to the base country’s monetary policy conduct that is responding to their own business cycle fluctuations. So, it is unlikely that countries in a fixed exchange rate regime can conduct “good” or “bad” monetary policy because, by definition, they abdicate their monetary policy independence when entering such a regime.
+
+
+\end{enumerate}
+
+Finally, in an effort to be the change I want to see in the profession, I want to state that I created an open repository in GitHub with the entire workflow from this project including all the codes, data, outputs, documentation, and tex files. This is available to everyone. So, feel free to check it out. The GitHub repository can be found on this \href{https://github.com/RicardoGabriel/Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff}{GitHub repository}.
+
+\renewcommand\bibname{References}
+
+\begin{singlespace}
+	\setlength{\bibsep}{5pt}
+	\bibliography{Bibliography}
+	\bibliographystyle{chicago}
+\end{singlespace}
+
+
+
+\end{document}
