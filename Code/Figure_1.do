@@ -115,8 +115,7 @@ rangerun mypanel, interval (year `nwindow' high) verbose
 
 * Figure for paper
 twoway (line b_dlwage year, lcolor(olive) lwidth(thick)) (line b_unemp year, lcolor(gs4) lpa("-") lwidth(thick)), ytitle("Percent (%)") ///
-legend( c(1) order(1 "Wage Inflation" 2 "Unemployment") ring(0) position(10)) ///
-xlabel(1880(20)2020) xtitle("") xsize(6) ysize(3) scale(1.3)
+legend(off) xlabel(1870(50)2020) xtitle("") xsize(6) ysize(3) scale(2.5)
 graph export "$Fig\Median_dwn_unemp_`country'.pdf", replace
 
 restore
