@@ -45,7 +45,7 @@ gen tt=-1
 * Figure for slides
 if ($slides == 1) {
 twoway (rarea t tt year if (year>=1870 & year<=1913), color(gs15*0.95)) (rarea t tt year if (year>=1946 & year<=1971), color(gs15*0.95)) ///
-	(rarea t tt year if (year>=1995), color(gs15*0.95)) (line b_dlwage year, lcolor(olive) lwidth(thick)) (line b_unemp year, lcolor(gs4) lpa("-") lwidth(thick)), ytitle("Percent (%)") ///
+	(rarea t tt year if (year>=1995), color(gs15*0.95)) (line dlwage year, lcolor(olive) lwidth(thick)) (line b_unemp year, lcolor(gs4) lpa("-") lwidth(thick)), ytitle("Percent (%)") ///
 legend( c(1) order(4 "Wage Inflation" 5 "Unemployment") ring(0) position(4) ) ylabel(0(3)12) ///
 xlabel(1880(20)2020) xtitle("") xsize(4) ysize(2) scale(1.3) graphregion(fcolor(gs15*0.33333))
 graph export "$Fig\Median_dwn_unemp.pdf", replace
