@@ -10,14 +10,14 @@
 
 	
 	** SET PATHS:
-	local path_in "data/data.dta"
-	local path_out "output/figures/history/"
+	local path_in "${hp}Data\Out\Data_Final_nuts2.dta"
+	local path_out "$Fig\"
 *	local suffix "_`=subinstr("`metric'",".","",.)'" // string or empty; file name suffix 
 
 	
 	
 	** CONFIGURE PLOT:
-	local metric S3.cbassets_money // metric variable
+	local metric S0.Year // metric variable
 	local cuts ///
 		deciles /// use decile code below instead of explicit cuts
 		///-0.2 -0.1 0 0.1 0.2 0.3 0.4 0.5 /// cbassets_log
@@ -30,6 +30,7 @@
 		///0 0.1 0.2 0.3 0.5 ///
 		///-0.5 -0.4 -0.3 -0.2 -0.1 0 0.1 0.2 0.3 0.4 0.5 /// bank equity return
 		//
+		
 	local title ///
 		"`: var lab `metric''"
 		///"Inflation" 
@@ -39,6 +40,7 @@
 		///"Real government financing rates cross time and space"
 		///"Monetary policy activism: Policy rate change during recession years"
 		///"Bank equity valuation"
+		
 	local note ""
 	
 	** SELECT SUBSAMPLE:
@@ -66,7 +68,7 @@ if "`cuts'" == "deciles" {
 		`r(r1)' `r(r2)' `r(r3)' `r(r4)' `r(r5)' `r(r6)' `r(r7)' `r(r8)' `r(r9)'
 	local decileopts title("Deciles",size(medium))  
 }
-heatplot metric country year if `subsample' ///
+heatplot metric Country Year if `subsample' ///
 	, xdiscrete ydiscrete scatter(pipe, msize(*2)) ///
 	cuts(`cuts') ///
 	keylabels(, `decileopts' interval format(%3.2f)) ///
@@ -76,7 +78,7 @@ heatplot metric country year if `subsample' ///
 	xtitle("") ytitle("") ///a
 	yscale(reverse) ///
 	ylab(,labsize(2)) ///
-	xlab(1870(10)2020, angle(45) grid labsize(vsmall)) ///
+	xlab(1980(10)2020, angle(45) grid labsize(vsmall)) ///
 	legend(region(color(white)) subtitle(" ")) ///
 	xsize(10) ysize(4) scale(2.5) ///
 	note(`note') ///

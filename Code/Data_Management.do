@@ -32,12 +32,12 @@ replace country = "Ireland" if country == "ZIreland"
 gen dp = cpi/l1.cpi-1
 replace dp=dp*100
 gen ldp = l.dp
-label var dp "Price inflation (%)"
+label var dp "Price inflation (\%)"
 
 * wage inflation (growth rate of wage index) in %
 gen dwn = wage/l1.wage-1
 replace dwn=dwn*100
-label var dwn "Wage inflation %(%)"
+label var dwn "Wage inflation (\%)"
 
 * unemployment					
 label var unemp "Unemployment rate"

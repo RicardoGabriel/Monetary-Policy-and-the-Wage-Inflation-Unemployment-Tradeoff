@@ -75,7 +75,7 @@ global slides	= 0
 global state 	= "lowflat"
 ********************************************************************************
 
-/*
+
 * Prepare Data with all observations
 global wage_out = 0
 do Data_Management
@@ -88,7 +88,7 @@ do Descriptives
 do Figure_1
 
 *** Main Analysis
-
+/*
 * Prepare Data without wage variable for outliers and war periods 
 global wage_out = 1
 do Data_Management
@@ -131,7 +131,7 @@ global match = 0
 global state 	= "lowflat"
 do SD_BM
 
-*/
+
 *******************************************************************************
 * Quarterly analysis
 global match = 1

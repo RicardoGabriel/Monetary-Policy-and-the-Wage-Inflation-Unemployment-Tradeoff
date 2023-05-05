@@ -37,8 +37,8 @@ replace window="2000-2020" if year<=2020 & year>=2000
 *include the variable noval in the tabstat command (now also with price inflation)
 replace noval=1 if unemp==. | dwn==. | dp==.
 
-estpost tabstat unemp dwn dp if noval==0 & outlier==0, by(window) stat(n mean sd min max) col(stat)
-esttab using "$Tab\Table_Descriptives.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
+estpost tabstat unemp dwn dp if noval==0 & outlier==0, by(window) stat(n p50 mean sd min max) col(stat)
+esttab using "$Tab\Table_Descriptives.tex", cells("count(fmt(0)) p50(fmt(2)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
 	title("Descriptive statistics \label{T:Descriptives}")
 
 	
@@ -49,8 +49,8 @@ esttab using "$Tab\Table_Descriptives.tex", cells("count(fmt(0)) mean(fmt(2)) sd
 *include the variable noval in the tabstat command (now also with price inflation)
 replace noval=1 if unemp==. | dwn==. | dp==.
 
-estpost tabstat unemp dwn dp [aw = pop] if noval==0 & outlier==0, by(window) stat(n mean sd min max) col(stat)
-esttab using "$Tab\Table_Descriptives_W.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
+estpost tabstat unemp dwn dp [aw = pop] if noval==0 & outlier==0, by(window) stat(n p50 mean sd min max) col(stat)
+esttab using "$Tab\Table_Descriptives_W.tex", cells("count(fmt(0)) p50(fmt(2)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
 	title("Descriptive statistics \label{T:DescriptivesW}")	
 	
 ********************************************************************************
@@ -64,8 +64,8 @@ replace window="1946-1971" if year<=1971 & year>=1946
 replace window="1972-1999" if year<=1999 & year>=1972
 replace window="2000-2020" if year<=2020 & year>=2000
 
-estpost tabstat unemp dwn dp if hyper==0, by(window) stat(n mean sd min max) col(stat)
-esttab using "$Tab\Table_Descriptives_Full.tex", cells("count(fmt(0)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
+estpost tabstat unemp dwn dp if hyper==0, by(window) stat(n p50 mean sd min max) col(stat)
+esttab using "$Tab\Table_Descriptives_Full.tex", cells("count(fmt(0)) p50(fmt(2)) mean(fmt(2)) sd(fmt(2)) min(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
 	title("Descriptive statistics - full sample \label{T:Descriptives-Full}")
 	
 	

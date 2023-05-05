@@ -1,8 +1,9 @@
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
       name:  <unnamed>
-       log:  C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Code\HWPC.log
+       log:  C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Trade
+> off\Code\HWPC.log
   log type:  text
- opened on:   3 Apr 2023, 13:40:06
+ opened on:   5 May 2023, 15:13:38
 
 . clear all
 
@@ -48,7 +49,8 @@
 . global levell   = 90
 
 . 
-. * Master - choose whether outlier is identified when wage inflation is above 50% in absolute value (fifty=1)
+. * Master - choose whether outlier is identified when wage inflation is above 50% in absolute value (fif
+> ty=1)
 . *                  or when it is either in top or bottom 1% of the sample (fifty=0) - robustness check
 . global fifty    = 1
 
@@ -59,29 +61,136 @@
 . 
 . * Master - asymmetry specifications, choose one at a time from the following list
 .         * lowflat       -       low vs high cpi inflation
-.         * boombust      -       bust vs boom in the economy (negative or positive unemployment gap using an hp filter)
+.         * boombust      -       bust vs boom in the economy (negative or positive unemployment gap usin
+> g an hp filter)
 .         * negpos        -       negative vs positive change in short run interest rate 
-.         * tradeoc       -       degree of trade openess (more vs less) measured by having more than 40% of (imports+exports) / gdp (40% is close to mean and median)
-.         * capitaloc     -       degree of capital openess (open vs close) measured as in Quinn et al. (2011)
+.         * tradeoc       -       degree of trade openess (more vs less) measured by having more than 40%
+>  of (imports+exports) / gdp (40% is close to mean and median)
+.         * capitaloc     -       degree of capital openess (open vs close) measured as in Quinn et al. (
+> 2011)
 .         * postwar   -   d
 . global state    = "lowflat"
 
 . ********************************************************************************
 . 
+. 
+. * Prepare Data with all observations
+. global wage_out = 0
+
+. do Data_Management
+
+. quietly{
+
+. 
+. ********************************************************************************
+. * Saving the Data
+. ********************************************************************************
+. xtset id year
+       panel variable:  id (strongly balanced)
+        time variable:  year, 1870 to 2019
+                delta:  1 year
+
+. 
+. drop if year>=2020
+(0 observations deleted)
+
+. 
+. save "$hp\Data\Data_MScThesis_Analysis.dta", replace
+file C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\\Dat
+> a\Data_MScThesis_Analysis.dta saved
+
+. 
+end of do-file
+
+. 
+. * Produce descriptive statistics
+. ** Table 1 + Table A.2 + Table A.3
+. do Descriptives
+
 . /*
-> * Prepare Data with all observations
-> global wage_out = 0
-> do Data_Management
+> Table Descriptives 
 > 
-> * Produce descriptive statistics
-> ** Table 1 + Table A.2 + Table A.3
-> do Descriptives
+> Produce Tables 1, A.2, and A.3
+> */
+. 
+. quietly{
+
+. 
+end of do-file
+
+. 
+. ** Figure 1
+. do Figure_1
+
+. /*
+> Produce Figure 1
+> */
+. 
+. quietly{
+
+. /* Weighted version is too similar
 > 
-> ** Figure 1
-> do Figure_1
+> ********************************************************************************
+> * Figure A.1 estimation - Rolling Window for weighted mean wage inflation and unemployment rate
+> ********************************************************************************
 > 
-> *** Main Analysis
+> * set size of rolling window (how many years?)
+> local window = 10
+> bysort year (id): gen pick = _n == 1
+> gen high = cond(pick, year, -99)
 > 
+> * create new program for rolling window estimation
+> program drop _all
+> program mypanel
+>     xtset id year
+>     gen year1 = r(tmin)
+>         foreach v in unemp dlwage{
+>     cap noi sum `v' [aw=pop] if noval==0
+>     gen b_`v' = r(mean)
+>     }
+> end
+> 
+> local nwindow = -`window'
+> 
+> * use rangerun command to run rolling window
+> rangerun mypanel, interval (year `nwindow' high) verbose
+> 
+> 
+> ********************************************************************************
+> * Figure A.1 - produce graphism
+> ********************************************************************************
+> 
+> * create variables to highlight different historical periods (max and min of previous estimates)
+> gen t=13
+> gen tt=-1
+> 
+> * Figure for slides
+> if ($slides == 1) {
+> twoway (rarea t tt year if (year>=1870 & year<=1913), color(gs15*0.95)) (rarea t tt year if (year>=1946
+>  & year<=1971), color(gs15*0.95)) ///
+>         (rarea t tt year if (year>=1995), color(gs15*0.95)) (line b_dlwage year, lcolor(olive) lwidth(t
+> hick)) (line b_unemp year, lcolor(gs4) lpa("-") lwidth(thick)), ytitle("Percent (%)") ///
+> legend( c(1) order(4 "Wage Inflation" 5 "Unemployment") ring(0) position(4) ) ylabel(0(3)12) ///
+> xlabel(1880(20)2020) xtitle("") xsize(4) ysize(2) scale(1.3) graphregion(fcolor(gs15*0.33333))
+> graph export "$hp\Output\Figures\Median_dwn_unemp_w.pdf", replace
+> }
+> 
+> else if ($slides == 0) {
+> * Figure for paper
+> twoway (rarea t tt year if (year>=1870 & year<=1913), color(gs15*0.95)) (rarea t tt year if (year>=1946
+>  & year<=1971), color(gs15*0.95)) ///
+>         (rarea t tt year if (year>=1995), color(gs15*0.95)) (line b_dlwage year, lcolor(olive) lwidth(t
+> hick)) (line b_unemp year, lcolor(gs4) lpa("-") lwidth(thick)), ytitle("Percent (%)") ///
+> legend( c(1) order(4 "Wage Inflation" 5 "Unemployment") ring(0) position(4) ) ylabel(0(3)12) ///
+> xlabel(1880(20)2020) xtitle("") xsize(6) ysize(3) scale(1.3)
+> graph export "$hp\Output\Figures\Median_dwn_unemp_paper_w.pdf", replace
+> }
+
+end of do-file
+
+. 
+. *** Main Analysis
+. /*
 > * Prepare Data without wage variable for outliers and war periods 
 > global wage_out = 1
 > do Data_Management
@@ -124,847 +233,208 @@
 > global state    = "lowflat"
 > do SD_BM
 > 
-> */
-. *******************************************************************************
-. * Quarterly analysis
-. global match = 1
+> 
+> *******************************************************************************
+> * Quarterly analysis
+> global match = 1
+> global wage_out = 1
+> do Data_Management_Quarter
+> 
+> * First Stage Results of Monetary Policy Shocks (Trilemma Instrumental Variable)
+> *do First_Stage_Quarter
+> 
+> * Phillips Multiplier Quarterly Data
+> ** Figures 3 a) and 3 b)
+> *do PM_BM_Quarter
+> 
+> ** Figure 3 c)
+> *do MP_IRFs_BM_Quarter
+> 
+> 
+> * State Dependent Phillips Multipliers
+> * Figure ?? and Table ??
+> global state    = "lowflat"
+> do SD_BM_Quarter
 
-. global wage_out = 1
+end of do-file
 
-. do Data_Management_Quarter
+. do "C:\Users\ricar\AppData\Local\Temp\STD3f8c_000000.tmp"
 
-.                                         *** Data Management Quarterly ***
-. 
-. * List of country codes: AU BE CA DK FI FR DE IE IT JP NL NO PT ES SE GB US
-.                                 
-.                                         
-. * Import data from FRED date range 1995Q1-2020Q1; when monthly agg to quarter
-. 
-. *quietly{
-. 
-. 
-. 
-. /*
-> ********************************************************************************
-> *                                                                  Wages
-> * Hourly Earnings: Private Sector (LCEA)
-> * Hourly Wage Rate: Private Sector for the Netherlands and Australia (LCWR)
-> ********************************************************************************
-> import fred LCEAPR01SEQ189N LCEAPR01ITQ661S LCEAPR01USQ189S LCEAPR01FRQ661S ///
-> LCWRPR01NLQ661S LCEAPR01IEQ661S LCEAPR01PTQ661S LCEAMN01CAQ189S LCEAPR01BEQ661S ///
-> LCEAMN03NOQ661N LCEAPR03JPQ661S LCEAPR01FIQ661S LCEAPR01DKQ661S LCEAPR01DEQ661S ///
-> LCEATT01ESQ189N LCEAPR02GBQ661S LCWRTT01AUQ661N ///
-> , daterange(1995-01-01 2020-01-01) aggregate(quarterly,avg) long clear
-> 
-> * Country Name (9 and 10 character)
-> gen country = substr(series_id,9,2)
-> 
-> * Seasonally adjusted (N: not seasonally adjusted; S: seasonally adjusted)
-> gen seasonal_wage = substr(series_id,15,1)
-> 
-> * change name of the series and store as .dta file
-> rename value wage
-> tempfile wage
-> save `wage'
-> 
-> 
-> ********************************************************************************
-> *                                                         Interest Rates
-> * 3-Month or 90-day Rates and Yields: Interbank Rates
-> * Immediate Rates: Less than 24 Hours: Call Money/Interbank Rate for Japan
-> ********************************************************************************
-> import fred IR3TIB01AUQ156N IR3TIB01BEQ156N IR3TIB01CAQ156N IR3TIB01DKQ156N ///
-> IR3TIB01FIQ156N IR3TIB01FRQ156N IR3TIB01DEQ156N IR3TIB01IEQ156N IR3TIB01ITQ156N ///
-> IRSTCI01JPQ156N IR3TIB01NLQ156N IR3TIB01NOQ156N IR3TIB01PTQ156N IR3TIB01ESQ156N ///
-> IR3TIB01SEQ156N IR3TIB01GBQ156N IR3TIB01USQ156N ///
-> , daterange(1995-01-01 2020-01-01) aggregate(quarterly,avg) long clear
-> 
-> * Country Name (9 and 10 character)
-> gen country = substr(series_id,9,2)
-> 
-> * Seasonally adjusted (N: not seasonally adjusted; S: seasonally adjusted)
-> gen seasonal_stir = substr(series_id,15,1)
-> 
-> * change name of the series and store as .dta file
-> rename value stir
-> tempfile stir
-> save `stir'
-> 
-> 
-> 
-> ********************************************************************************
-> *                                                                       GDP
-> * Real Gross Domestic Product
-> ********************************************************************************
-> import fred NGDPRSAXDCAUQ CLVMNACSCAB1GQBE NGDPRSAXDCCAQ CLVMNACSCAB1GQDK ///
-> CLVMNACSCAB1GQFI CLVMNACSCAB1GQFR CLVMNACSCAB1GQDE CLVMNACNSAB1GQIE CLVMNACSCAB1GQIT ///
-> JPNRGDPEXP CLVMNACSCAB1GQNL CLVMNACSCAB1GQNO CLVMNACSCAB1GQPT CLVMNACSCAB1GQES ///
-> CLVMNACSCAB1GQSE CLVMNACSCAB1GQUK GDPC1 ///
-> , daterange(1995-01-01 2020-01-01) aggregate(quarterly,avg) long clear
-> 
-> * Country Name
-> gen country = substr(series_id,15,2)
-> replace country = substr(series_id,11,2) if substr(series_id,1,3) == "NGD"
-> replace country = "JP" if series_id == "JPNRGDPEXP"
-> replace country = "US" if series_id == "GDPC1"
-> replace country = "GB" if country == "UK"
-> 
-> * Seasonally adjusted (N: not seasonally adjusted; S: seasonally adjusted)
-> gen seasonal_gdp = "S"
-> replace seasonal_gdp = "N" if country == "IE"
-> 
-> * change name of the series and store as .dta file
-> rename value gdp
-> tempfile gdp
-> save `gdp'
-> 
-> 
-> ********************************************************************************
-> *                                                       Consumer Price Index
-> ********************************************************************************
-> import fred AUSCPIALLQINMEI BELCPIALLQINMEI CPALCY01CAM661N DNKCPIALLQINMEI ///
-> FINCPIALLQINMEI FRACPIALLQINMEI DEUCPIALLQINMEI IRLCPIALLQINMEI ITACPIALLQINMEI ///
-> JPNCPIALLQINMEI NLDCPIALLQINMEI NORCPIALLQINMEI PRTCPIALLQINMEI ESPCPIALLQINMEI ///
-> SWECPIALLQINMEI GBRCPIALLQINMEI USACPIALLQINMEI ///
-> , daterange(1995-01-01 2020-01-01) aggregate(quarterly,avg) long clear
-> 
-> * Country Name
-> gen country = substr(series_id,1,2)
-> replace country = "CA" if country == "CP"
-> replace country = "DK" if country == "DN"
-> replace country = "IE" if country == "IR"
-> replace country = "PT" if country == "PR"
-> replace country = "SE" if country == "SW"
-> 
-> * Seasonally adjusted (N: not seasonally adjusted; S: seasonally adjusted)
-> gen seasonal_cpi = "N"
-> 
-> * change name of the series and store as .dta file
-> rename value cpi
-> tempfile cpi
-> save `cpi'
-> 
-> 
-> ********************************************************************************
-> *                                                       Unemployment Rates
-> *Harmonised Unemployment Rates: Total: All Persons 
-> ********************************************************************************
-> import fred LRHUTTTTAUQ156S LRHUTTTTBEQ156S LRHUTTTTCAQ156S LRHUTTTTDKQ156S ///
-> LRHUTTTTFIQ156S LRHUTTTTFRQ156S LRHUTTTTDEQ156S LRHUTTTTIEQ156S LRHUTTTTITQ156S ///
-> LRHUTTTTJPQ156S LRHUTTTTNLQ156S LRHUTTTTNOQ156S LRHUTTTTPTQ156S LRHUTTTTESQ156S ///
-> LRHUTTTTSEQ156S LRHUTTTTGBQ156S LRHUTTTTUSQ156S ///
-> , daterange(1995-01-01 2020-01-01) aggregate(quarterly,avg) long clear
-> 
-> * Country Name (9 and 10 character)
-> gen country = substr(series_id,9,2)
-> 
-> * Seasonally adjusted (N: not seasonally adjusted; S: seasonally adjusted)
-> gen seasonal_unemp = substr(series_id,15,1)
-> 
-> * change name of the series and store as .dta file
-> rename value unemp
-> tempfile unemp
-> save `unemp'
-> 
-> 
-> ********************************************************************************
-> *                                                       Quarterly Dataset
-> ********************************************************************************
-> 
-> * Merge different variables
-> foreach var in wage cpi stir gdp {
->         merge 1:1 country daten using ``var''
->         drop _merge
-> }
-> 
-> * Date
-> generate dateq = qofd(daten)
-> generate quarter = quarter(daten)
-> 
-> * Cid
-> egen id = group(country), label
-> 
-> * Panel data
-> xtset id dateq, quarter
-> 
-> 
-> * remove seasonality from not seasonally adjusted series (wages for group and gdp for Ireland)
-> foreach var in wage gdp {
->         by id:  hprescott `var', stub(hp) smooth(100)
->         egen double hpsmm = rowtotal(hp_`var'_sm_*)
->         replace `var' = hpsmm if seasonal_`var' == "N"
->         drop hp_`var'_* hp_`var'_sm_* hpsmm
-> }
-> 
-> * Index to 2015-01-01 = 100 for comparability?
-> * ?
-> 
-> * add capital openess variable under the assumption it does not change within the same year
-> gen year = substr(datestr,1,4)
-> destring year, replace
-> merge m:1 country year using "$hp\Data\openquinn_extended_IRL.dta"
-> drop if _merge == 2
-> drop _merge
-> xtset id dateq, quarter
-> replace iso = iso[_n-1] if id==id[_n-1]
-> 
-> * drop unnecessary variables
-> drop daten datestr seasonal_* country series_id
-> 
-> * save FRED data
-> save "$hp\Data\FRED_Imported.dta", replace
-> */
-. 
-. use "$hp\Data\FRED_Imported.dta", clear
+. estpost tabstat unemp dwn dp if noval==0 & outlier==0, by(window) stat(n p50 mean sd min max) col(stat)
+variable window not found
+(error in option by())
+r(111);
+
+end of do-file
+
+r(111);
+
+. do "C:\Users\ricar\AppData\Local\Temp\STD3f8c_000000.tmp"
+
+. use "$hp\Data\Data_MScThesis_Analysis.dta", clear
+
+. set more off
 
 . 
-. * get peg definitions from yearly data from JST (2020)
-. preserve
+. * Graphs management
+. graph drop _all
 
-. use "$hp\Data\JSTdataset_v100.dta", clear
+. set scheme s1mono
 
-. keep year iso peg peg_base peg_type
+. graph set window fontface default
 
-. tempfile JST
-
-. save `JST'
-file C:\Users\ricar\AppData\Local\Temp\ST_3674_000002.tmp saved
-
-. restore
+. capture graph set window fontface Helvetica
 
 . 
-. * merge with quarterly data
-. merge m:1 iso year using `JST'
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                         2,276
-        from master                         0  (_merge==1)
-        from using                      2,276  (_merge==2)
-
-    matched                             1,717  (_merge==3)
-    -----------------------------------------
-
-. drop if _merge == 2
-(2,276 observations deleted)
-
-. drop _merge
-
+.                                                         *** Descriptives *** 
 . 
-. xtset id dateq, quarter
-       panel variable:  id (strongly balanced)
-        time variable:  dateq, 1995q1 to 2020q1
-                delta:  1 quarter
+. *Adjust here if you want to construct the dataset according to explicit or implicit inflation targeting
+. global EXPLICIT=1
 
-. 
-. ********************************************************************************
-. * Creation of control variables
-. ********************************************************************************
-.                                 
-. * price inflation (growth rate of cpi) in % year on year (yoy)
-. gen dpyoy = cpi/l4.cpi-1
-(68 missing values generated)
-
-. replace dpyoy=dpyoy*100
-(1,647 real changes made)
-
-. label var dpyoy "Price inflation (%) yoy"
-
-. 
-. gen dp = cpi/l1.cpi-1
-(17 missing values generated)
-
-. replace dp=dp*100
-(1,670 real changes made)
-
-. gen ldp = l.dp
-(34 missing values generated)
-
-. label var dp "Price inflation (%)"
-
-. 
-. * wage inflation (growth rate of wage index) in %
-. gen dwn = wage/l1.wage-1
-(114 missing values generated)
-
-. replace dwn=dwn*100
-(1,590 real changes made)
-
-. label var dwn "Wage inflation (%)"
-
-. 
-. * unemployment                                  
-. label var unemp "Unemployment rate"
-
-. 
-. * world GDP growth following JST (2020)
-. sort dateq
-
-. by dateq: egen countgdp = count(gdp)  
-
-. by dateq: egen sumGDP = sum(gdp)
-
-. 
-. * correcting for artificial growth coming from potential missing observations
-. replace sumGDP = sumGDP / countgdp
-(1,717 real changes made)
-
-. label var sumGDP "World GDP"
-
-. 
-. 
-. ********************************************************************************
-. * List unstable periods and outliers in the sample 
-. ********************************************************************************
-. 
-. * Hyperinflation in Germany (1920 to 1925)
-. gen hyper=0
-
-. replace hyper=1 if iso=="DEU" & year>=1920 & year<=1925
-(0 real changes made)
-
-. 
-. * War periods
-. gen war = 0
-
-. replace war = 1 if year>=1914 & year<=1919
-(0 real changes made)
-
-. replace war = 1 if year>=1939 & year<=1945
-(0 real changes made)
-
-. 
-. 
-. * Identify extreme (outlier) values in the dependent variable (dwn)
-. gen outlier=0
-
-. 
-. if ($fifty ==1) {
-. * if absolute value of wage inflation is above 50%
-. replace outlier = 1 if abs(dwn)>50
-(114 real changes made)
-. }
-
-. else if ($fifty ==0) {
-. * alternatively, truncate top 1% and bottom 1% (rob check)
-. xtile pct = dwn, nq(100)
-. replace outlier = 1 if pct <= 1
-. replace outlier = 1 if pct >= 100
-. drop pct
-. }
-
-. 
-. * include hyperinflation in Germany
-. replace outlier = . if dwn == .
-(114 real changes made, 114 to missing)
-
-. replace outlier = 1 if hyper == 1
-(0 real changes made)
-
-. 
-. 
-. * in order to properly remove the outlier values from the main analysis 
-. * replace wage variable by missing value
-. if ($wage_out ==1) {
-.         replace wage = . if war==1 | outlier==1
-(0 real changes made)
-. }
-
-. 
-. * Create a matched sample dummy (i.e. for which there is data for both wages and unemployment)
-. gen noval=0
-
-. replace noval=1 if unemp==. | dwn==.
-(114 real changes made)
-
-. 
-. 
-. ********************************************************************************
-. * Creation of control variables (must come after replace wage by missing values for outliers)
-. ********************************************************************************
-. 
-. 
-. * Taking Logs (following JST (2020) JME)
-. gen lunemp      = 100*log(1+unemp)                      // unemployment rate
-
-. gen lwage       = 100*log(1+wage)                       // wage index
-(97 missing values generated)
-
-. gen lsumgdp = 100*log(sumGDP)                   // (sample) "world" GDP
-
-. gen lrgdp   = 100*log(gdp)                              // real GDP
-(4 missing values generated)
-
-. gen lcpi    = 100*log(cpi)                              // price index
-
-. 
-. 
-. /*
-> gen lriy        = 100*log(iy*rgdpbarro)         // investment
-> gen loansgdp = tloans/gdp*100                   // loans to gdp ratio
-> gen lspreal = log(stock/cpi)                    // real stock prices index
-> gen cay         = 100*(ca/gdp)                          // current account to gdp ratio
-> gen lrcon   = 100*log(rconsbarro)               // real consumption index from Barro
-> */
-. 
-. * Taking Differences
-. xtset id dateq, quarter
-       panel variable:  id (strongly balanced)
-        time variable:  dateq, 1995q1 to 2020q1
-                delta:  1 quarter
-
-. local varlist lrgdp lwage lsumgdp lcpi stir lunemp unemp 
-
-. *ltrate lspreal loansgdp  cay lrcon lriy 
-. foreach var in `varlist'{ 
-  2.         gen d`var' = d.`var'
-  3. }
-(21 missing values generated)
-(114 missing values generated)
-(17 missing values generated)
-(17 missing values generated)
-(17 missing values generated)
-(17 missing values generated)
-(17 missing values generated)
-
-. 
-.         gen dlcpi_yoy = 100*log(cpi)-100*log(l4.cpi)
-(68 missing values generated)
-
-. 
-. 
-. ********************************************************************************
-. * Preparing State-Dependencies (output and unemployment gaps)
-. ********************************************************************************
-. /*
-> **** 1) output gap 
-> cap drop hpsm
-> sort iso
-> by iso: hprescott gdp, stub(hp) smooth(100)
-> egen double hpsm = rowtotal(hp_gdp_sm_*)
-> drop hp_gdp_sm_*
-> gen outgap=(1-hpsm/gdp)
-> 
-> 
-> **** 2) unemployment gap
-> 
-> * by country replace missing unemployment gaps by average across entire sample
-> gen unempp=unemp
-> forvalues x=1/18{
->         sum unemp if id==`x'
->         replace unempp = r(mean) if id==`x' & unemp ==.
-> }
-> 
-> cap drop hpsmm
-> sort iso
-> by iso:  hprescott unempp, stub(hp) smooth(100)
-> egen double hpsmm = rowtotal(hp_unempp_sm_*)
-> drop hp_unempp_sm_*
-> gen unempgap=(1-hpsmm/unemp)
-> */
-. 
-. ********************************************************************************
-. * Instrument construction
-. ********************************************************************************
-. do trilemma_iv_Quarter
+. do HistoricalPeriods
 
 . /*
-> trilemma_iv.do
+> Historical Periods
 > 
-> Here, I follow the code from Jordà, Schularick, and Taylor (2020) JME 
-> to re-construct the trilemma instrument until 2020.
-> */ 
+> Here, I construct the historical peridos used in the Descriptives section.
+> This classification is based on Table B.1. in the Appendix of the paper.
+> */
 . 
-. *quietly{
-. 
-. **************************************************************************
-. * CONSTRUCT THE INSTRUMENTAL VARIABLE 
-. **************************************************************************
-.         
-. * extended Ireland capital openess variable (assume from 1960 onwards same capital openess as the UK) - waiting on data from Dennis Quinn to confirm this
-. * extend dataset until 2020 (according to their classification all countries in this dataset are today with capital openess = 100)
-. replace openquinn = 100 if year >2012
-(493 real changes made)
+. quietly{
 
-. 
-. 
-. ********* MAKE BASE INTEREST RATE DATA
-. 
-. * collect ibase data for DEU/USA
-. 
-. preserve
-
-. keep iso dateq stir
-
-. keep if iso=="USA"
-(1,616 observations deleted)
-
-. keep dateq stir
-
-. rename stir stir_usa
-
-. sort dateq
-
-. save ../Data/stir_usa.dta, replace
-file ../Data/stir_usa.dta saved
-
-. restore
-
-. 
-. preserve
-
-. keep iso dateq stir
-
-. keep if iso=="DEU"
-(1,616 observations deleted)
-
-. keep dateq stir
-
-. rename stir stir_deu
-
-. sort dateq
-
-. save ../Data/stir_deu.dta, replace
-file ../Data/stir_deu.dta saved
-
-. restore
-
-. 
-. 
-. cap drop _merge
-
-. sort dateq
-
-. merge m:1 dateq using ../Data/stir_usa.dta // JST us rate
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                             0
-    matched                             1,717  (_merge==3)
-    -----------------------------------------
-
-. drop _merge
-
-. sort dateq
-
-. merge m:1 dateq using ../Data/stir_deu.dta // JST deu rate
-
-    Result                           # of obs.
-    -----------------------------------------
-    not matched                             0
-    matched                             1,717  (_merge==3)
-    -----------------------------------------
-
-. drop _merge
-
-. xtset id dateq
-       panel variable:  id (strongly balanced)
-        time variable:  dateq, 1995q1 to 2020q1
-                delta:  1 quarter
-
-. 
-. *erase ../Data/stir_usa.dta
-. *erase ../Data/stir_deu.dta
-. 
-. ********** 1. Make IV using the raw change in the base country interest rate
-. ********** IV dibpeg = dibase*peg 
-. 
-. * force sort tsset again
-. xtset id dateq, quarter
-       panel variable:  id (strongly balanced)
-        time variable:  dateq, 1995q1 to 2020q1
-                delta:  1 quarter
-
-. 
-. * use base coding from JST dataset
-. capture drop dibase
-
-. gen      dibase = .
-(1,717 missing values generated)
-
-. replace  dibase = d.stir_usa   if peg_base=="USA"
-(400 real changes made)
-
-. replace  dibase = d.stir_deu   if peg_base=="DEU"
-(1,200 real changes made)
-
-. 
-. 
-. * IV is impulse to short rate due to change in base when pegged in year T and T-1
-. capture drop dibpeg
-
-. gen     dibpeg = dibase * peg * l.peg  
-(117 missing values generated)
-
-. replace dibpeg = dibpeg * (openquinn/100)  // scale by quinn capital openness
-(148 real changes made)
-
-. replace dibpeg = . if peg==0 | l.peg==0
-(634 real changes made, 634 to missing)
-
-. 
-. 
-. 
-. ********** 2. Make IV using the residualized change in the base country interest rate
-. ********** IV dibpegF = dibaseF*peg (without R&R forecast for base countries - here it is about peg regimes)
-. 
-. **************************************************************************
-. ******** CONSTRUCT THE INSTRUMENTAL VARIABLE                      ********
-. ********  USING TAYLOR RULE RESIDS OR FACTOR AUGMENTATION         ********
-. **************************************************************************
-. 
-. * force sort tsset again
-. xtset id dateq, quarter
-       panel variable:  id (strongly balanced)
-        time variable:  dateq, 1995q1 to 2020q1
-                delta:  1 quarter
-
-. estimates clear                                         
-
-. 
-. * forecasting equation = regressor list uses 4 lags of RHS (reduced version from
-. *  yearly data) - l.dlrcon l.dltrate l.dstir l.dlrgdp l.dlcpi l.dlriy l.cay
-. local rhsstirF L(1/4).dlrgdp L(1/4).dstir L(1/4).dlcpi
-
-. 
-. cap drop dstir_hat
-
-. gen dstir_hat =.
-(1,717 missing values generated)
-
-. 
-. * forecast stir
-. xtreg d.stir `rhsstirF' if (iso=="DEU"|iso=="USA"), fe
-
-Fixed-effects (within) regression               Number of obs     =        192
-Group variable: id                              Number of groups  =          2
-
-R-sq:                                           Obs per group:
-     within  = 0.4440                                         min =         96
-     between = 1.0000                                         avg =       96.0
-     overall = 0.4435                                         max =         96
-
-                                                F(12,178)         =      11.84
-corr(u_i, Xb)  = -0.0355                        Prob > F          =     0.0000
-
-------------------------------------------------------------------------------
-      D.stir |      Coef.   Std. Err.      t    P>|t|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-      dlrgdp |
-         L1. |   .1066036   .0342321     3.11   0.002     .0390507    .1741566
-         L2. |   .0414355   .0355082     1.17   0.245    -.0286358    .1115068
-         L3. |  -.0041053   .0357537    -0.11   0.909     -.074661    .0664504
-         L4. |   .0231017   .0354628     0.65   0.516      -.04688    .0930834
-             |
-       dstir |
-         L1. |   .4317721   .0799099     5.40   0.000     .2740795    .5894648
-         L2. |  -.0533472   .0863042    -0.62   0.537    -.2236583    .1169639
-         L3. |   .0457448     .08607     0.53   0.596    -.1241041    .2155937
-         L4. |   .0117863   .0741548     0.16   0.874    -.1345494     .158122
-             |
-       dlcpi |
-         L1. |   .1517525   .0475255     3.19   0.002     .0579665    .2455384
-         L2. |  -.1604093   .0470863    -3.41   0.001    -.2533284   -.0674901
-         L3. |  -.0205628   .0481319    -0.43   0.670    -.1155454    .0744197
-         L4. |   -.113552   .0484565    -2.34   0.020     -.209175   -.0179289
-             |
-       _cons |  -.0366625   .0570074    -0.64   0.521    -.1491598    .0758348
--------------+----------------------------------------------------------------
-     sigma_u |  .01202631
-     sigma_e |  .29513737
-         rho |  .00165766   (fraction of variance due to u_i)
-------------------------------------------------------------------------------
-F test that all u_i=0: F(1, 178) = 0.12                      Prob > F = 0.7248
-
-. cap drop temp
-
-. predict temp if (iso=="DEU"|iso=="USA")
-(option xb assumed; fitted values)
-(1,525 missing values generated)
-
-. replace dstir_hat = temp if (iso=="DEU"|iso=="USA")
-(192 real changes made)
-
-. 
-. * make the residualized change in stir that will be the basis for the IV
-. cap drop dstir_resid
-
-. gen dstir_resid = d.stir - dstir_hat
-(1,525 missing values generated)
-
-. 
-. * copy into new series
-. cap drop dibaseF_usa dibaseF_gbr dibaseF_deu dibaseF_fra
-
-. gen dibaseF_usa = dstir_resid if iso=="USA"  // dibase for new IV
-(1,621 missing values generated)
-
-. gen dibaseF_deu = dstir_resid if iso=="DEU"  // dibase for new IV
-(1,621 missing values generated)
-
-. 
-. 
-. cap drop temp
-
-. bysort dateq: egen temp = mean(dibaseF_usa)
-(85 missing values generated)
-
-. replace dibaseF_usa = temp
-(1,536 real changes made)
-
-. cap drop temp
-
-. bysort dateq: egen temp = mean(dibaseF_deu)
-(85 missing values generated)
-
-. replace dibaseF_deu = temp
-(1,536 real changes made)
-
-. drop temp
-
-. 
-. 
-. * make the IV, same as standard trilemma IV (use composite GBR-USA-FRA for interwar)
-. xtset id dateq
-       panel variable:  id (strongly balanced)
-        time variable:  dateq, 1995q1 to 2020q1
-                delta:  1 quarter
-
-. 
-. 
-. * use base coding from JST dataset and replicate hybrid construction of OST
-. cap drop dibaseF
-
-. gen      dibaseF = .
-(1,717 missing values generated)
-
-. replace  dibaseF = dibaseF_usa   if peg_base=="USA"
-(384 real changes made)
-
-. replace  dibaseF = dibaseF_deu   if peg_base=="DEU"
-(1,152 real changes made)
-
-. 
-. 
-. *****************
-. * impulse to short rate due to change in base when pegged in year T and T-1
-. cap drop dibpegF
-
-. gen      dibpegF = .
-(1,717 missing values generated)
-
-. replace  dibpegF = dibaseF * peg * l.peg  
-(1,536 real changes made)
-
-. replace  dibpegF = dibpegF * (openquinn/100)  // scale by quinn capital openness
-(135 real changes made)
-
-. replace  dibpegF = . if peg==0 | l.peg==0
-(610 real changes made, 610 to missing)
-
-. 
-. * replace original JST estimates by these new ones
-. gen JSTtrilemmaIV       = dibpeg
-(751 missing values generated)
-
-. gen JSTtrilemmaIV_R = dibpegF
-(791 missing values generated)
-
-. label var JSTtrilemmaIV   "JST trilemma instrument (raw base rate changes)"
-
-. label var JSTtrilemmaIV_R  "JST trilemma instrument (residualized base rate changes)"
-
-. 
-. 
-. *****************
-. *  save trilemma IVs in their own file
-. preserve
-
-. keep      dateq iso JSTtrilemmaIV JSTtrilemmaIV_R peg peg_type peg_base
-
-. order     dateq iso JSTtrilemmaIV JSTtrilemmaIV_R peg peg_type peg_base
-
-. label var peg_type "Peg type: BASE, PEG, or FLOAT"
-
-. label var peg_base "Peg base: GBR, USA, or DEU"
-
-. sort iso dateq
-
-. save  ../Data/JSTtrilemmaIV2_Quarter.dta , replace
-file ../Data/JSTtrilemmaIV2_Quarter.dta saved
-
-. restore
-
-. 
-. *}
 . 
 end of do-file
 
+.                                                         
+.                                                         
+. *Generating windows for descriptives analysis
+. gen window=""
+(2,700 missing values generated)
+
+. replace window="1870-1913" if year<=1913 & year>=1870
+variable window was str1 now str9
+(792 real changes made)
+
+. replace window="1920-1938" if year<=1938 & year>=1920
+(342 real changes made)
+
+. replace window="1946-1971" if year<=1971 & year>=1946
+(468 real changes made)
+
+. replace window="1972-1999" if year<=1999 & year>=1972
+(504 real changes made)
+
+. replace window="2000-2020" if year<=2020 & year>=2000
+(360 real changes made)
+
 . 
-. *}
+. ********************************************************************************
+. * Table 2 - Descriptive statistics table (main sample)
+. ********************************************************************************
+. *To exclude the observations for which one of the trio variables is missing
+. *include the variable noval in the tabstat command (now also with price inflation)
+. replace noval=1 if unemp==. | dwn==. | dp==.
+(0 real changes made)
+
+. 
+. estpost tabstat unemp dwn dp if noval==0 & outlier==0, by(window) stat(n p50 mean sd min max) col(stat)
+
+Summary statistics: count p50 mean sd min max
+     for variables: unemp dwn dp
+  by categories of: window
+
+      window |  e(count)     e(p50)    e(mean)      e(sd)     e(min)     e(max) 
+-------------+------------------------------------------------------------------
+1870-1913    |                                                                  
+       unemp |       223   3.433889   4.079205   2.746125         .2       18.4 
+         dwn |       223   1.677149   1.682527   2.630929  -6.710671   10.25943 
+          dp |       223   .2154678   .3863919   3.205294  -10.94235   11.56097 
+-------------+------------------------------------------------------------------
+1920-1938    |                                                                  
+       unemp |       268       5.85   7.169665   4.988088         .6       24.9 
+         dwn |       268   .5251064   1.256395   8.626197  -27.71604   43.96599 
+          dp |       268          0   -.288989   7.234616  -18.45018   30.43478 
+-------------+------------------------------------------------------------------
+1946-1971    |                                                                  
+       unemp |       428   2.072727   2.602807   1.829869   .0381528   9.923077 
+         dwn |       428   7.074716   7.773532   5.098241  -10.78282   35.29412 
+          dp |       428   3.229563   4.084873   3.764423  -6.866704   20.37937 
+-------------+------------------------------------------------------------------
+1972-1999    |                                                                  
+       unemp |       504   6.629231   7.071776   4.295835   .0359226    24.2087 
+         dwn |       504   6.683088   8.298505   6.268544  -1.420051   32.28492 
+          dp |       504   5.026458    6.56101   5.509912  -.7078078    37.8819 
+-------------+------------------------------------------------------------------
+2000-2020    |                                                                  
+       unemp |       360     6.3638   7.058696   3.544274          2    26.0936 
+         dwn |       360    2.51518   2.413602   1.720488  -3.491477   7.502242 
+          dp |       360    1.72844   1.692833   1.278395  -4.480427   5.565171 
+-------------+------------------------------------------------------------------
+Total        |                                                                  
+       unemp |      1783   4.740343   5.636814   4.131366   .0359226    26.0936 
+         dwn |      1783   3.809524   5.098336   6.299129  -27.71604   43.96599 
+          dp |      1783    2.33215   3.181835   5.298986  -18.45018    37.8819 
+
+. esttab using "$Tab\Table_Descriptives.tex", cells("count(fmt(0)) p50(fmt(2)) mean(fmt(2)) sd(fmt(2)) mi
+> n(fmt(2)) max(fmt(2))") noobs nonumber label replace ///
+>         title("Descriptive statistics \label{T:Descriptives}")
+(output written to C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment
+> -Tradeoff\Output\Tables\Table_Descriptives.tex)
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Cod
+> e\Descriptives.do"
+
+. /*
+> Table Descriptives 
+> 
+> Produce Tables 1, A.2, and A.3
+> */
+. 
+. quietly{
+
+. 
+end of do-file
+
+. do "C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Cod
+> e\Data_Management.do"
+
+. quietly{
+
 . 
 . ********************************************************************************
 . * Saving the Data
 . ********************************************************************************
-. xtset id dateq, quarter
+. xtset id year
        panel variable:  id (strongly balanced)
-        time variable:  dateq, 1995q1 to 2020q1
-                delta:  1 quarter
+        time variable:  year, 1870 to 2019
+                delta:  1 year
 
-. drop if dateq==240
-(17 observations deleted)
+. 
+. drop if year>=2020
+(0 observations deleted)
 
-. save "$hp\Data\Data_Analysis_Quarter.dta", replace
-file C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\\Data\Data_Analysis_Quarter.dta saved
+. 
+. save "$hp\Data\Data_MScThesis_Analysis.dta", replace
+file C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\\Dat
+> a\Data_MScThesis_Analysis.dta saved
 
 . 
 end of do-file
 
-. 
-. * First Stage Results of Monetary Policy Shocks (Trilemma Instrumental Variable)
-. *do First_Stage_Quarter
-. 
-. * Phillips Multiplier Quarterly Data
-. ** Figures 3 a) and 3 b)
-. *do PM_BM_Quarter
-. 
-. ** Figure 3 c)
-. *do MP_IRFs_BM_Quarter
-. 
-. 
-. * State Dependent Phillips Multipliers
-. * Figure ?? and Table ??
-. global state    = "lowflat"
-
-. do SD_BM_Quarter
+. do "C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Cod
+> e\Descriptives.do"
 
 . /*
-> State Dependencies - Monetary Policy and the Wage-Inflation Unemployment Trade-off
+> Table Descriptives 
 > 
-> SD Phillips Multiplier and IRFs close to Barnichon and Mesters (2020):
-> Adding two lags of unemployment and wage inflation but also country 
-> fixed effects and global gdp growth.
-> 
-> Author: Ricardo Duque Gabriel
-> First Date: 15/11/2020
-> Last Update: 31/03/2023
-> 
-> Calls SD_BM_Reg.do and Sd_BM_Graphs.do to produce Figures 3 and A.3 and table A.4
-> according to different specifications as called in Master.do file
-> 
+> Produce Tables 1, A.2, and A.3
 > */
 . 
-. clear all
+. quietly{
 
 . 
-. * Upload data
-. use "$hp\Data\Data_Analysis_Quarter.dta", clear
+end of do-file
 
-. 
-. 
-. * Call chosen state
-. local s1 $state
-
-. 
-. * Log from here
-. cap log close
