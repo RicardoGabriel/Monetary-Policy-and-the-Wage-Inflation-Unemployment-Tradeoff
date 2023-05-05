@@ -1,43 +1,41 @@
-\begin{table}[ht!]
-\caption{Descriptive statistics}
-\label{T_Descriptives}
-\centering
+\begin{table}[htbp]\centering
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\begin{tabular}{l*{1}{ccccc}}
+\caption{Descriptive statistics \label{T:Descriptives}}
+\begin{tabular}{l*{1}{cccccc}}
 \hline\hline
-                                         
-                    &       \textbf{N}    &        \textbf{Mean}&   \textbf{Std. Dev.}&         \textbf{Min}&         \textbf{Max}\\
+                    &\multicolumn{6}{c}{}                                                         \\
+                    &       count&         p50&        mean&          sd&         min&         max\\
 \hline
-\textbf{1870-1913}          &            &            &            &            &            \\
-Unemployment rate   &         223&        4.08&        2.75&        0.20&       18.40\\
-Wage inflation      &         223&        1.68&        2.63&       -6.71&       10.26\\
-Price inflation     &         223&        0.39&        3.21&      -10.94&       11.56\\
+1870-1913           &            &            &            &            &            &            \\
+Unemployment rate   &         223&        3.43&        4.08&        2.75&        0.20&       18.40\\
+Wage inflation      &         223&        1.68&        1.68&        2.63&       -6.71&       10.26\\
+Price inflation     &         223&        0.22&        0.39&        3.21&      -10.94&       11.56\\
 \hline
-\textbf{1920-1938}           &            &            &            &            &            \\
-Unemployment rate   &         268&        7.17&        4.99&        0.60&       24.90\\
-Wage inflation      &         268&        1.26&        8.63&      -27.72&       43.97\\
-Price inflation     &         268&       -0.29&        7.23&      -18.45&       30.43\\
+1920-1938           &            &            &            &            &            &            \\
+Unemployment rate   &         268&        5.85&        7.17&        4.99&        0.60&       24.90\\
+Wage inflation      &         268&        0.53&        1.26&        8.63&      -27.72&       43.97\\
+Price inflation     &         268&        0.00&       -0.29&        7.23&      -18.45&       30.43\\
 \hline
-\textbf{1946-1971}           &            &            &            &            &            \\
-Unemployment rate   &         428&        2.60&        1.83&        0.04&        9.92\\
-Wage inflation      &         428&        7.77&        5.10&      -10.78&       35.29\\
-Price inflation     &         428&        4.08&        3.76&       -6.87&       20.38\\
+1946-1971           &            &            &            &            &            &            \\
+Unemployment rate   &         428&        2.07&        2.60&        1.83&        0.04&        9.92\\
+Wage inflation      &         428&        7.07&        7.77&        5.10&      -10.78&       35.29\\
+Price inflation     &         428&        3.23&        4.08&        3.76&       -6.87&       20.38\\
 \hline
-\textbf{1972-1999}           &            &            &            &            &            \\
-Unemployment rate   &         504&        7.07&        4.30&        0.04&       24.21\\
-Wage inflation      &         504&        8.30&        6.27&       -1.42&       32.28\\
-Price inflation     &         504&        6.56&        5.51&       -0.71&       37.88\\
+1972-1999           &            &            &            &            &            &            \\
+Unemployment rate   &         504&        6.63&        7.07&        4.30&        0.04&       24.21\\
+Wage inflation      &         504&        6.68&        8.30&        6.27&       -1.42&       32.28\\
+Price inflation     &         504&        5.03&        6.56&        5.51&       -0.71&       37.88\\
 \hline
-\textbf{2000-2020}           &            &            &            &            &            \\
-Unemployment rate   &         377&        7.05&        3.52&        2.00&       26.09\\
-Wage inflation      &         377&        2.32&        1.84&       -6.14&        7.50\\
-Price inflation     &         377&        1.63&        1.28&       -4.48&        5.57\\
+2000-2020           &            &            &            &            &            &            \\
+Unemployment rate   &         360&        6.36&        7.06&        3.54&        2.00&       26.09\\
+Wage inflation      &         360&        2.52&        2.41&        1.72&       -3.49&        7.50\\
+Price inflation     &         360&        1.73&        1.69&        1.28&       -4.48&        5.57\\
 \hline
-\textbf{Total}               &            &            &            &            &            \\
-Unemployment rate   &        1800&        5.65&        4.12&        0.04&       26.09\\
-Wage inflation      &        1800&        5.05&        6.29&      -27.72&       43.97\\
-Price inflation     &        1800&        3.16&        5.28&      -18.45&       37.88\\
+Total               &            &            &            &            &            &            \\
+Unemployment rate   &        1783&        4.74&        5.64&        4.13&        0.04&       26.09\\
+Wage inflation      &        1783&        3.81&        5.10&        6.30&      -27.72&       43.97\\
+Price inflation     &        1783&        2.33&        3.18&        5.30&      -18.45&       37.88\\
 \hline\hline
 \end{tabular}
-\annote{\footnotesize All statistics are expressed in percent. The war periods (1914-1919 and 1939-1945) and the German hyperinflation episode (1920-1925) are not included. This table only uses \textit{unweighted} country-year observations for which there is data for the unemployment rate, and price and wage inflation. Table \ref{T_Descriptives_Full} presents descriptive statistics for the unrestricted sample.}
 \end{table}
+\annote{\footnotesize All statistics are expressed in percent. The war periods (1914-1919 and 1939-1945) and the German hyperinflation episode (1920-1925) are not included. This table only uses \textit{weighted} by population country-year observations for which there is data for the unemployment rate, and price and wage inflation. Table \ref{T:Descriptives-Full} presents descriptive statistics for the unrestricted sample.}
