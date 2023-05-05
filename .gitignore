@@ -1,0 +1,7 @@
+#Ignore data files
+
+data_replication/psid/proc_data/
+data_replication/psid/raw_data/
+data_replication/scf/proc_data/
+data_replication/scf/raw_data/
+**/Letter*
