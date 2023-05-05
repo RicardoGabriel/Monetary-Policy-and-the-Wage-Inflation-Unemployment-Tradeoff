@@ -2,6 +2,7 @@
 Produce Figure 1
 */
 
+
 quietly{
 * import data
 use "$hp\Data\Data_MScThesis_Analysis.dta", clear
@@ -62,7 +63,94 @@ graph export "$Fig\Median_dwn_unemp_paper.pdf", replace
 
 restore
 
+
+
+
+
+* import data
+use "$hp\Data\Data_MScThesis_Analysis.dta", clear
+set more off
+
+
+
+********************************************************************************
+* Figure 1 estimation - Rolling Window for mean wage inflation and unemployment rate
+********************************************************************************
+
+
+
+* create new program for rolling window estimation
+program drop _all
+program mypanel
+    tsset year
+    gen year1 = r(tmin)
+	foreach v in unemp dlwage{
+    cap noi sum `v' if noval==0
+    gen b_`v' = r(mean)
+    }
+end
+
+
+
+forvalues i=1/18 {
+
+preserve
+
+keep if id==`i'
+
+* set size of rolling window (how many years?)
+local window = 20
+bysort year (id): gen pick = _n == 1
+gen high = cond(pick, year, -99)
+local country = country
+local nwindow = -`window'
+
+* use rangerun command to run rolling window
+rangerun mypanel, interval (year `nwindow' high) verbose
+
+
+********************************************************************************
+* Figure 1 - produce graphism
+********************************************************************************
+
+* Figure for paper
+twoway (line b_dlwage year, lcolor(olive) lwidth(thick)) (line b_unemp year, lcolor(gs4) lpa("-") lwidth(thick)), ytitle("Percent (%)") ///
+legend( c(1) order(1 "Wage Inflation" 2 "Unemployment") ring(0) position(10)) ///
+xlabel(1880(20)2020) xtitle("") xsize(6) ysize(3) scale(1.3)
+graph export "$Fig\Median_dwn_unemp_`country'.pdf", replace
+
+restore
+
 }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Weighted version is too similar
 
 ********************************************************************************
