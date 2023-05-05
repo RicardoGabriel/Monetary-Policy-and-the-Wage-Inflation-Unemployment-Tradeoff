@@ -1,5 +1,7 @@
 #Ignore data files
 
 Revision_EER/Letter_Editor.tex
-**/Letter*
+Revision_EER/Letter_Ref1.tex
+Revision_EER/Letter_Ref2.tex
+
 *.log
