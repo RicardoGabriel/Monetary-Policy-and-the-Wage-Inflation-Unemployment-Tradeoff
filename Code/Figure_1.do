@@ -8,13 +8,15 @@ quietly{
 use "$hp\Data\Data_MScThesis_Analysis.dta", clear
 set more off
 
+replace dlwage = dwn
+
 preserve 
 ********************************************************************************
 * Figure 1 estimation - Rolling Window for mean wage inflation and unemployment rate
 ********************************************************************************
 
-* set size of rolling window (how many years?)
-local window = 10
+* set size of rolling window (20 years)
+local window = 19
 bysort year (id): gen pick = _n == 1
 gen high = cond(pick, year, -99)
 
@@ -64,14 +66,12 @@ graph export "$Fig\Median_dwn_unemp_paper.pdf", replace
 restore
 
 
-
-
-
 * import data
 use "$hp\Data\Data_MScThesis_Analysis.dta", clear
 set more off
 
-
+replace dlwage = dwn
+*replace dlwage =50 if dlwage > 50
 
 ********************************************************************************
 * Figure 1 estimation - Rolling Window for mean wage inflation and unemployment rate
@@ -98,8 +98,8 @@ preserve
 
 keep if id==`i'
 
-* set size of rolling window (how many years?)
-local window = 20
+* set size of rolling window (20 years)
+local window = 19
 bysort year (id): gen pick = _n == 1
 gen high = cond(pick, year, -99)
 local country = country
