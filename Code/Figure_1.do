@@ -71,6 +71,10 @@ use "$hp\Data\Data_MScThesis_Analysis.dta", clear
 set more off
 
 replace dlwage = dwn
+
+* trim beginning of sample for Belgium, Finland, Italy for descriptives purposes
+*replace dlwage = . if (country == "Belgium" & year <= 1921) | (country == "Finland" & year <= 1921)
+
 *replace dlwage =50 if dlwage > 50
 
 ********************************************************************************
@@ -85,7 +89,7 @@ program mypanel
     tsset year
     gen year1 = r(tmin)
 	foreach v in unemp dlwage{
-    cap noi sum `v' if noval==0
+    cap noi sum `v' // if noval==0
     gen b_`v' = r(mean)
     }
 end
