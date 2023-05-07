@@ -652,7 +652,7 @@ These results add a new perspective to the current debate about the existence of
     \centering
     \caption{Panel-OLS 20-year weighted Rolling Window}
     \includegraphics[scale=0.9]{../Output/Figures/RW_dwn_OLS_w}
-    \annote{\footnotesize This figure plots a time-varying estimate of the slope of the wage Phillips curve for two different specifications of Equation \eqref{EQ:Baseline}. In brown, I estimate the parameter $\varphi$  by estimating: $\pi_{c,t}^w = \mu_c + \delta_t + \varphi u_{c,t} + \gamma \pi_{c,t-1}^p + \epsilon_{c,t}$. In blue, I estimate the parameter $\varphi$  by estimating: $\pi_{c,t}^w = \mu_c + \pi_{t+1}^e + \varphi u_{c,t} + \gamma \pi_{c,t-1}^p + \epsilon_{c,t}$. In both specifications I am using Panel-OLS and annual data from 1870 to 2019 for all 18 countries. It is computed based on a rolling OLS regression using a 20-year window with year fixed effects ($\delta_t$) and displays a 90\% confidence band.}
+    \annote{\footnotesize This figure plots a time-varying estimate of the slope of the wage Phillips curve for a weighted version of Equation \eqref{EQ:Baseline}. I am using Panel-OLS and annual data from 1870 to 2019 for all 18 countries. It is computed based on a rolling OLS regression using a 20-year window weighted by population size. It displays a 90\% confidence band.}
     \label{F:RWIV3}
 \end{figure}
 
