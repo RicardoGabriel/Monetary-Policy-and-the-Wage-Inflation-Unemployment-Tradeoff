@@ -14,12 +14,12 @@
 	local path_out "$Fig\"
 *	local suffix "_`=subinstr("`metric'",".","",.)'" // string or empty; file name suffix 
 
+
 	
-	label var dlwage "Wage Inflation"
 	
 	** CONFIGURE PLOT:
 	local metric unemp // metric variable
-	local cuts ///
+	local cuts ///		
 		deciles /// use decile code below instead of explicit cuts
 		///-0.2 -0.1 0 0.1 0.2 0.3 0.4 0.5 /// cbassets_log
 		///-0.20 -0.15 -0.10 -0.05 0 0.05 0.10 0.15 0.20 0.25 0.30 0.35 0.5 /// cbassets_gdp
@@ -61,7 +61,6 @@ use `path_in', clear
 	** EDIT:
 	g metric = `metric'
 	
-
 ** PLOT:
 if "`cuts'" == "deciles" {
 	qui _pctile metric if `subsample', nq(10)
@@ -70,8 +69,7 @@ if "`cuts'" == "deciles" {
 	local decileopts title("Deciles",size(medium))  
 }
 
-local metric dlwage
-heatplot metric country year if `subsample' ///
+heatplot metric country year if `subsample'  ///
 	, xdiscrete ydiscrete scatter(pipe, msize(*2)) ///
 	cuts(`cuts') /// 
 	keylabels(, `decileopts' interval format(%3.2f)) ///

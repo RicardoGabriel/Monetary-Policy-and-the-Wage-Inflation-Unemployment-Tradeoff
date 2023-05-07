@@ -75,6 +75,7 @@ global slides	= 0
 global state 	= "lowflat"
 ********************************************************************************
 
+/*
 
 * Prepare Data with all observations
 global wage_out = 0
@@ -88,13 +89,16 @@ do Descriptives
 do Figure_1
 
 *** Main Analysis
-/*
+
 * Prepare Data without wage variable for outliers and war periods 
 global wage_out = 1
 do Data_Management
 
+*Produce heat plots
+do explore_history
+
 *Produce Rolling Window graphs
-* Figure 2
+* Figure 2 (and remaining robustness figures based on Philips curve estimation)
 do Figure_2
 
 * First Stage Results of Monetary Policy Shocks (Trilemma Instrumental Variable)

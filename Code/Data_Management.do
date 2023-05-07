@@ -133,6 +133,7 @@ foreach v in dlunemp dunemp dlwage dlrcon dlrgdp dlcpi dlriy dstir dltrate dloan
 	gen `v'2=`v'*(1-sevs)
 }
 
+label var dlwage "Wage Inflation"
 
 ********************************************************************************
 * Preparing State-Dependencies (output and unemployment gaps)
