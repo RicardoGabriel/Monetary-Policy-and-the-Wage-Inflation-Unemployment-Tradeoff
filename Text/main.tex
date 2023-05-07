@@ -138,11 +138,13 @@ In addition, Figure \ref{F_median} summarizes the data cross-country trends by p
     \centering
     \caption{Mean wage inflation and unemployment rate}
     \includegraphics[width=\textwidth]{../Output/Figures/Median_dwn_unemp_paper.pdf}
-    \annote{\footnotesize This figure plots a time-varying estimate of the mean wage inflation (solid line) and mean unemployment rate (dashed line) using a 10-year rolling window and the fully matched sample.}
+    \annote{\footnotesize This figure plots a time-varying estimate of the mean wage inflation (solid line) and mean unemployment rate (dashed line) using a 20-year rolling window and the fully matched sample.}
     \label{F_median}
 \end{figure}
 
-Summing up, Figure \ref{F_median} points to a strong negative co-movement between the two variables, which is also corroborated at the country level (see Table \ref{T_Correlation} in the Appendix). Nevertheless, during the Gold Standard and the last twenty years, wage inflation and unemployment series were more stable, suggesting a weaker co-movement and thus, unveiling a potentially time-varying wage inflation-unemployment tradeoff.
+Summing up, Figure \ref{F_median} points to a strong negative co-movement between the two variables, which is also corroborated at the country level (see Table \ref{T_Correlation} in the Appendix). Nevertheless, during the Gold Standard and the last twenty years, wage inflation and unemployment series were more stable, suggesting a weaker co-movement and thus, unveiling a potentially time-varying wage inflation-unemployment tradeoff. 
+
+In the Appendix, Figure \ref{F_median_country} presents the same exercise for each country using the full sample. Despite the level differences, evidence that motivates the use of country-fixed effects in my regression analysis, the pattern does not uncover a specific country driving the statistics and supports the evidence provided in Figure 1 of a negative co-movement between wage inflation and unemployment, even at the country level.
 
 \subsection{Historical Wage Phillips Curves}
 
@@ -152,7 +154,7 @@ To give more structure to the previous exploratory analysis, I turn my attention
     \pi_{c,t}^w = \mu_c + \varphi u_{c,t} + \gamma \pi_{c,t-1}^p + \epsilon_{c,t}
 \end{equation}
 
-where $\pi_{c,t}^w$ denotes the annual wage inflation in country $c$ at time $t$; $\alpha$ is a constant; $u_{c,t}$ denotes the unemployment rate in country $c$ at time $t$; $\pi_{c,t-1}^p$ is the lagged price inflation, the measure by which wages are indexed; and $\epsilon_{c,t}$ is an error term proxying for time-varying cost-push shocks to wages.\footnote{The majority of the literature argues for the use of the unemployment gap instead of its level. However, that approach ignores the problem of measurement error arising from the computation of a natural unemployment rate. In my setting, due to the use of historical data, I believe that the latter poses a bigger threat because it is not possible to use detailed data to get the best estimates of the natural unemployment rate.} The twist of exploring the Phillips curve using a panel approach has been recently explored by \cite{Coibion2019}, \cite{Levy2019}, \cite{DeSchryder2020}, and \cite{Hazell2021} at both national and regional levels. Following the empirical literature, I include time-invariant country fixed effects $\mu_c$. %to account for different local trends. %but do not add year fixed effects.
+where $\pi_{c,t}^w$ denotes the annual wage inflation in the country $c$ at time $t$; $\alpha$ is a constant; $u_{c,t}$ denotes the unemployment rate in the country $c$ at time $t$; $\pi_{c,t-1}^p$ is the lagged price inflation, the measure by which wages are indexed; and $\epsilon_{c,t}$ is an error term proxying for time-varying cost-push shocks to wages.\footnote{The majority of the literature argues for the use of the unemployment gap instead of its level. However, that approach ignores the problem of measurement error arising from the computation of a natural unemployment rate. In my setting, due to the use of historical data, I believe that the latter poses a bigger threat because it is not possible to use detailed data to get the best estimates of the natural unemployment rate.} The twist of exploring the Phillips curve using a panel approach has been recently explored by \cite{Coibion2019}, \cite{Levy2019}, \cite{DeSchryder2020}, and \cite{Hazell2021} at both national and regional levels. Following the empirical literature, I include time-invariant country fixed effects $\mu_c$. %to account for different local trends. %but do not add year fixed effects.
 
 Here, I implicitly assume that, when there is no reoptimization, wages are indexed to ($\pi_{c,t-1}^p$), where $\gamma$ represents the degree of indexation on past price inflation.\footnote{Another possible interpretation is that firms look at the previous period's price inflation as a good measure of inflation expectations, which then affects their decision in changing both their products' prices and workers' wages.} Given an increase in the price level in $t-1$, workers bargain for a higher wage in $t$ due to an increase in the cost of living in $t-1$.\footnote{Table A.3 in the online Appendix corroborates this idea by displaying a correlation between price inflation in $t-1$ and wage inflation in $t$ of more than 0.5 for almost every country.}
 
@@ -553,7 +555,7 @@ These results add a new perspective to the current debate about the existence of
 
 \begin{figure}[ht]
     \centering
-    \caption{Mean wage inflation and unemployment rate across countries} \label{F_median_country}
+    \caption{Wage inflation (solid) and unemployment rate (dash) across countries} \label{F_median_country}
     \begin{subfigure}[b]{0.30\textwidth}
     \caption*{Australia}
     \includegraphics[width=\textwidth]{../Output/Figures/Median_dwn_unemp_Australia.pdf}   
@@ -626,7 +628,7 @@ These results add a new perspective to the current debate about the existence of
     \caption*{United States}
     \includegraphics[width=\textwidth]{../Output/Figures/Median_dwn_unemp_USA.pdf}   
     \end{subfigure} 
-    \annote{\footnotesize These figures plot a time-varying estimate of the mean wage inflation (solid line) and mean unemployment rate (dashed line) using a 10-year rolling window for each country and excluding missing data.}
+    \annote{\footnotesize These figures plot a time-varying estimate of the mean wage inflation (solid line) and mean unemployment rate (dashed line) using a 20-year rolling window for each country.}
 \end{figure}
 
 
@@ -646,6 +648,13 @@ These results add a new perspective to the current debate about the existence of
     \label{F:RWIV2}
 \end{figure}
 
+\begin{figure}[h!]
+    \centering
+    \caption{Panel-OLS 20-year weighted Rolling Window}
+    \includegraphics[scale=0.9]{../Output/Figures/RW_dwn_OLS_w}
+    \annote{\footnotesize This figure plots a time-varying estimate of the slope of the wage Phillips curve for two different specifications of Equation \eqref{EQ:Baseline}. In brown, I estimate the parameter $\varphi$  by estimating: $\pi_{c,t}^w = \mu_c + \delta_t + \varphi u_{c,t} + \gamma \pi_{c,t-1}^p + \epsilon_{c,t}$. In blue, I estimate the parameter $\varphi$  by estimating: $\pi_{c,t}^w = \mu_c + \pi_{t+1}^e + \varphi u_{c,t} + \gamma \pi_{c,t-1}^p + \epsilon_{c,t}$. In both specifications I am using Panel-OLS and annual data from 1870 to 2019 for all 18 countries. It is computed based on a rolling OLS regression using a 20-year window with year fixed effects ($\delta_t$) and displays a 90\% confidence band.}
+    \label{F:RWIV3}
+\end{figure}
 
 \begin{figure}[h!]
     \centering
