@@ -8,7 +8,6 @@ quietly{
 use "$hp\Data\Data_MScThesis_Analysis.dta", clear
 set more off
 
-replace dlwage = dwn
 
 preserve 
 ********************************************************************************
@@ -71,11 +70,6 @@ use "$hp\Data\Data_MScThesis_Analysis.dta", clear
 set more off
 
 replace dlwage = dwn
-
-* trim beginning of sample for Belgium, Finland, Italy for descriptives purposes
-*replace dlwage = . if (country == "Belgium" & year <= 1921) | (country == "Finland" & year <= 1921)
-
-*replace dlwage =50 if dlwage > 50
 
 ********************************************************************************
 * Figure 1 estimation - Rolling Window for mean wage inflation and unemployment rate
