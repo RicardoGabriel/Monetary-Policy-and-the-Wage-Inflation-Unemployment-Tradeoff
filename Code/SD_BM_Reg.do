@@ -452,7 +452,7 @@ foreach x in lunemp {
 		(line F`k'_`y'`x'_`a2'`j' Years, lcolor(dkorange) lwidth(thick)), ///
 		ytitle("", size()) xtitle("", size()) ///
 		graphregion(fcolor(white)) plotregion(color(white)) ylabel(0(5)15) ///
-		legend(off) ysize(1) xsize(2) scale(2.5)
+		legend(off) ysize(1) xsize(2) scale(2)
 		graph export "$Fig\fig_`p`j''_PMBM_F_LPIV`horizon2'_`k'_asym`what'.pdf", replace
 		}
 	}

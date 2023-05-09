@@ -248,7 +248,7 @@ foreach x of local impulse {
 		twoway (bar F`k'_`y'`x'_`p`j'' Years, bcolor(olive) barw(1)), ///
 		ytitle("", size()) xtitle("Year", size()) ///
 		graphregion(fcolor(white)) plotregion(color(white)) ylabel(0(5)15, nogrid) ///
-		legend(off) ysize(1) xsize(2) scale(2.5)
+		legend(off) ysize(1) xsize(2) scale(2)
 		graph export "$Fig\fig_`p`j''_PMBM_F_LPIV`horizon2'_`k'.pdf", replace
 
 		
@@ -263,7 +263,7 @@ foreach x of local impulse {
 		/*title("`t`y''", color(black) size(medsmall))*/ ///
 		ytitle("`ylab_`y''", size()) xtitle("Year", size()) ///
 		graphregion(fcolor(white)) plotregion(color(white)) ylabel(-2(1)1, nogrid) ///
-		/*name(`y'`k'`j'`horizon2', replace)*/ legend(off) scale(2.5) ysize(1.5) xsize(3)
+		/*name(`y'`k'`j'`horizon2', replace)*/ legend(off) scale(2) ysize(1.5) xsize(3)
 		graph export "$Fig\fig_`p`j''_PMBM_LPIV`horizon2'_`k'.pdf", replace
 
 		

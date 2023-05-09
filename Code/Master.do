@@ -89,11 +89,12 @@ do Descriptives
 do Figure_1
 
 *** Main Analysis
-
+*/
 * Prepare Data without wage variable for outliers and war periods 
 global wage_out = 1
 do Data_Management
 
+/*
 *Produce heat plots
 do explore_history
 
@@ -118,24 +119,22 @@ do MP_IRFs_BM
 * Effects of Monetary Policy (as in JST 2020)
 do MP_IRFs
 
+*/
+
 * State Dependent Phillips Multipliers
 * Figure 5 and Table A.7
-do SD_BM
-
-
-* Figure 4
-global state 	= "postwar"
-do SD_BM
+*do SD_BM
 
 
 *** Other Figures in Appendix 
-* Figure A.2 and Table A.6 (unmatched 15 years)
+* Figure A.8 and Table A.8 (unmatched 15 years)
 global hf = 15
 global match = 0
 global state 	= "lowflat"
 do SD_BM
 
 
+/*
 *******************************************************************************
 * Quarterly analysis
 global match = 1
@@ -143,17 +142,33 @@ global wage_out = 1
 do Data_Management_Quarter
 
 * First Stage Results of Monetary Policy Shocks (Trilemma Instrumental Variable)
-*do First_Stage_Quarter
+** Table A.6
+do First_Stage_Quarter
 
 * Phillips Multiplier Quarterly Data
-** Figures 3 a) and 3 b)
-*do PM_BM_Quarter
+** Figures 5 a) and 3 b)
+do PM_BM_Quarter
 
-** Figure 3 c)
-*do MP_IRFs_BM_Quarter
+** Figure 5 c)
+do MP_IRFs_BM_Quarter
 
 
 * State Dependent Phillips Multipliers
-* Figure ?? and Table ??
+* Figure 6 and Table ??
 global state 	= "lowflat"
 do SD_BM_Quarter
+
+
+
+
+
+
+
+
+
+/*
+
+* Graveyard
+* Figure 4
+global state 	= "postwar"
+do SD_BM

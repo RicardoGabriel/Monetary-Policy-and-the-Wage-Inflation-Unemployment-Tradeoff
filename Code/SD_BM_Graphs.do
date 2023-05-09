@@ -124,7 +124,7 @@ foreach x of local impulse {
 		(line zero Years, lcolor(black)), ///
 		/// ylabel(`l`y''(`c`y'')`h`y'', nogrid) ///
 		title("`t`y''", color(black) size(medsmall)) ///
-		ytitle("Percentage Points", size(medsmall)) xtitle("Year", size(medsmall)) ///
+		ytitle("", size(medsmall)) xtitle("Year", size(medsmall)) ///
 		graphregion(fcolor(white)) plotregion(color(white)) ///
 		/*legend(off)*/ legend( c(1) region(ls(none)) size(vsmall) col(2) order(3 4) label(3 "`ta1'") label(4 "`ta2'") ring(0) position(2)) ///	
 		name(`y'`k'`j', replace) nodraw xsize(2) ysize(3) ///
@@ -176,6 +176,25 @@ graph export "$Fig\fig_`p`j''_SDLPIVBM`horizon2'_`k'_asym`what'.pdf", replace
 }
 }
 }
+
+
+********************************************************************************
+* Produce AR p-value graphs
+********************************************************************************
+
+gen pvalue = 0.1
+
+twoway  (bar arph_lwage Years if Years>2 & arph_lwage > 0.1, color(gray)) ///
+		(line pvalue Years) ///
+		(bar arph_lwage Years if Years>2 & arph_lwage <= 0.1, color(dkgreen)) , ///
+		ytitle("p-value", size()) xtitle("Year", size()) ///
+		graphregion(fcolor(white)) plotregion(color(white)) ///
+		legend(off) /*legend( region(ls(none)) size(vsmall) col(1) order(3 4 5) label(3 "Baseline") label(4 "`ta1'") label(5 "`ta2'") )*/ ///
+		scale(2) ysize(1.5) xsize(3) ylab(0(0.2)1) 	
+		graph export "$Fig\fig_`p1'_SDPMBM_LPIV`horizon2'_2_asym`what'_arph.pdf", replace
+
+drop pvalue
+
 
 
 ********************************************************************************
