@@ -52,6 +52,7 @@ local p2 post
 	*use wage inflation rate
 	replace lwage 	= dlwage
 	
+	
 	*generate variables as its change from t+h relative to t-1
 foreach y of local response {
 	forvalues i=0/`horizon2' {
@@ -59,6 +60,23 @@ foreach y of local response {
 		gen `y'`i' = (f`i'.`y' - l.`y') 
 	}
 }
+	
+	/*
+	*generate variables as its change from t+h relative to t+h-1 (non-cumulative IRF)
+foreach y of local response {
+	forvalues i=0/0 {
+		*cap drop `y'`i'
+		gen `y'`i' = (f`i'.`y' - l.`y') 
+	}
+	
+		forvalues i=1/`horizon2' {
+		*cap drop `y'`i'
+		local j = `i' - 1
+		gen `y'`i' = (f`i'.`y' - f`j'.`y') 
+	}
+}
+	*/
+	
 	
 	* x
 	local impulse JSTtrilemmaIV_R
