@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Code\HWPC.log
   log type:  text
- opened on:   9 May 2023, 17:30:14
+ opened on:   9 May 2023, 20:42:58
 
 . clear all
 
@@ -140,17 +140,6 @@ end of do-file
 . 
 . * State Dependent Phillips Multipliers
 . * Figure 5 and Table A.7
-. *do SD_BM
-. 
-. 
-. *** Other Figures in Appendix 
-. * Figure A.8 and Table A.8 (unmatched 15 years)
-. global hf = 15
-
-. global match = 0
-
-. global state    = "lowflat"
-
 . do SD_BM
 
 . /*

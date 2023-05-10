@@ -139,7 +139,9 @@ foreach x in lunemp {
 		forvalues k=2/2 {
 		
 		preserve
-		twoway (rarea up`k'_`y'`x'_`p`j'' dn`k'_`y'`x'_`p`j''  Years if Years>2,  ///
+		twoway (rarea up`k'_`y'`x'_`a1'`j' dn`k'_`y'`x'_`a1'`j'  Years if Years>2,  ///
+		fcolor(gs15) lcolor(gs15) lw(none) lpattern(solid))  ///
+		(rarea up`k'_`y'`x'_`a2'`j' dn`k'_`y'`x'_`a2'`j'  Years if Years>2,  ///
 		fcolor(gs15) lcolor(gs15) lw(none) lpattern(solid))  ///
 		(line b`k'_`y'`x'_`p`j'' Years if Years>2, lcolor(olive) ///
 		lpattern(solid) lwidth(thick)) ///

@@ -123,9 +123,9 @@ do MP_IRFs
 
 * State Dependent Phillips Multipliers
 * Figure 5 and Table A.7
-*do SD_BM
+do SD_BM
 
-
+/*
 *** Other Figures in Appendix 
 * Figure A.8 and Table A.8 (unmatched 15 years)
 global hf = 15
