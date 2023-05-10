@@ -165,7 +165,7 @@ Figure \ref{F:RWIV} shows the time-varying estimates of its slope $(\varphi)$ ba
     \centering
     \caption{Panel-OLS 20-year Rolling Window}
     \includegraphics[scale=1]{../Output/Figures/RW_dwn_OLS}
-    \annote{\footnotesize This figure plots a time-varying estimate of the slope of the wage Phillips curve (parameter $\varphi$, in Equation \eqref{EQ:Baseline}), using OLS and annual data from 1870 to 2019 for all 18 countries. It is computed based on a rolling OLS regression using a 20-year window and displays a 90\% confidence band. In the Appendix, Figure \ref{F:RWIV_gamma} shows the estimate for the persistence coefficient ($\gamma$) while Figure \ref{F:RWIV2} presents the same regression when adding year fixed effects.}
+    \annote{\footnotesize This figure plots a time-varying estimate of the slope of the wage Phillips curve (parameter $\varphi$, in Equation \eqref{EQ:Baseline}), using OLS and annual data from 1870 to 2019 for all 18 countries. It is computed based on a rolling OLS regression using a 20-year window and displays a 90\% confidence band. In the Appendix, Figure \ref{F:RWIV_gamma} shows the estimate for the persistence coefficient ($\gamma$); Figure \ref{F:RWIV2} presents the same regression when adding year fixed effects; and Figure \ref{F:RWIV3} presents a population-weighted version of this same graph.}
     \label{F:RWIV}
 \end{figure}
 
@@ -268,9 +268,9 @@ Figure \ref{F:Dynamics} decomposes the Phillips multiplier into the response of 
 
 %\clearpage
 
-\subsection{The Phillips multiplier is different across sub-samples}
+\subsection{The Phillips multiplier is smaller in a low inflation environment}
 
-Building on the previous Phillips multiplier analysis, I can test whether the wage inflation-unemployment tradeoff is different across different sub-samples. The baseline specification is thus augmented to include an interaction term. Therefore, in the remaining exercises, I estimate a state-dependent Phillips multiplier as follows:
+Building on the previous Phillips multiplier analysis, I can test whether the wage inflation-unemployment tradeoff is different across different sub-samples and in particular weaker in times of low inflation. The baseline specification is thus augmented to include an interaction term; a state-dependent Phillips multiplier as follows:
 
 \begin{equation} \label{EQ:MULT_State}
 \begin{split}
@@ -279,44 +279,7 @@ Building on the previous Phillips multiplier analysis, I can test whether the wa
 \end{split}
 \end{equation}
 
-where $\mathcal{I}_{c,t}$ is the indicator variable different for each sub-sample analysis. This exercise allows comparing the evolution of the Phillips multiplier in each sub-sample and directly test whether $\mathcal{P}_h^{(\mathcal{I})} = \mathcal{P}_h^{(1-\mathcal{I})}$.
-
-\subsubsection{The Phillips multiplier is smaller during the Gold Standard and the last 20 years}
-
-Motivated by Figure \ref{F:RWIV}, I now test in a more robust empirical setting whether the wage inflation-unemployment tradeoff is different across sub-samples. To be precise, I am going to aggregate the years where inflation was more credibly anchored - the last 20 years (2000-2019) and the Gold Standard epoch (1870-1913) - and compare them against the post-war period (1946-1999) leaving the between-war period (1920-1938) out of this analysis.
-
-Therefore, I estimate equation \ref{EQ:MULT_State} where $\mathcal{I}_{c,t}$ is an indicator of the post-war period defined as a dummy variable, which is equal to 1 for the years between 1946 and 1999 and equal to 0 for the years where inflation was more credibly anchored. This exercise allows comparing the evolution of the Phillips multiplier in these sub-samples and directly test whether $\mathcal{P}_h^{(\mathcal{I})} = \mathcal{P}_h^{(1-\mathcal{I})}$.
-
-Figure \ref{F2:Multiplier_GS} displays the estimates of both the baseline and state-dependent Phillips multipliers over a 10-year horizon (Figure \ref{F2:Multiplier_M_GS}), their F-statistics (Figure \ref{F2:Multiplier_F_GS}), and their underlying impulse responses (Figure \ref{F2:Dynamics_GS}) in the historical sub-samples.
-
-\begin{figure}[h!]
-    \centering
-	\caption{State-Dependent Phillips multiplier and IRFs}
-	\label{F2:Multiplier_GS}
-	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{Phillips multiplier}
-		\label{F2:Multiplier_M_GS}
-		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_SDPMBM_LPIV10_2_asym_postwar.pdf}	
-	\end{subfigure}
-	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{F-Statistic}
-		\label{F2:Multiplier_F_GS}
-		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_PMBM_F_LPIV10_2_asym_postwar.pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.9\textwidth}
-		\caption{Impulse Responses}
-		\label{F2:Dynamics_GS}
-		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_SDLPIVBM10_2_asym_postwar.pdf}
-		\end{subfigure}
-		\annote{Phillips multiplier estimated using the trilemma IV as instrument according to Equation \eqref{EQ:MULT}. For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator. The F-statistics (upper-right) are computed as discussed in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets. Across all figures, one can distinguish the state by its color and shape, a short-dashed orange shape for the period with more credible anchored inflation (1870-1913 \& 2000-2019) and a long-dashed green shape for the post-war period (1946-1999).}
-	
-\end{figure}
-
-Figure \ref{F2:Multiplier_M_GS} displays a bigger Phillips multiplier for the post-war period. Its difference becomes statistically significant from horizon $t=7$ onward with the weak instrument robust Anderson-Rubin p-values being 0.031, 0.019, 0.025, and 0.089 for horizons 7, 8, 9, and 10 respectively.\footnote{See Table \ref{T:SDPM_GS} in the Appendix for a more detailed description of this result.} This result is in line with the idea put forward by Figure \ref{F:RWIV} in which we see that the correlation between unemployment and wage inflation is weaker in the last 20 years and during the Gold Standard.
-
-Figure \ref{F2:Dynamics_GS} indicates that the wage inflation response is the main driver of the weaker tradeoff in the credible inflation anchor periods. Although the average unemployment rate response is virtually identical in both the baseline and the state dependencies for longer horizons, the average wage inflation response is muted for longer horizons.
-
-\subsubsection{The Phillips multiplier is smaller in a low inflation environment}
+where $\mathcal{I}_{c,t}$ is the indicator variable. This exercise allows comparing the evolution of the Phillips multiplier in each sub-sample and directly test whether $\mathcal{P}_h^{(\mathcal{I})} = \mathcal{P}_h^{(1-\mathcal{I})}$.
 
 Research on the wage inflation-unemployment tradeoff, traditionally inferred from a Phillips curve, pointed to the hypothesis that  an increase (decrease) in trend inflation should lead to an increase (decrease) in the frequency of price adjustment, thereby decreasing (increasing) the steepness of the wage Phillips curve \citep{Benati2007}.
 
@@ -357,13 +320,13 @@ These two exercises together lend empirical substance to the concern that moneta
 
 \subsection{Disentangling the low-price inflation motive from the monetary regime}
 
-The previous two exercises show evidence consistent with the key message of this paper. First, the Phillips multiplier is smaller during the Gold Standard and the last 20 years (Figure \ref{F2:Multiplier_GS}) which are periods associated with lower average price inflation (Table \ref{T:Descriptives}). Second, the Phillips multiplier is smaller when monetary policy is implemented following periods of low and stable inflation (Figure \ref{F2:Multiplier}).
+The previous exercise presents evidence consistent with the key message of this paper: The Phillips multiplier is smaller when monetary policy is implemented following periods of low and stable inflation (Figure \ref{F2:Multiplier}).
 
-Notwithstanding, these exercises do not allow us to distinguish whether the state-dependent effects of monetary policy for different inflation environments (low or high) are driven or not by different sample periods. That is because different sample periods could capture different monetary policy regimes and hence different Phillips multipliers.
+Notwithstanding, this exercise does not allow us to distinguish whether the state-dependent effects of monetary policy for different inflation environments (low or high) are driven or not by different sample periods. That is because different sample periods could capture different monetary policy regimes and hence different multipliers due to the monetary policy regime.
 
-To be more precise about the low inflation mechanism I put forward in this paper, I first run a robustness check by accounting for different monetary policy regimes. I then conduct a thorough analysis using higher frequency data using data since 1995 for 17 out of 18 countries in the baseline sample, to evaluate whether within the same monetary policy regime the low inflation motive is still present.
+To be more precise on the low inflation mechanism I put forward, I first run a robustness check where I account for different monetary policy regimes. I then conduct a thorough analysis using higher frequency data using data since 1995 for 17 out of 18 countries in the baseline sample, to evaluate whether within the same monetary policy regime the low inflation motive is still present.
 
-For the first exercise, I identified different monetary policy regimes as described in Appendix \ref{SS_HistoricalPeriods} and summarized in Table \ref{T_HistoricalPeriodsSource1}. I then add a Monetary Policy regime dummy when estimating equations \eqref{EQ:MULT} and \eqref{EQ:MULT_State} to capture structural differences that are common across countries in the same MP regime. Results... 
+For this first exercise, I identified different monetary policy regimes as described in Appendix \ref{SS_HistoricalPeriods} and summarized in Table \ref{T_HistoricalPeriodsSource1}. I then add a Monetary Policy regime dummy when estimating equations \eqref{EQ:MULT} and \eqref{EQ:MULT_State} to capture structural differences that are common across countries in the same MP regime. Results... 
 
 For the second exercise, I start by collecting higher frequency data for the same set of baseline countries. I was able to compile information for 17 out of 18 countries, excluding Switzerland, from the Federal Reserve Economic Data (FRED) at the quarter level since 1995. Then, I estimate equation \eqref{EQ:MULT}, using the non-residualized version of the instrument defined by Equation \eqref{EQ:trilemmaIV}.
 
@@ -505,21 +468,10 @@ These results add a new perspective to the current debate about the existence of
 \vspace{1ex}
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \input{Output/Tables/First_Stage_Quarter}
-\annote{This table presents the first-stage estimates of the trilemma IV on the country's interest rate for quarterly data. The standard errors are in parentheses and the T-statistics are in square brackets. The full sample covers 1995q1–2019q4. The estimates in the last column (with controls) include country fixed effects and two lags of wage inflation and unemployment rate. In addition, I include world GDP growth to capture global cycles.}
+\annote{This table presents the first-stage estimates of the trilemma IV on the country's interest rate for quarterly data. The standard errors are in parentheses and the T-statistics are in square brackets. The full sample covers 1995q1–2019q4. The estimates in the last column (with controls) include country-fixed effects and two lags of wage inflation and unemployment rate. In addition, I include world GDP growth to capture global cycles.}
 \end{table}
 
 \begin{singlespace}
-\begin{table}[ht]
-\footnotesize
-\centering
-\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\caption{Estimates of multipliers across sub-samples \label{T:SDPM_GS}}
-\input{../Output/Tables/Table_asym_postwar_10_1_fix.tex}
-\annote{\footnotesize This table presents the multiplier estimates corresponding to the ones in Figure \ref{F2:Multiplier_M_GS}. The values in parentheses under the multipliers indicate the corresponding standard errors. The last column indicates the weak instrument robust Anderson-Rubin p-values for the difference in multipliers across states.}
-\end{table}
-
-
-
 \begin{table}[ht]
 \footnotesize
 \centering
@@ -529,8 +481,6 @@ These results add a new perspective to the current debate about the existence of
 \annote{\footnotesize This table presents the multiplier estimates corresponding to the ones in Figure \ref{F2:Multiplier_M}. The values in parentheses under the multipliers indicate the corresponding standard errors. The last column indicates the weak instrument robust Anderson-Rubin p-values for the difference in multipliers across states.}
 \end{table}
 
-
-
 \begin{table}[ht]
 \footnotesize
 \centering
@@ -539,7 +489,6 @@ These results add a new perspective to the current debate about the existence of
 \input{../Output/Tables/Table_asym_lowflat_15_0.tex}
 \annote{\footnotesize This table presents the multiplier estimates corresponding to the ones in Figure \ref{F2:Multiplier_MM}. The values in parentheses under the multipliers indicate the standard errors. The last column indicates the weak instrument robust Anderson-Rubin p-values for the difference in multipliers across states.}
 \end{table}
-\end{singlespace}
 
 \clearpage
 
@@ -663,7 +612,7 @@ These results add a new perspective to the current debate about the existence of
 	\begin{subfigure}[b]{0.75\textwidth}
 		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_LPIV10_2.pdf}
 	\end{subfigure}
-\annote{These impulse responses for cumulative unemployment and cumulative wage inflation are obtained from the OLS regressions \eqref{EQ:IRF} by changing the dependent variable from the average $\dfrac{1}{h} \sum^h_{j=0} y_{c,t+j}$ to the difference $y_{c,t+j}-y_{c,t+1}$. They display 90\% confidence sets and show the temporary effect of the monetary policy shock to unemployment and the persistent effect to the wage inflation (in line with the persistent effect to price inflation in \cite{Jorda2019}).}
+\annote{These impulse responses for cumulative unemployment and cumulative wage inflation are obtained from the OLS regressions \eqref{EQ:IRF} by changing the dependent variable from the average $\dfrac{1}{h} \sum^h_{j=0} y_{c,t+j}$ to the difference $y_{c,t+j}-y_{c,t-1}$. They display 90\% confidence sets and show the temporary effect of the monetary policy shock to unemployment and the persistent effect to the wage inflation (in line with the persistent effect to price inflation in \cite{Jorda2019}).}
 \end{figure}
 
 \begin{figure}[h!]
@@ -940,6 +889,57 @@ Norway and Sweden pegged their currency to the ECU in 1990 and 1991, respectivel
 %According to \cite{Berg1999}, Sweden had experienced similar inflation targeting from 1931 to 1937, thereby attempting to mimic the price stabilization features of the gold standard while eliminating the volatility produced by shocks to the gold market.
 
 \input{../Output/Tables/Table_DataSource_Fix.tex}
+
+
+
+Gold Standard Exercise 
+
+\subsubsection{The Phillips multiplier is smaller during the Gold Standard and the last 20 years}
+
+Motivated by Figure \ref{F:RWIV}, I now test in a more robust empirical setting whether the wage inflation-unemployment tradeoff is different across sub-samples. To be precise, I am going to aggregate the years where inflation was more credibly anchored - the last 20 years (2000-2019) and the Gold Standard epoch (1870-1913) - and compare them against the post-war period (1946-1999) leaving the between-war period (1920-1938) out of this analysis.
+
+Therefore, I estimate equation \ref{EQ:MULT_State} where $\mathcal{I}_{c,t}$ is an indicator of the post-war period defined as a dummy variable, which is equal to 1 for the years between 1946 and 1999 and equal to 0 for the years where inflation was more credibly anchored. This exercise allows comparing the evolution of the Phillips multiplier in these sub-samples and directly test whether $\mathcal{P}_h^{(\mathcal{I})} = \mathcal{P}_h^{(1-\mathcal{I})}$.
+
+Figure \ref{F2:Multiplier_GS} displays the estimates of both the baseline and state-dependent Phillips multipliers over a 10-year horizon (Figure \ref{F2:Multiplier_M_GS}), their F-statistics (Figure \ref{F2:Multiplier_F_GS}), and their underlying impulse responses (Figure \ref{F2:Dynamics_GS}) in the historical sub-samples.
+
+\begin{figure}[h!]
+    \centering
+	\caption{State-Dependent Phillips multiplier and IRFs}
+	\label{F2:Multiplier_GS}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{Phillips multiplier}
+		\label{F2:Multiplier_M_GS}
+		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_SDPMBM_LPIV10_2_asym_postwar.pdf}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{F-Statistic}
+		\label{F2:Multiplier_F_GS}
+		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_PMBM_F_LPIV10_2_asym_postwar.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.9\textwidth}
+		\caption{Impulse Responses}
+		\label{F2:Dynamics_GS}
+		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_SDLPIVBM10_2_asym_postwar.pdf}
+		\end{subfigure}
+		\annote{Phillips multiplier estimated using the trilemma IV as instrument according to Equation \eqref{EQ:MULT}. For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator. The F-statistics (upper-right) are computed as discussed in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets. Across all figures, one can distinguish the state by its color and shape, a short-dashed orange shape for the period with more credible anchored inflation (1870-1913 \& 2000-2019) and a long-dashed green shape for the post-war period (1946-1999).}
+	
+\end{figure}
+
+Figure \ref{F2:Multiplier_M_GS} displays a bigger Phillips multiplier for the post-war period. Its difference becomes statistically significant from horizon $t=7$ onward with the weak instrument robust Anderson-Rubin p-values being 0.031, 0.019, 0.025, and 0.089 for horizons 7, 8, 9, and 10 respectively.\footnote{See Table \ref{T:SDPM_GS} in the Appendix for a more detailed description of this result.} This result is in line with the idea put forward by Figure \ref{F:RWIV} in which we see that the correlation between unemployment and wage inflation is weaker in the last 20 years and during the Gold Standard.
+
+Figure \ref{F2:Dynamics_GS} indicates that the wage inflation response is the main driver of the weaker tradeoff in the credible inflation anchor periods. Although the average unemployment rate response is virtually identical in both the baseline and the state dependencies for longer horizons, the average wage inflation response is muted for longer horizons.
+
+\begin{table}[ht]
+\footnotesize
+\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Estimates of multipliers across sub-samples \label{T:SDPM_GS}}
+\input{../Output/Tables/Table_asym_postwar_10_1_fix.tex}
+\annote{\footnotesize This table presents the multiplier estimates corresponding to the ones in Figure \ref{F2:Multiplier_M_GS}. The values in parentheses under the multipliers indicate the corresponding standard errors. The last column indicates the weak instrument robust Anderson-Rubin p-values for the difference in multipliers across states.}
+\end{table}
+
+\end{singlespace}
+
 
 \end{comment}
 
