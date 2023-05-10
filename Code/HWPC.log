@@ -1,8 +1,11 @@
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------
       name:  <unnamed>
-       log:  C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Code\HWPC.log
+       log:  C:\Users\ricar\Dropbox\Apps
+> \GitHub\Monetary-Policy-and-the-Wage-I
+> nflation-Unemployment-Tradeoff\Code\HW
+> PC.log
   log type:  text
- opened on:   9 May 2023, 20:42:58
+ opened on:  10 May 2023, 16:00:55
 
 . clear all
 
@@ -10,63 +13,102 @@
 
 . set scheme s1color
 
-. graph set window fontface "Linux Biolinum O"        // set default font (window)
+. graph set window fontface "Linux Bioli
+> num O"        // set default font (win
+> dow)
 
-. graph set window fontfacesans "Linux Biolinum O"    // set default sans font (window)
+. graph set window fontfacesans "Linux B
+> iolinum O"    // set default sans font
+>  (window)
 
-. graph set window fontfaceserif "Linux Libertine O"  // set default serif font (window)
+. graph set window fontfaceserif "Linux 
+> Libertine O"  // set default serif fon
+> t (window)
 
-. graph set window fontfacemono "DejaVu Sans Mono"    // set default mono font (window)
+. graph set window fontfacemono "DejaVu 
+> Sans Mono"    // set default mono font
+>  (window)
 
 . 
 . 
-. ********************************************************************************
+. **************************************
+> **************************************
+> ****
 . * Control Panel
-. ********************************************************************************
+. **************************************
+> **************************************
+> ****
 . 
-. * Master - choose number of horizons for the IRFs
+. * Master - choose number of horizons f
+> or the IRFs
 . global hf               = 10
 
 . 
-. * Choose number of horizons for the quarterly IRFs
+. * Choose number of horizons for the qu
+> arterly IRFs
 . global hfq              = 40
 
 . 
-. * Master - choose number of lags for the IRFs
+. * Master - choose number of lags for t
+> he IRFs
 . global lags     = 2
 
 . global lagsq    = 4
 
 . 
-. * Master - use matched sample (that is, all horizons with same # obs)
+. * Master - use matched sample (that is
+> , all horizons with same # obs)
 . global match    = 1
 
 . 
-. * Master - estimation of AR conf bands: set number of gridpoints and conf level
+. * Master - estimation of AR conf bands
+> : set number of gridpoints and conf le
+> vel
 . global gridd    = 100
 
 . global levell   = 90
 
 . 
-. * Master - choose whether outlier is identified when wage inflation is above 50% in absolute value (fifty=1)
-. *                  or when it is either in top or bottom 1% of the sample (fifty=0) - robustness check
+. * Master - choose whether outlier is i
+> dentified when wage inflation is above
+>  50% in absolute value (fifty=1)
+. *                  or when it is eithe
+> r in top or bottom 1% of the sample (f
+> ifty=0) - robustness check
 . global fifty    = 1
 
 . 
-. * Master - produce figure for slides (slides==1) or for paper (slides==0)
+. * Master - produce figure for slides (
+> slides==1) or for paper (slides==0)
 . global slides   = 0
 
 . 
-. * Master - asymmetry specifications, choose one at a time from the following list
-.         * lowflat       -       low vs high cpi inflation
-.         * boombust      -       bust vs boom in the economy (negative or positive unemployment gap using an hp filter)
-.         * negpos        -       negative vs positive change in short run interest rate 
-.         * tradeoc       -       degree of trade openess (more vs less) measured by having more than 40% of (imports+exports) / gdp (40% is close to mean and median)
-.         * capitaloc     -       degree of capital openess (open vs close) measured as in Quinn et al. (2011)
+. * Master - asymmetry specifications, c
+> hoose one at a time from the following
+>  list
+.         * lowflat       -       low vs
+>  high cpi inflation
+.         * boombust      -       bust v
+> s boom in the economy (negative or pos
+> itive unemployment gap using an hp fil
+> ter)
+.         * negpos        -       negati
+> ve vs positive change in short run int
+> erest rate 
+.         * tradeoc       -       degree
+>  of trade openess (more vs less) measu
+> red by having more than 40% of (import
+> s+exports) / gdp (40% is close to mean
+>  and median)
+.         * capitaloc     -       degree
+>  of capital openess (open vs close) me
+> asured as in Quinn et al. (2011)
 .         * postwar   -   d
 . global state    = "lowflat"
 
-. ********************************************************************************
+. **************************************
+> **************************************
+> ****
 . 
 . /*
 > 
@@ -83,85 +125,64 @@
 > 
 > *** Main Analysis
 > */
-. * Prepare Data without wage variable for outliers and war periods 
+. * Prepare Data without wage variable f
+> or outliers and war periods 
 . global wage_out = 1
 
 . do Data_Management
 
 . quietly{
+--Break--
+--Break--
+--Break--
+--Break--
+r(1);
 
-. 
-. ********************************************************************************
-. * Saving the Data
-. ********************************************************************************
-. xtset id year
-       panel variable:  id (strongly balanced)
-        time variable:  year, 1870 to 2019
-                delta:  1 year
+end of do-file
+--Break--
+r(1);
 
-. 
-. drop if year>=2020
-(0 observations deleted)
-
-. 
-. save "$hp\Data\Data_MScThesis_Analysis.dta", replace
-file C:\Users\ricar\Dropbox\Apps\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\\Data\Data_MScThesis_Analysis.dta saved
-
-. 
 end of do-file
 
-. 
-. /*
-> *Produce heat plots
-> do explore_history
-> 
-> *Produce Rolling Window graphs
-> * Figure 2 (and remaining robustness figures based on Philips curve estimation)
-> do Figure_2
-> 
-> * First Stage Results of Monetary Policy Shocks (Trilemma Instrumental Variable)
-> ** Table 3
-> do First_Stage                  
-> 
-> 
-> * Phillips Multiplier
-> ** Figures 3 a) and 3 b)
-> do PM_BM
-> 
-> 
-> ** Figure 3 c)
-> do MP_IRFs_BM
-> 
-> ** Figure A.1
-> * Effects of Monetary Policy (as in JST 2020)
-> do MP_IRFs
-> 
-> */
-. 
-. * State Dependent Phillips Multipliers
-. * Figure 5 and Table A.7
-. do SD_BM
+--Break--
+r(1);
+
+. order dlcpi
+
+. order dp
+
+. do "C:\Users\ricar\Dropbox\Apps\GitHub
+> \Monetary-Policy-and-the-Wage-Inflatio
+> n-Unemployment-Tradeoff\Code\SD_BM.do"
 
 . /*
-> State Dependencies - Monetary Policy and the Wage-Inflation Unemployment Trade-off
+> State Dependencies - Monetary Policy a
+> nd the Wage-Inflation Unemployment Tra
+> de-off
 > 
-> SD Phillips Multiplier and IRFs close to Barnichon and Mesters (2020):
-> Adding two lags of unemployment and wage inflation but also country 
+> SD Phillips Multiplier and IRFs close 
+> to Barnichon and Mesters (2020):
+> Adding two lags of unemployment and wa
+> ge inflation but also country 
 > fixed effects and global gdp growth.
 > 
 > Author: Ricardo Duque Gabriel
 > First Date: 15/11/2020
 > Last Update: 04/05/2022
 > 
-> Calls SD_BM_Reg.do and Sd_BM_Graphs.do to produce Figures 3 and A.3 and table A.4
-> according to different specifications as called in Master.do file
+> Calls SD_BM_Reg.do and Sd_BM_Graphs.do
+>  to produce Figures 3 and A.3 and tabl
+> e A.4
+> according to different specifications 
+> as called in Master.do file
 > */
 . 
 . clear all
 
 . 
 . * Upload data
-. use "$hp\Data\Data_MScThesis_Analysis.dta", clear
+. use "$hp\Data\Data_MScThesis_Analysis.
+> dta", clear
 
 . 
 . * Call chosen state

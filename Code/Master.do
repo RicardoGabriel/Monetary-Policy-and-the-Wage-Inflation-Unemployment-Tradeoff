@@ -89,12 +89,12 @@ do Descriptives
 do Figure_1
 
 *** Main Analysis
-*/
+
 * Prepare Data without wage variable for outliers and war periods 
 global wage_out = 1
 do Data_Management
 
-/*
+
 *Produce heat plots
 do explore_history
 
@@ -119,13 +119,13 @@ do MP_IRFs_BM
 * Effects of Monetary Policy (as in JST 2020)
 do MP_IRFs
 
-*/
+
 
 * State Dependent Phillips Multipliers
 * Figure 5 and Table A.7
 do SD_BM
 
-/*
+
 *** Other Figures in Appendix 
 * Figure A.8 and Table A.8 (unmatched 15 years)
 global hf = 15
@@ -134,6 +134,11 @@ global state 	= "lowflat"
 do SD_BM
 
 
+* Robustness Test of adding monetary policy regimes
+
+
+
+*/
 /*
 *******************************************************************************
 * Quarterly analysis

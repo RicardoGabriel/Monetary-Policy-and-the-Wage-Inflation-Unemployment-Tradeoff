@@ -482,11 +482,11 @@ foreach x in lunemp {
 * Heat map sample
 ********************************************************************************
 
-replace dlcpihi = . if sample == 0
+replace dlcpilo = . if sample == 0
 
 	** CONFIGURE Heat map for sample used in trilemma:
 	
-	local metric dlcpihi // metric variable
+	local metric dlcpilo // metric variable
 	local cuts ///		
 		0.5
 		

@@ -21,6 +21,7 @@ replace p1=1 if iso=="DNK" & year<=1917 & year>=1876
 replace p1=1 if iso=="FIN" & year<=1914 & year>=1877
 replace p1=1 if iso=="FRA" & year<=1914 & year>=1878
 replace p1=1 if iso=="DEU" & year<=1914 & year>=1871
+replace p1=1 if iso=="IRL" & year<=1914 & year>=1880
 replace p1=1 if iso=="ITA" & year<=1917 & year>=1884
 replace p1=1 if iso=="JPN" & year<=1917 & year>=1897
 replace p1=1 if iso=="NLD" & year<=1914 & year>=1875
@@ -56,6 +57,7 @@ replace p3=1 if iso=="DNK" & year<=1971 & year>=1946
 replace p3=1 if iso=="FIN" & year<=1971 & year>=1948
 replace p3=1 if iso=="FRA" & year<=1971 & year>=1946
 replace p3=1 if iso=="DEU" & year<=1971 & year>=1952
+replace p3=1 if iso=="IRL" & year<=1971 & year>=1957
 replace p3=1 if iso=="ITA" & year<=1971 & year>=1947
 replace p3=1 if iso=="JPN" & year<=1971 & year>=1952
 replace p3=1 if iso=="NLD" & year<=1971 & year>=1946 
@@ -80,6 +82,7 @@ replace p5=1 if iso=="DNK" & year>=1986
 replace p5=1 if iso=="FIN" & year>=1995
 replace p5=1 if iso=="FRA" & year>=1986
 replace p5=1 if iso=="DEU" & year>=1986
+replace p5=1 if iso=="IRL" & year>=1986
 replace p5=1 if iso=="ITA" & year>=1986
 replace p5=1 if iso=="JPN" & year>=1987
 replace p5=1 if iso=="NLD" & year>=1986
