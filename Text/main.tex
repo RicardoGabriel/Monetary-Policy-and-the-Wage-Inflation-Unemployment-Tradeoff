@@ -326,34 +326,15 @@ Notwithstanding, this exercise does not allow us to distinguish whether the stat
 
 To be more precise on the low inflation mechanism I put forward, I first run a robustness check where I account for different monetary policy regimes. I then conduct a thorough analysis using higher frequency data using data since 1995 for 17 out of 18 countries in the baseline sample, to evaluate whether within the same monetary policy regime the low inflation motive is still present.
 
-For this first exercise, I identified different monetary policy regimes as described in Appendix \ref{SS_HistoricalPeriods} and summarized in Table \ref{T_HistoricalPeriodsSource1}. I then add a Monetary Policy regime dummy when estimating equations \eqref{EQ:MULT} and \eqref{EQ:MULT_State} to capture structural differences that are common across countries in the same MP regime. Results... 
+The first exercise has the goal of capturing structural differences that are common across countries in the same monetary policy regimes. I start by identifying different monetary policy regimes as described in Appendix \ref{SS_HistoricalPeriods} and summarized in Table \ref{T_HistoricalPeriodsSource1}. I then add different monetary policy regime dummies when estimating equations \eqref{EQ:MULT} and \eqref{EQ:MULT_State} which differ across countries according to Table \ref{T_HistoricalPeriodsSource1}. I do so for the following regimes: Gold Standard; Interwar and Bretton Woods; and Implicit Inflation Targeting. When doing so, the number of estimated coefficients increases and thus, the uncertainty around the estimates also increases. Nevertheless, Table \ref{T:SDPM_MP} qualitatively corroborates the same finding that when monetary policy is implemented in periods of low inflation, the tradeoff between wage inflation and unemployment is weaker.
 
-For the second exercise, I start by collecting higher frequency data for the same set of baseline countries. I was able to compile information for 17 out of 18 countries, excluding Switzerland, from the Federal Reserve Economic Data (FRED) at the quarter level since 1995. Then, I estimate equation \eqref{EQ:MULT}, using the non-residualized version of the instrument defined by Equation \eqref{EQ:trilemmaIV}.
+\paragraph{Addressing external validity by focusing on one monetary policy regime and using higher frequency data.}
 
-In many ways, this exercise is a replication of \cite{Barnichon2019} Phillips multiplier computation based on their Proposition 1 (equation 4) differing in three dimensions. First, I am analyzing a panel of countries in a fixed exchange rate regime instead of the United States and the United Kingdom separately. Second, I based my identification on the trilemma of international finance instead of narrative identification to characterize monetary policy shocks. Finally, my sample is based on the period between 1995q1 and 2019q4, incorporating the Great Recession Period but excluding the Covid pandemic. Like \cite{Barnichon2019}, I use quarterly data, include four lags of inflation and unemployment as control variables, and rely on weak instrument robust methods for computing the confidence sets for the Phillips multiplier \citep{Anderson1949}.
+For the second exercise, I start by collecting higher frequency data for the same set of baseline countries. I was able to compile information for 17 out of 18 countries, excluding Switzerland, from the Federal Reserve Economic Data (FRED) at the quarter level since 1995. Then, I estimate equation \eqref{EQ:MULT}, using the non-residualized version of the instrument defined by Equation \eqref{EQ:trilemmaIV}, keeping the same horizon of 10 years (40 quarters) and using a matched sample.
 
-\begin{figure}[h!]
-    \centering
-	\caption{Phillips multiplier and IRFs}
-	\label{F:Multiplie}
-	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{Phillips multiplier}
-		\label{F:Multiplier_M}
-		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_PMBM_LPIV40_2_Quarter.pdf}	
-	\end{subfigure}
-	\begin{subfigure}[b]{0.45\textwidth}
-		\caption{F-Statistic}
-		\label{F:Multiplier_F}
-		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_PMBM_F_LPIV40_2_Quarter.pdf}
-	\end{subfigure}
-	\begin{subfigure}[b]{0.9\textwidth}
-		\caption{Impulse Responses}
-		\label{F:Dynamics}
-		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_LPIVBM40_2_Quarter.pdf}
-		\end{subfigure}
-		\annote{Phillips multiplier estimations using the trilemma IV as an instrument, using a matched sample of 465 quarterly observations between 1995q1 and 2019q1, and controlling for two lags of unemployment and wage inflation, country fixed effects, and world GDP growth as explained in Equation \eqref{EQ:MULT}. For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator, while the dashed lines correspond to the two-sided 90\% Anderson-Rubin confidence sets robust to weak instruments. The F-statistics (upper-right) are computed using the method presented in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and \textit{average} unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets.}
-	
-\end{figure}
+In many ways, this exercise is a replication of \cite{Barnichon2019} based on their Proposition 1 (equation 4) and differing in three dimensions. First, I am analyzing a panel of countries in a fixed exchange rate regime instead of the United States and the United Kingdom separately. Second, I based my identification on the trilemma of international finance instead of narrative identification to characterize monetary policy shocks. Finally, my sample is based on the period between 1995q1 and 2020q1, incorporating the Great Recession Period but excluding the Covid pandemic. Like \cite{Barnichon2019}, I use quarterly data, include four lags of inflation and unemployment as control variables, and rely on weak instrument robust methods for computing the confidence sets for the Phillips multiplier \citep{Anderson1949}.
+
+In Appendix, Figure \ref{F:MultiplierQ} replicates Figure \ref{F:Multiplie} using this new data. Compared to the baseline, Figure \ref{F:MultiplierQ} displays a smaller multiplier and a much weaker average wage inflation response.
 
 Phillips multiplier estimates - interpretation. Talk about the horizon - same as baseline. F-statistic being small The asymptotic distribution of the Anderson-Rubin confidence sets does not depend on the strength of the instrument, however, the confidence bands of the Phillips multiplier are larger when the instruments are weaker \cite{Barnichon2019}.  
 
@@ -364,20 +345,20 @@ To go one step further, test whether the Phillips multiplier is weaker in period
 \begin{figure}[h!]
     \centering 
 	\caption{Phillips multiplier and IRFs}
-	\label{F:Multiplie}
+	\label{F:MultiplierQ_SD}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\caption{Phillips multiplier}
-		\label{F:Multiplier_M}
+		\label{F:MultiplierQ_SD_M}
 		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_SDPMBM_LPIV40_2_asym_lowflat_Quarter.pdf}	
 	\end{subfigure}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\caption{F-Statistic}
-		\label{F:Multiplier_F}
+		\label{F:MultiplierQ_SD_F}
 		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_PMBM_F_LPIV40_2_asym_lowflat_Quarter.pdf}
 	\end{subfigure}
 	\begin{subfigure}[b]{0.9\textwidth}
 		\caption{Impulse Responses}
-		\label{F:Dynamics}
+		\label{F:DynamicsQ_SD}
 		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_SDLPIVBM40_2_asym_lowflat_Quarter.pdf}
 		\end{subfigure}
 		\annote{Phillips multiplier estimations using the trilemma IV as an instrument, using a matched sample of 465 quarterly observations between 1995q1 and 2019q1, and controlling for two lags of unemployment and wage inflation, country fixed effects, and world GDP growth as explained in Equation \eqref{EQ:MULT} but now at the quarterly frequency. 230 (235) observations are assigned to high (low) inflation environments following the classification  For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator, while the dashed lines correspond to the two-sided 90\% Anderson-Rubin confidence sets robust to weak instruments. The F-statistics (upper-right) are computed using the method presented in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and \textit{average} unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets.}
@@ -485,10 +466,52 @@ These results add a new perspective to the current debate about the existence of
 \footnotesize
 \centering
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
-\caption{Estimates of multipliers across states of inflation \label{T:SDPM_App}}
+\caption{Estimates of multipliers across states of inflation - unmatched sample \label{T:SDPM_App}}
 \input{../Output/Tables/Table_asym_lowflat_15_0.tex}
 \annote{\footnotesize This table presents the multiplier estimates corresponding to the ones in Figure \ref{F2:Multiplier_MM}. The values in parentheses under the multipliers indicate the standard errors. The last column indicates the weak instrument robust Anderson-Rubin p-values for the difference in multipliers across states.}
 \end{table}
+
+\begin{table}[ht]
+\footnotesize
+\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Estimates of multipliers across states of inflation - Monetary Policy Regimes \label{T:SDPM_MP}}
+\begin{tabular}{l*{1}{cccc}}
+\hline\hline
+ Horizon  & Linear & High                 & Low           & AR            \\
+                  & Model         & Inflation & Inflation & p-value       \\
+\hline
+   3       & 0.294 & 0.297 & 0.239 & 0.355 \\
+          & (0.897) & (0.897) & (3.060) & \\
+ & & & &\\
+   4       & -0.227 & -0.228 & 0.072 & 0.810 \\
+          & (0.432) & (0.486) & (1.154) & \\
+ & & & &\\
+   5       & -0.370 & -0.418 & 0.078 & 0.675 \\
+          & (0.320) & (0.403) & (0.746) & \\
+ & & & &\\
+   6       & -0.403 & -0.462 & 0.113 & 0.452 \\
+          & (0.267) & (0.378) & (0.574) & \\
+ & & & &\\
+   7       & -0.468 & -0.555 & 0.134 & 0.250 \\
+          & (0.252) & (0.379) & (0.520) & \\
+ & & & &\\
+   8       & -0.569 & -0.716 & 0.148 & 0.129 \\
+          & (0.267) & (0.431) & (0.489) & \\
+ & & & &\\
+   9       & -0.799 & -1.010 & -0.058 & 0.108 \\
+          & (0.326) & (0.578) & (0.407) & \\
+ & & & &\\
+  10       & -1.144 & -1.586 & -0.211 & 0.048 \\
+          & (0.472) & (0.992) & (0.345) & \\
+ & & & &\\
+\hline\hline
+\end{tabular}
+\annote{\footnotesize This table presents the multiplier estimates when adding monetary policy regime dummies to equation \eqref{EQ:MULT_State}. The values in parentheses under the multipliers indicate the corresponding standard errors. The last column indicates the weak instrument robust Anderson-Rubin p-values for the difference in multipliers across states.}
+\end{table}
+
+
+
 
 \clearpage
 
@@ -618,7 +641,7 @@ These results add a new perspective to the current debate about the existence of
 \begin{figure}[h!]
     \centering
     \caption{Sample composition for Phillips Multiplier estimation}
-    \includegraphics[scale=0.6]{../Output/Figures/history_Sample}
+    \includegraphics[scale=0.55]{../Output/Figures/history_Sample}
     \annote{\footnotesize This figure displays which year-country observations are being used when estimating the Phillips Multiplier for the matched sample.}
     \label{F:Sample}
 \end{figure}
@@ -626,9 +649,9 @@ These results add a new perspective to the current debate about the existence of
 \begin{figure}[h!]
     \centering
     \caption{Sample composition for state-dependent Phillips Multiplier estimation}
-    \includegraphics[scale=0.6]{../Output/Figures/history_Sample_SD}
-    \annote{\footnotesize This figure displays which year-country observations are being used when estimating the Phillips Multiplier for the matched sample.}
-    \label{F:Sample}
+    \includegraphics[scale=0.55]{../Output/Figures/history_Sample_SD}
+    \annote{\footnotesize This figure displays which year-country observations are being used when estimating the state-dependent Phillips Multiplier in periods of high (blue) versus low (red) inflation. Differences to the main sample used (Figure \ref{F:Sample}) represent the periods with inflation smaller than -2\% or above 40\% as per definition.}
+    \label{F:Sample_SD}
 \end{figure}
 
 
@@ -655,6 +678,38 @@ These results add a new perspective to the current debate about the existence of
 	
 \end{figure}
 
+
+\begin{figure}[h!]
+    \centering
+	\caption{Phillips multiplier and IRFs}
+	\label{F:MultiplierQ}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{Phillips multiplier}
+		\label{F:MultiplierQ_M}
+		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_PMBM_LPIV40_2_Quarter.pdf}	
+	\end{subfigure}
+	\begin{subfigure}[b]{0.45\textwidth}
+		\caption{F-Statistic}
+		\label{F:MultiplierQ_F}
+		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_PMBM_F_LPIV40_2_Quarter.pdf}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.9\textwidth}
+		\caption{Impulse Responses}
+		\label{F:DynamicsQ}
+		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_LPIVBM40_2_Quarter.pdf}
+		\end{subfigure}
+		\annote{Phillips multiplier estimations using the trilemma IV as an instrument, using a matched sample of 465 quarterly observations between 1995q1 and 2019q1, and controlling for two lags of unemployment and wage inflation, country fixed effects, and world GDP growth as explained in Equation \eqref{EQ:MULT}. For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator, while the dashed lines correspond to the two-sided 90\% Anderson-Rubin confidence sets robust to weak instruments. The F-statistics (upper-right) are computed using the method presented in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and \textit{average} unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets.}
+	
+\end{figure}
+
+
+\begin{figure}[h!]
+    \centering
+    \caption{Sample composition for state-dependent Phillips Multiplier estimation}
+    \includegraphics[scale=0.55]{../Output/Figures/history_Sample_SD_quarter}
+    \annote{\footnotesize This figure displays which year-country observations are being used when estimating the state-dependent Phillips Multiplier in periods of high (blue) versus low (red) inflation.}
+    \label{F:Sample_SD}
+\end{figure}
 
 %\begin{figure}[h]
 %    \centering
@@ -687,7 +742,7 @@ The first World War went from July 1914 to November 1918 while the second World 
 
 Finally, one needs to argue on the exact year when countries started implicitly targeting inflation. While explicit inflation targeting, in the sense of it being announced by the national Central Banks, started only in the nineties, there is a long literature arguing that some countries were implicitly doing it before that.
 
-According to \cite{vonHagen1999}, ``\textit{the Bundesbank began to announce inflation targets together with adopting monetary targeting, first a series of `unavoidable’ inflation rates and, from 1986 on, a fixed rate of 2\%}".\footnote{Some others would agree on a date even before 1986 \cite{Mishkin2001}.} The German Mark accounted for roughly one-third of the weight of the European Currency Unit (ECU) value from 1984 until 1999. Given both Germany's importance to the ECU and its adoption of an inflation target, I am considering that countries who already belong to the European Exchange Rate Mechanism (EERM) such as Denmark, France, Ireland, Italy, Netherlands and then countries who later join the EERM as Belgium, Finland, Portugal, Spain and the UK or pegged their currencies to the ECU such as Norway and Sweden, are implicitly adopting a behavior of targeting price inflation. For Japan, this definition is based on the work of \cite{Jinushi2000} who thoroughly explains why Japan was implicitly targeting inflation by 1987.
+According to \cite{vonHagen1999}, ``\textit{the Bundesbank began to announce inflation targets together with adopting monetary targeting, first a series of `unavoidable’ inflation rates and, from 1986 on, a fixed rate of 2\%}".\footnote{Some others would agree on a date even before 1986 \citep{Mishkin2001}.} The German Mark accounted for roughly one-third of the weight of the European Currency Unit (ECU) value from 1984 until 1999. Given both Germany's importance to the ECU and its adoption of an inflation target, I am considering that countries who already belong to the European Exchange Rate Mechanism (EERM) such as Denmark, France, Ireland, Italy, Netherlands and then countries who later join the EERM as Belgium, Finland, Portugal, Spain and the UK or pegged their currencies to the ECU such as Norway and Sweden, are implicitly adopting a behavior of targeting price inflation. For Japan, this definition is based on the work of \cite{Jinushi2000} who thoroughly explains why Japan was implicitly targeting inflation by 1987.
 
 \cite{Ungerer1997}, page 183, tells us that Norway and Sweden pegged their currency to the ECU and in 1990 and 1991 respectively. Even though they abandoned such a peg later on, both of them became explicit inflation targeters - Norway in 2001 and Sweden in 1993. 
 
