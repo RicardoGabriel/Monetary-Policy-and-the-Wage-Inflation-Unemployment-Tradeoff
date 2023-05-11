@@ -48,6 +48,7 @@ tsset id year, yearly
 estimates clear	
 
 
+
 ********************************************************************************
 * Setup - defining main variables (y, x, z) and controls (W)
 ********************************************************************************
@@ -102,6 +103,11 @@ local rhslwage2		l(1/`Lags').unemp1_s1 l(1/`Lags').dlwage1_s1 l(1/`Lags').unemp1
 			
 * add extra variable to the control set - dlsumgdp to capture world business cycles(with state interaction)
 local fe dlsumgdp_s1 dlsumgdp_s2
+
+
+* for robustness check adding monetary policy regimes dummies
+*local fe dlsumgdp_s1 dlsumgdp_s2 p1 p4 p5
+
 
 * add extra variable to control for state * country FE
 local cfe id1_s1 id2_s1 id3_s1 id4_s1 id5_s1 id6_s1 id7_s1 id8_s1 id9_s1 id10_s1 id11_s1 id12_s1 id13_s1 id14_s1 id15_s1 id16_s1 id17_s1 id18_s1 ///
