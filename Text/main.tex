@@ -150,9 +150,9 @@ In the Appendix, Figure \ref{F_median_country} presents the same exercise for ea
 
 To give more structure to the previous exploratory analysis, I turn my attention to the wage Phillips curve across historical periods. I depart from the wage Phillips curve derived from the micro-founded New Keynesian model presented in \cite{Gali2011}, which I extend to a panel dimension in Appendix \ref{S_Theory}, and estimate the following Equation:
 
-\begin{Equation} \label{EQ:Baseline}
+\begin{equation} \label{EQ:Baseline}
     \pi_{c,t}^w = \mu_c + \varphi u_{c,t} + \gamma \pi_{c,t-1}^p + \epsilon_{c,t}
-\end{Equation}
+\end{equation}
 
 where $\pi_{c,t}^w$ denotes the annual wage inflation in the country $c$ at time $t$; $\alpha$ is a constant; $u_{c,t}$ denotes the unemployment rate in the country $c$ at time $t$; $\pi_{c,t-1}^p$ is the lagged price inflation, the measure by which wages are indexed; and $\epsilon_{c,t}$ is an error term proxying for time-varying cost-push shocks to wages.\footnote{The majority of the literature argues for the use of the unemployment gap instead of its level. However, that approach ignores the problem of measurement error arising from the computation of a natural unemployment rate. In my setting, due to the use of historical data, I believe that the latter poses a bigger threat because it is not possible to use detailed data to get the best estimates of the natural unemployment rate.} The twist of exploring the Phillips curve using a panel approach has been recently explored by \cite{Coibion2019}, \cite{Levy2019}, \cite{DeSchryder2020}, and \cite{Hazell2021} at both national and regional levels. Following the empirical literature, I include time-invariant country fixed effects $\mu_c$. %to account for different local trends. %but do not add year fixed effects.
 
@@ -197,9 +197,9 @@ When a country pegs its exchange rate, its interest rate from then on has to clo
 
 The trilemma IV, $z_{c,t}$, for local policy rate changes, $\Delta r_{c,t}$, can only be computed when a country's exchange rate is fixed ($\text{Peg}_{c,t}=1$) with respect to a base country $b$ and is thus defined as follows:
 
-\begin{Equation} \label{EQ:trilemmaIV}
+\begin{equation} \label{EQ:trilemmaIV}
 	z_{c,t} \equiv (\Delta r_{b(c,t),t} - \Delta \hat{r}_{b(c,t),t}) \times k_{c,t} \times \text{Peg}_{c,t}
-\end{Equation}
+\end{equation}
 
 where $c$ and $t$ are the country and year indices, respectively; $b(c,t)$ denotes country $c$'s base country in year $t$; $\Delta r_{b(c,t),t} - \Delta \hat{r}_{b(c,t),t}$ can be interpreted as a Taylor residual of the base country $b(c,t)$; $\text{Peg}_{c,t}$ takes thew value of 1 if the country is in a fixed exchange rate regime against base country $b$; and $k_{c,t}$ is the degree of capital openness from \cite{Quinn2011}, this index ranges from 0 to 1, with 0 indicating a low degree and 1 a high degree of capital mobility. Both studies by \cite{Jorda2019} and \cite{Schularick2020} show that the trilemma IV is relevant due to its strong relation with changes in pegs' domestic short-term interest rates. In my sample, the instrument exhibits a statistically significant coefficient of 0.65 over the full sample (SE $=0.08$) and for both the pre and post-World War II periods, with the slope coefficients being approximately 0.64 (SE $=0.15$) and 0.65 (SE$=0.09$), respectively (see Table \ref{T:First_Stage} in the Appendix for more details).
 
@@ -207,17 +207,17 @@ Another main challenge that persists even after correcting for endogeneity is sp
 
 In the following section, I start by tracing the effect of a one percentage point surprise increase in policy rates on average wage inflation and average unemployment rate. To be precise, I estimate impulse response functions (IRFs) by making use of a panel local projections instrumental variable (Panel LP-IV) approach \citep{Jorda2005, Stock2018} as follows:
 
-\begin{Equation} \label{EQ:IRF}
+\begin{equation} \label{EQ:IRF}
 	\bar{X}_{c,t:t+h} = \alpha^X_{c,h} + \beta_h^X z_{c,t} + \zeta^X_h W_{c,t} + e^X_{c,t+h}
-\end{Equation}
+\end{equation}
 
 where $\bar{X}_{c,t:t+h} \equiv \frac{1}{h} \sum^h_{j=0} X_{c,t+j}$ is either the average value of wage inflation or the unemployment rate over $[t,t+h]$, $\alpha^X_{c,h}$ denotes country fixed effects, $z_{c,t}$ is the trilemma IV as introduced in Equation \eqref{EQ:trilemmaIV}, and $W_{c,t}$ is a vector of controls including the world GDP growth and two lags of wage inflation and unemployment.\footnote{Please note for later reference that I include a global real GDP growth variable to parsimoniously remove global business cycle effects as including time-fixed effects would require over a hundred additional parameter estimates.} To remove potential extreme values, throughout the analysis I remove the war periods and observations for which yearly wage inflation is above 50\%.\footnote{Alternatively, I trimmed the first and last percentiles of wage inflation and the results go through.}
 
 Building on these IRFs, I estimate the Phillips multiplier as in \cite{Barnichon2019}. The Phillips multiplier ($\mathcal{P}_h$) can be estimated using a Panel LP-IV approach from the following cumulative regression:
 
-\begin{Equation} \label{EQ:MULT}
+\begin{equation} \label{EQ:MULT}
 	\sum_{j=0}^{h} \pi_{c,t+j}^{w} = \alpha_{c,h} + \mathcal{P}_h \sum_{j=0}^{h} \hat{u}_{c,t+j} + \zeta_h \vec{W}_{c,t} + \epsilon_{c,t+h}
-\end{Equation}
+\end{equation}
 
 where $\alpha_{c,h}$ denotes country fixed effects; $\vec{W}_{c,t}$ is the same vector of control variables as in Equation \eqref{EQ:IRF}; and $\sum_{j=0}^{h} \hat{u}_{c,t+j}$ is instrumented by the trilemma IV, $z_{c,t}$, the exogenous changes in the short-term interest rate in country $c$. These monetary shocks are orthogonal to supply shocks and to the natural unemployment rate under the common assumption that monetary policy is neutral under flexible prices \citep{Gali2015}. Through this IV approach, the Phillips multiplier allows estimating the tradeoff without bias from confounding supply shocks and without the need to measure the natural unemployment rate.
 
@@ -272,12 +272,12 @@ Figure \ref{F:Dynamics} decomposes the Phillips multiplier into the response of 
 
 Building on the previous Phillips multiplier analysis, I can test whether the wage inflation-unemployment tradeoff is different across sub-samples and, in particular, weaker in times of low price inflation. The baseline specification is thus augmented to include an interaction term. I this estimate a state-dependent Phillips multiplier as follows:
 
-\begin{Equation} \label{EQ:MULT_State}
+\begin{equation} \label{EQ:MULT_State}
 \begin{split}
 	\sum_{j=0}^{h} \pi_{c,t+j}^{w} = & \mathcal{I}_{c,t} \Bigg[\alpha_{c,h}^{(\mathcal{I})} + \mathcal{P}^{(\mathcal{I})}_h \sum_{j=0}^{h} \hat{u}_{c,t+j} + \zeta^{(\mathcal{I})}_h \vec{W}_{c,t}\Bigg] \\  
 	& + (1 - \mathcal{I}_{c,t}) \Bigg[\alpha_{c,h}^{(1-\mathcal{I})} + \mathcal{P}^{(1-\mathcal{I})}_h \sum_{j=0}^{h} \hat{u}_{c,t+j} + \zeta^{(1-\mathcal{I})}_h \vec{W}_{c,t}\Bigg] +  \epsilon_{c,t+h}
 \end{split}
-\end{Equation}
+\end{equation}
 
 where $\mathcal{I}_{c,t}$ is the indicator variable. This exercise allows comparing the evolution of the Phillips multiplier in each sub-sample and directly test whether $\mathcal{P}_h^{(\mathcal{I})} = \mathcal{P}_h^{(1 - \mathcal{I})}$.
 
@@ -367,7 +367,7 @@ To go one step further, I then test whether the Phillips multiplier is weaker in
 
 The weak instrument robust Anderson-Rubin p-values for the difference in the high versus low price inflation multipliers are presented in Table \ref{T:SDPM_Q} together with the point estimates of Figure \ref{F:MultiplierQ_SD_F} and their standard errors. Even using such a limited sample, focusing on the period between 1995q1 and 2019q4, and with quarterly level data, we are still able to find that the wage inflation-unemployment tradeoff is weaker during periods of low price inflation.
 
-I still find a statistically significantly weaker multiplier during a low price inflation episode and for some horizons. But, interestingly enough, for a different reason. While Figure \ref{F:Multiplier_SD} tells us that it is the muted wage inflation response driving the weaker multiplier, Figure \ref{F:MultiplierQ_SD} tells us that since 1995 the stronger unemployment response is actually driving the weaker multiplier.
+I still find a statistically significantly weaker multiplier during a low price inflation episode and for some horizons. But, interestingly enough, for a different reason. While Figure \ref{F2:Multiplier} tells us that it is the muted wage inflation response driving the weaker multiplier, Figure \ref{F:MultiplierQ_SD} tells us that since 1995 the stronger unemployment response is actually driving the weaker multiplier.
 
 
 \section{Conclusion \label{S_Conclusion}}
@@ -912,23 +912,23 @@ Once the wage has been set, the quantity of workers employed is determined unila
 where $N_{c,t+k|t}$ denotes the quantity demanded in period $t+k$ of a labor type whose wage is being reset in period $t$, $MRS_{c,t+k|t} \equiv \chi_{c,t+k} C_{c,t+k} (N_{c,t+k|t})^\phi$ is the relevant marginal rate of substitution between consumption and employment in period $t+k$, and $\mathcal{M}_c \equiv \dfrac{\epsilon_c}{(\epsilon_c - 1)}$ is the desired (or flexible wage) markup, with $\epsilon_c$ denoting the wage elasticity of demand for the services of each labor type assumed to be constant over time.\footnote{See \cite{Gali2012} for an application of a one-country framework allowing for time variations in the desired wage markup.}
 
 Log-linearizing the above optimality condition around a perfect foresight zero inflation steady state, using lower case letters to denote the logs of the corresponding variable and letting $\mu_c \equiv log(\mathcal{M}_c)$, we obtain the approximate wage setting rule:
-\begin{Equation}
+\begin{equation}
     w_{c,t}^{*} = \mu_c + (1-\beta \theta) \sum_{k=0}^{\infty} (\beta \theta)^k E_t [mrs_{c,t+k|t}+p_{c,t+k}] 
-\end{Equation}
+\end{equation}
 
 When nominal wage rigidities are present $(\theta > 0)$, new wages are set as a constant markup over a weighted average of current and expected future price-adjusted marginal rates of substitution. Furthermore, log-linearizing the expression for the aggregate wage index around a zero inflation steady state we obtain:
-\begin{Equation}
+\begin{equation}
     w_{c,t} = (1-\theta)w_{c,t}^* + \theta w_{c,t-1}
-\end{Equation}
+\end{equation}
 Moreover, letting $mrs_{c,t} \equiv c_{c,t} + \phi n_{c,t} + \xi_{c,t}$ denote the economy’s average (log) marginal rate of substitution, with $\xi_{c,t} = log(\chi_{c,t})$, we can write:
-\begin{Equation}
+\begin{equation}
     mrs_{c,t+k|t} = mrs_{c,t+k} - \epsilon_c \phi (w_{c,t}^* - w_{c,t+k})
-\end{Equation}
+\end{equation}
 I proceed to combine Equations (1) through (3) in order to derive the baseline wage Equation in each country $c$:
-\begin{Equation}
+\begin{equation}
     \label{EQ_baseline}
     \pi_{c,t}^{w} = \beta E_t [\pi_{c,t+1}^{w}] + \lambda_c (\mu_{c,t} - \mu_c)
-\end{Equation}
+\end{equation}
 where $\pi_{c,t}^{w} \equiv w_{c,t} - w_{c,t-1}$ is wage inflation, $\mu_{c,t} \equiv w_{c,t} - p_{c,t} - mrs_{c,t}$ denotes the (average) wage markup in country $c$ and $\mu_{c,t} - \mu_c$ is the natural wage markup, the gap between the average real wage and the marginal rate of substitution that would prevail under flexible prices. By assumption, we then have $\lambda_c \equiv - \dfrac{(1-\theta)(1-\beta \theta)}{\theta (1+\epsilon_c \phi)} < 0$. 
 
 Even though this relation holds irrespective of the wage setting process, I further assume partial indexation of wages to a measure of lagged price inflation ($\pi^p_{t-1}$) when there is no reoptimization of wages, with probability $\theta$ each period. Such assumption is reasonable when we consider that there exists a strong positive correlation between wage inflation ($\pi_t^w$) and lagged price inflation ($\pi^p_{t-1}$) at the country level as showed in Table \ref{T_Correlation}. Following \cite{Gali2019}, this changes Equation (\ref{EQ_baseline}) to:
@@ -939,10 +939,10 @@ Even though this relation holds irrespective of the wage setting process, I furt
 
 where $\tilde{\pi}_{c,t}^{w} \equiv \pi^w_{c,t} - [\gamma \pi^p_{t-1} + (1-\gamma)\pi]$ and $\gamma$ is the degree of indexation. Further assuming that the natural wage markup follows an AR(1) with persistence $\rho^w$ one can re-write the previous Equation as:
 
-\begin{Equation}
+\begin{equation}
     \label{EQ_baseline2}
     \tilde{\pi}_{c,t}^{w} = \dfrac{\lambda_c}{1 - \beta \rho^w}  (\mu_{c,t} - \mu_c)
-\end{Equation}
+\end{equation}
 
 Next, I introduce unemployment explicitly in the model. Following \cite{Gali2011}, an household member $(i,j)$ uses a household welfare criterion to decide whether she finds it optimal to participate in the labor market. She does so whenever the real wage prevailing in her trade is above her disutility from working, that is, if and only if:
 \begin{Equation*}
@@ -953,33 +953,33 @@ Thus, the marginal supplier of type $i$ labor (employed or unemployed) in countr
     \dfrac{W_{c,t}(i)}{P_{c,t}} = \chi_{c,t} C_{c,t} L_{c,t}(i)^{\phi}
 \end{Equation*}
 Log-linearizing and aggregating yields:
-\begin{Equation}
+\begin{equation}
     \label{EQ_5}
     w_{c,t} - p_{c,t} = c_{c,t} + \phi l_{c,t} + \xi_{c,t}
-\end{Equation}
+\end{equation}
 where $l_{c,t} \equiv \int_0^1 l_{c,t}(i) di$ can be interpreted as the model’s implied labor force, and $w_{c,t} \equiv \int_0^1 w_{c,t}(i) di$ is the average wage, both expressed in logs. Naturally, the unemployment rate can be defined as:
-\begin{Equation}
+\begin{equation}
     \label{EQ_6}
     u_{c,t} \equiv l_{c,t} - n_{c,t}
-\end{Equation}
+\end{equation}
 Combining Equations (\ref{EQ_5}) and (\ref{EQ_6}) with the expression for the average wage markup $\mu_{c,t}$ yields the following linear relation between the wage markup and the unemployment rate:
-\begin{Equation}
+\begin{equation}
     \label{EQ_u}
     u_{c,t} = \mu_{c,t} \phi^{-1} 
-\end{Equation}
+\end{equation}
 Let us define the natural rate of unemployment, $u_{c,t}^n$, as the rate of unemployment that would prevail in the absence of nominal wage rigidities. It follows from the assumption of a constant desired wage markup that $u_{c,t}^n$ is constant and given by:
-\begin{Equation}
+\begin{equation}
     \label{EQ_un}
     u_{c}^n = \mu_c \phi^{-1}
-\end{Equation}
+\end{equation}
 Thus, in the framework above unemployment is a consequence of workers’ market power (that is, of the wage being above their perfectly competitive level), while unemployment fluctuations result from the slow adjustment of wages. 
 %Figure \ref{F_Gali_2011} represents the relation between the wage markup and the unemployment rate using a simple diagram of the labor market.
 
 Finally, combining Equations (\ref{EQ_baseline2}), (\ref{EQ_u}) and (\ref{EQ_un}) and defining $\varphi_c \equiv \dfrac{\phi \lambda_c}{1 - \beta \rho^w}$ we obtain the following panel version of a New Keynesian wage Phillips curve (henceforth, NKWPC):
-\begin{Equation}
+\begin{equation}
     \label{EQ_NKWPC}
     \pi_{c,t}^{w} = (1-\gamma)\pi + \gamma \pi^p_{t-1} + \varphi_c (u_{c,t} - u_c^n)
-\end{Equation}
+\end{equation}
 
 \subsection{A time-varying New Keynesian wage Phillips curve \label{SS_FPA}}
 
