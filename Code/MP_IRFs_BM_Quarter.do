@@ -128,10 +128,10 @@ foreach y of local response {
 		replace se`k'_`y'`x'_`p`j'' = _se[`instr'] if _n == `i'+1
 		
 		eststo iv`k'`j'`i'_`y'
-		estadd scalar KleibergenPaapWeakID = e(widstat)
+		*estadd scalar KleibergenPaapWeakID = e(widstat)
 		
-		weakivtest
-		estadd scalar OleaPfluegerFStat = r(F_eff)
+		*weakivtest
+		*estadd scalar OleaPfluegerFStat = r(F_eff)
 			}
 		}
 	}
@@ -183,8 +183,8 @@ gen dn2`k'_`y'`x'_`p`j'' = b`k'_`y'`x'_`p`j'' - 1*se`k'_`y'`x'_`p`j'' if _n <= `
 cap drop Years
 gen Years = _n-1 if _n<=`hh'
 
-local ylablwage 	"ylab(-0.3(0.3)0.6)"
-local ylablunemp  	"ylab(-0.3(0.3)0.6)"
+local ylablwage 	"ylab(-0.5(0.5)2.5)"
+local ylablunemp  	"ylab(-0.5(0.5)2.5)"
 
 
 * Produce Figures

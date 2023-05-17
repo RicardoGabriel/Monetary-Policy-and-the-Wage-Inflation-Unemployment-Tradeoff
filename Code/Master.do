@@ -18,6 +18,8 @@
 * ssc install reghdfe
 * ssc install ftools
 * ssc install graph3d
+* ssc install avar
+* ssc install heatplot
 ********************************************************************************
 
 timer clear
@@ -76,7 +78,6 @@ global state 	= "lowflat"
 ********************************************************************************
 
 /*
-
 * Prepare Data with all observations
 global wage_out = 0
 do Data_Management
@@ -93,6 +94,7 @@ do Figure_1
 * Prepare Data without wage variable for outliers and war periods 
 global wage_out = 1
 do Data_Management
+
 
 
 *Produce heat plots
@@ -118,9 +120,7 @@ do MP_IRFs_BM
 ** Figure A.1
 * Effects of Monetary Policy (as in JST 2020)
 do MP_IRFs
-
-
-
+*
 * State Dependent Phillips Multipliers
 * Figure 5 and Table A.7
 do SD_BM
@@ -135,11 +135,12 @@ do SD_BM
 
 
 * Robustness Test of adding monetary policy regimes
-
-
-
+* run SD_BM and add dummies for MP regimes
+* comment line 105 and uncomment line 109
 */
-/*
+
+
+
 *******************************************************************************
 * Quarterly analysis
 global match = 1

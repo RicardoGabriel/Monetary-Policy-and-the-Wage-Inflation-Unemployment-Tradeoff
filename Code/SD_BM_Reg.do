@@ -165,6 +165,25 @@ foreach y of local response {
 }
 
 
+* compute confidence bands
+cap drop up* dn*
+forvalues j=1/`jj'{
+forvalues n=1/2{
+	foreach y of local response {
+		forvalues k=2/`kk' {
+
+gen up`k'_`y'_`a`n''`j' = b`k'_`y'_`a`n''`j' + 1.645*se`k'_`y'_`a`n''`j' if _n <= `hh'
+gen dn`k'_`y'_`a`n''`j' = b`k'_`y'_`a`n''`j' - 1.645*se`k'_`y'_`a`n''`j' if _n <= `hh'
+
+gen up2`k'_`y'_`a`n''`j' = b`k'_`y'_`a`n''`j' + 1*se`k'_`y'_`a`n''`j' if _n <= `hh'
+gen dn2`k'_`y'_`a`n''`j' = b`k'_`y'_`a`n''`j' - 1*se`k'_`y'_`a`n''`j' if _n <= `hh'
+			
+		}
+	}
+}
+}
+
+
 ********************************************************************************
 * Estimation - IRFs - Baseline
 ********************************************************************************
@@ -215,7 +234,6 @@ foreach y of local response {
 
 
 * compute confidence bands
-cap drop up* dn*
 forvalues j=1/`jj'{
 foreach x of local impulse {
 	foreach y of local response {
@@ -487,7 +505,7 @@ foreach x in lunemp {
 ********************************************************************************
 * Heat map sample
 ********************************************************************************
-
+if ($match) == 1 {
 replace dlcpilo = . if sample == 0
 
 	** CONFIGURE Heat map for sample used in trilemma:
@@ -558,3 +576,4 @@ heatplot metric country year if `subsample'  ///
 	note(`note') ///
 	name(histor_`=subinstr("`metric'",".","",.)',replace)
 graph export "$Fig\history_Sample_SD.pdf", replace
+}

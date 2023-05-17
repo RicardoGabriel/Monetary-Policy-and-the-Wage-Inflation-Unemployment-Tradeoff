@@ -189,11 +189,12 @@ gen Years = _n-1 if _n<=`hh'
 
 gen arcib=.
 gen arcit=.
+* generate a bounded ar confidence set
 forvalues i = 0/`horizon2' {
 	foreach var in arcib arcit{
 		quietly replace `var' = `var'h2`i' if Years==`i'
-		quietly replace `var' = 1 if `var'h2`i' >= 1	& _n == (`i'+1)	
-		quietly replace `var' = -1.5 if `var'h2`i' <= -1.5	& _n == (`i'+1)	
+		quietly replace `var' = 0.2 if `var'h2`i' >= 0.2	& _n == (`i'+1)	
+		quietly replace `var' = -0.2 if `var'h2`i' <= -0.2	& _n == (`i'+1)	
 	}
 }
 
@@ -205,18 +206,18 @@ foreach x of local impulse {
 		forvalues k=2/`kk' {
 
 gen up`k'_`y'`x'_`p`j'' = b`k'_`y'`x'_`p`j'' + 1.645*se`k'_`y'`x'_`p`j'' if _n <= `hh'
-	replace up`k'_`y'`x'_`p`j'' = 1 if _n <= `hh' & up`k'_`y'`x'_`p`j'' > 1
+	*replace up`k'_`y'`x'_`p`j'' = 1 if _n <= `hh' & up`k'_`y'`x'_`p`j'' > 1
 
 gen dn`k'_`y'`x'_`p`j'' = b`k'_`y'`x'_`p`j'' - 1.645*se`k'_`y'`x'_`p`j'' if _n <= `hh'
-	replace dn`k'_`y'`x'_`p`j'' = -1.5 if _n <= `hh' & dn`k'_`y'`x'_`p`j'' < -1.5
+	*replace dn`k'_`y'`x'_`p`j'' = -1.5 if _n <= `hh' & dn`k'_`y'`x'_`p`j'' < -1.5
 
 gen up2`k'_`y'`x'_`p`j'' = b`k'_`y'`x'_`p`j'' + 1*se`k'_`y'`x'_`p`j'' if _n <= `hh'
-	replace up2`k'_`y'`x'_`p`j'' = 1 if _n <= `hh' & up2`k'_`y'`x'_`p`j'' > 1
+	*replace up2`k'_`y'`x'_`p`j'' = 1 if _n <= `hh' & up2`k'_`y'`x'_`p`j'' > 1
 
 gen dn2`k'_`y'`x'_`p`j'' = b`k'_`y'`x'_`p`j'' - 1*se`k'_`y'`x'_`p`j'' if _n <= `hh'
-	replace dn2`k'_`y'`x'_`p`j'' = -1.5 if _n <= `hh' & dn2`k'_`y'`x'_`p`j'' < -1.5
+	*replace dn2`k'_`y'`x'_`p`j'' = -1.5 if _n <= `hh' & dn2`k'_`y'`x'_`p`j'' < -1.5
 
-	replace b`k'_`y'`x'_`p`j'' = . if _n <= `hh' & (b`k'_`y'`x'_`p`j'' > 0.5 | b`k'_`y'`x'_`p`j'' < -1)
+	*replace b`k'_`y'`x'_`p`j'' = . if _n <= `hh' & (b`k'_`y'`x'_`p`j'' > 0.5 | b`k'_`y'`x'_`p`j'' < -1)
 
 		}
 	}
@@ -236,14 +237,14 @@ foreach x of local impulse {
 
 		twoway (bar F`k'_`y'`x'_`p`j'' Years, bcolor(olive) barw(1)), ///
 		ytitle("", size()) xtitle("Quarter", size()) ///
-		graphregion(fcolor(white)) plotregion(color(white)) ylabel(0(2)6, nogrid) ///
+		graphregion(fcolor(white)) plotregion(color(white)) ylabel(0(5)15, nogrid) ///
 		legend(off) ysize(1) xsize(2) scale(2.5)
 		graph export "$Fig\fig_`p`j''_PMBM_F_LPIV`horizon2'_`k'_Quarter.pdf", replace
 
 		
 		twoway (rarea up`k'_`y'`x'_`p`j'' dn`k'_`y'`x'_`p`j''  Years if Years>5,  ///
 		fcolor(gs13) lcolor(gs13) lw(none) lpattern(solid)) ///
-		(line b`k'_`y'`x'_`p`j'' Years if Years>2, lcolor(olive) ///
+		(line b`k'_`y'`x'_`p`j'' Years if Years>5, lcolor(olive) ///
 		lpattern(solid) lwidth(thick)) ///
 		(line arcit Years, lcolor(olive) lpattern(dash)) ///
 		(line arcib Years, lcolor(olive) lpattern(dash)) ///
@@ -251,7 +252,7 @@ foreach x of local impulse {
 		/*ylabel(`l`y''(`c`y'')`h`y'', nogrid) */ ///
 		/*title("`t`y''", color(black) size(medsmall))*/ ///
 		ytitle("`ylab_`y''", size()) xtitle("Quarter", size()) ///
-		graphregion(fcolor(white)) plotregion(color(white)) ylabel(-1.5(0.5)1, nogrid) ///
+		graphregion(fcolor(white)) plotregion(color(white)) ylabel(-0.2(0.1)0.2, nogrid) ///
 		/*name(`y'`k'`j'`horizon2', replace)*/ legend(off) scale(2.5) ysize(1.5) xsize(3)
 		graph export "$Fig\fig_`p`j''_PMBM_LPIV`horizon2'_`k'_Quarter.pdf", replace
 

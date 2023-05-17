@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Code\asym_lowflat.log
   log type:  text
- opened on:  15 May 2023, 16:07:04
+ opened on:  17 May 2023, 12:43:03
 
 . 
 . 
@@ -6471,6 +6471,43 @@ Dropped collinear:    L.unemp1_s1 L2.unemp1_s1 L.dlwage1_s1 L2.dlwage1_s1
 
 . 
 . 
+. * compute confidence bands
+. cap drop up* dn*
+
+. forvalues j=1/`jj'{
+  2. forvalues n=1/2{
+  3.         foreach y of local response {
+  4.                 forvalues k=2/`kk' {
+  5. 
+. gen up`k'_`y'_`a`n''`j' = b`k'_`y'_`a`n''`j' + 1.645*se`k'_`y'_`a`n''`j' if _n <= `hh'
+  6. gen dn`k'_`y'_`a`n''`j' = b`k'_`y'_`a`n''`j' - 1.645*se`k'_`y'_`a`n''`j' if _n <= `hh'
+  7. 
+. gen up2`k'_`y'_`a`n''`j' = b`k'_`y'_`a`n''`j' + 1*se`k'_`y'_`a`n''`j' if _n <= `hh'
+  8. gen dn2`k'_`y'_`a`n''`j' = b`k'_`y'_`a`n''`j' - 1*se`k'_`y'_`a`n''`j' if _n <= `hh'
+  9.                         
+.                 }
+ 10.         }
+ 11. }
+ 12. }
+(2,689 missing values generated)
+(2,689 missing values generated)
+(2,689 missing values generated)
+(2,689 missing values generated)
+(2,689 missing values generated)
+(2,689 missing values generated)
+(2,689 missing values generated)
+(2,689 missing values generated)
+(2,689 missing values generated)
+(2,689 missing values generated)
+(2,689 missing values generated)
+(2,689 missing values generated)
+(2,689 missing values generated)
+(2,689 missing values generated)
+(2,689 missing values generated)
+(2,689 missing values generated)
+
+. 
+. 
 . ********************************************************************************
 . * Estimation - IRFs - Baseline
 . ********************************************************************************
@@ -9495,8 +9532,6 @@ Dropped collinear:    L.unemp1_s2 L2.unemp1_s2 L.dlwage1_s2 L2.dlwage1_s2
 . 
 . 
 . * compute confidence bands
-. cap drop up* dn*
-
 . forvalues j=1/`jj'{
   2. foreach x of local impulse {
   3.         foreach y of local response {
@@ -17093,18 +17128,15 @@ file C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Un
 . ********************************************************************************
 . * Heat map sample
 . ********************************************************************************
-. 
+. if ($match) == 1 {
 . replace dlcpilo = . if sample == 0
 (1,849 real changes made, 1,849 to missing)
-
 . 
 .         ** CONFIGURE Heat map for sample used in trilemma:
 .         
 .         local metric dlcpilo // metric variable
-
 .         local cuts ///          
 >                 0.5
-
 .                 
 .                 *deciles /// use decile code below instead of explicit cuts
 >                 ///-0.2 -0.1 0 0.1 0.2 0.3 0.4 0.5 /// cbassets_log
@@ -17120,7 +17152,6 @@ file C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Un
 .                 
 .         local title ///
 >                 "`: var lab `metric''"
-
 .                 ///"Inflation" 
 >                 ///"Public debt/GDP"
 >                 ///"Central Bank Balance Sheet, relative to GDP"
@@ -17130,7 +17161,6 @@ file C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Un
 >                 ///"Bank equity valuation"
 >                 
 .         local note ""
-
 .         
 .         ** SELECT SUBSAMPLE:
 .         local subsample ///
@@ -17138,17 +17168,14 @@ file C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Un
 >                 ///(crisisJST == 1 | crisis_bvx == 1) ///
 >                 ///(cycle_peak == 1) ///                
 > 
-
 .         
 .         ** ADDITIONAL PACKAGES:
 .         *ssc install heatplot
 . 
 .         ** EDIT:
 .         cap drop metric
-
 .         g metric = `metric'
 (1,965 missing values generated)
-
 .         
 . ** PLOT:
 . if "`cuts'" == "deciles" {
@@ -17157,7 +17184,6 @@ file C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Un
 >                 `r(r1)' `r(r2)' `r(r3)' `r(r4)' `r(r5)' `r(r6)' `r(r7)' `r(r8)' `r(r9)'
 .         local decileopts title("Deciles",size(medium))  
 . }
-
 . 
 . heatplot metric country year if `subsample'  ///
 >         , xdiscrete ydiscrete scatter(pipe, msize(*2)) ///
@@ -17174,9 +17200,9 @@ file C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Un
 >         xsize(10) ysize(6) scale(2) ///
 >         note(`note') ///
 >         name(histor_`=subinstr("`metric'",".","",.)',replace)
-
 . graph export "$Fig\history_Sample_SD.pdf", replace
 file C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\\Output\Figures\history_Sample_SD.pdf saved as PDF format
+. }
 
 . 
 end of do-file
@@ -17304,7 +17330,7 @@ end of do-file
  16.                 preserve
  17.                 keep if Years>=0 & Years<=`hh'
  18.                 twoway (rarea up`k'_`y'`x'_`p`j'' dn`k'_`y'`x'_`p`j''  Years, ///
->                 fcolor(gs15) lcolor(gs15) lw(none)  lpattern(solid)) ///
+>                 fcolor(gs12) lcolor(gs12) lw(none)  lpattern(solid)) ///
 >                 (line b`k'_`y'`x'_`p`j'' Years, lcolor(olive) ///
 >                 lpattern(solid) lwidth(thick)) /// 
 >                 (line b`k'_`y'_`a1'`j' Years, lcolor(dkgreen) ///
@@ -17319,15 +17345,19 @@ end of do-file
 >                 legend(off) /// 
 >                 name(`y'`k'`j', replace) nodraw xsize(2) ysize(3) ///
 >                 `ylab`y''
- 19.                 restore         
+ 19.                 * (rarea up`k'_`y'_`a1'`j' dn`k'_`y'_`a1'`j'  Years, fcolor(gs12) lcolor(gs12) lw(none)  lpattern(solid)) (rarea up`k'_`y'_`a2'`j' dn`k'_`y'_`a2'`j'  Years, fcolor(gs12) lcolor(gs12) lw(none)  lpattern(solid)) (line b`k'_`y'`x'_`p`j''
+>  Years, lcolor(olive)
+.                 
+.                 restore         
  20.         }
- 21.         
+ 21. 
+.         
 .         local response lwage
  22.         foreach y of local response {
  23.                 preserve
  24.                 keep if Years>=0 & Years<=`hh'
  25.                 twoway (rarea up`k'_`y'`x'_`p`j'' dn`k'_`y'`x'_`p`j''  Years, ///
->                 fcolor(gs15) lcolor(gs15) lw(none)  lpattern(solid)) ///
+>                 fcolor(gs12) lcolor(gs12) lw(none)  lpattern(solid)) ///
 >                 (line b`k'_`y'`x'_`p`j'' Years, lcolor(olive) ///
 >                 lpattern(solid) lwidth(thick)) /// 
 >                 (line b`k'_`y'_`a1'`j' Years, lcolor(dkgreen) ///
@@ -17353,9 +17383,9 @@ end of do-file
  33.                 
 .                 preserve
  34.                 twoway (rarea up`k'_`y'`x'_`a1'`j' dn`k'_`y'`x'_`a1'`j'  Years if Years>2,  ///
->                 fcolor(gs15) lcolor(gs15) lw(none) lpattern(solid))  ///
+>                 fcolor(gs12) lcolor(gs12) lw(none) lpattern(solid))  ///
 >                 (rarea up`k'_`y'`x'_`a2'`j' dn`k'_`y'`x'_`a2'`j'  Years if Years>2,  ///
->                 fcolor(gs15) lcolor(gs15) lw(none) lpattern(solid))  ///
+>                 fcolor(gs12) lcolor(gs12) lw(none) lpattern(solid))  ///
 >                 (line b`k'_`y'`x'_`p`j'' Years if Years>2, lcolor(olive) ///
 >                 lpattern(solid) lwidth(thick)) ///
 >                 (line b`k'_`y'`x'_`a1'`j' Years if Years>2, lcolor(dkgreen) ///
