@@ -5,7 +5,7 @@
 * Author: Ricardo Duque Gabriel
 * First Date: 06/30/2019
 * Last Update: 05/17/2023
-* Predicted running time: 20 minutes
+* Predicted running time: 10 minutes
 * to run a faster specification change global grid to 50
 *
 * Some commands necessary to run/install before running this code:
@@ -77,7 +77,7 @@ global slides	= 0
 global state 	= "lowflat"
 ********************************************************************************
 
-/*
+
 * Prepare Data with all observations
 global wage_out = 0
 do Data_Management
@@ -120,12 +120,12 @@ do MP_IRFs_BM
 ** Figure A.1
 * Effects of Monetary Policy (as in JST 2020)
 do MP_IRFs
-**/
+
 * State Dependent Phillips Multipliers
 * Figure 5 and Table A.7
 do SD_BM
 
-/*
+
 *** Other Figures in Appendix 
 * Figure A.8 and Table A.8 (unmatched 15 years)
 global hf = 15
