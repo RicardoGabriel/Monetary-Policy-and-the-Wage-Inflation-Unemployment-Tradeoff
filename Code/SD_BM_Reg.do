@@ -102,11 +102,11 @@ local rhslwage2		l(1/`Lags').unemp1_s1 l(1/`Lags').dlwage1_s1 l(1/`Lags').unemp1
 					
 			
 * add extra variable to the control set - dlsumgdp to capture world business cycles(with state interaction)
-*local fe dlsumgdp_s1 dlsumgdp_s2
+local fe dlsumgdp_s1 dlsumgdp_s2
 
 
 * for robustness check adding monetary policy regimes dummies
-local fe dlsumgdp_s1 dlsumgdp_s2 p1 p4 p5
+*local fe dlsumgdp_s1 dlsumgdp_s2 p1 p4 p5
 
 
 * add extra variable to control for state * country FE
