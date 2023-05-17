@@ -285,7 +285,7 @@ Research on the wage inflation-unemployment tradeoff, traditionally inferred fro
 
 In this exercise, I test whether the wage inflation-unemployment tradeoff is shaped by a low-price inflation environment. Therefore, I estimate equation \ref{EQ:MULT_State} where $\mathcal{I}_{c,t}$ is an indicator of low price inflation defined as a dummy variable, which is equal to one for periods when countries experienced lagged price inflation below the threshold of 2\% and above -2\% ($\mathcal{I}_{c,t} = 1 \hspace{1ex} \text{if} \hspace{1ex} -2\% < \pi^p_{c,t-1} < 2\%$) and equal to 0 when countries experienced high price inflation ($\mathcal{I}_{c,t} = 0 \hspace{1ex} \text{if} \hspace{1ex} 2\% \leq \pi^p_{c,t-1} < 40\%$). This exercise allows comparing the evolution of the Phillips multiplier in times of low versus high price changes and directly test whether $\mathcal{P}_h^{(\mathcal{I})} = \mathcal{P}_h^{(1-\mathcal{I})}$.
 
-The choice of the 2\% threshold can be rationalized by the inflation target strategy of many of the central banks present in the analyzed sample. Over the last 20 years of the sample, most central banks were targeting inflation either implicitly or explicitly. Most of them disclaimed that their goal was to achieve inflation close to or even below 2\%. With such division of the sample, I assign 64\% of the sample to a high-inflation state and 31\% to the low-inflation state while the remaining 5\% of the sample is left out of this sub-sample analysis.
+The choice of the 2\% threshold can be rationalized by the inflation target strategy of many of the central banks present in the analyzed sample. Over the last 20 years of the sample, most central banks were targeting inflation either implicitly or explicitly. Most of them disclaimed that their goal was to achieve inflation close to or even below 2\%. With such a sample division, I assign 75\% of the sample to the high-inflation state and 25\% to the low-inflation state as summarized in Figure \ref{F:Sample_SD}.
 
 Figure \ref{F2:Multiplier} displays the estimates of both the baseline and state-dependent Phillips multipliers over a 10-year horizon (Figure \ref{F2:Multiplier_M}), their F-statistics (Figure \ref{F2:Multiplier_F}), and their underlying impulse responses (Figure \ref{F2:Dynamics}) in periods of high and low price inflation.
 
@@ -361,7 +361,7 @@ To go one step further, test whether the Phillips multiplier is weaker in period
 		\label{F:DynamicsQ_SD}
 		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_SDLPIVBM40_2_asym_lowflat_Quarter.pdf}
 		\end{subfigure}
-		\annote{Phillips multiplier estimations using the trilemma IV as an instrument, using a matched sample of 465 quarterly observations between 1995q1 and 2019q1, and controlling for two lags of unemployment and wage inflation, country fixed effects, and world GDP growth as explained in Equation \eqref{EQ:MULT} but now at the quarterly frequency. 230 (235) observations are assigned to high (low) inflation environments following the classification  For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator, while the dashed lines correspond to the two-sided 90\% Anderson-Rubin confidence sets robust to weak instruments. The F-statistics (upper-right) are computed using the method presented in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and \textit{average} unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets.}
+		\annote{Phillips multiplier estimations using the trilemma IV as an instrument, using a matched sample of 477 quarterly observations between 1995q1 and 2019q4, and controlling for two lags of unemployment and wage inflation, country fixed effects, and world GDP growth as explained in Equation \eqref{EQ:MULT} but now at the quarterly frequency. 230 (235) observations are assigned to high (low) inflation environments following the classification  For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator, while the dashed lines correspond to the two-sided 90\% Anderson-Rubin confidence sets robust to weak instruments. The F-statistics (upper-right) are computed using the method presented in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and \textit{average} unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets.}
 	
 \end{figure}
 
@@ -778,7 +778,7 @@ These results add a new perspective to the current debate about the existence of
 
 \begin{figure}[h!]
     \centering
-	\caption{Phillips multiplier and IRFs}
+	\caption{Quarterly Data Phillips multiplier and IRFs}
 	\label{F:MultiplierQ}
 	\begin{subfigure}[b]{0.45\textwidth}
 		\caption{Phillips multiplier}
@@ -795,7 +795,7 @@ These results add a new perspective to the current debate about the existence of
 		\label{F:DynamicsQ}
 		\includegraphics[width=\textwidth]{../Output/Figures/fig_full_LPIVBM40_2_Quarter.pdf}
 		\end{subfigure}
-		\annote{Phillips multiplier estimations using the trilemma IV as an instrument, using a matched sample of 465 quarterly observations between 1995q1 and 2019q1, and controlling for two lags of unemployment and wage inflation, country fixed effects, and world GDP growth as explained in Equation \eqref{EQ:MULT}. For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator, while the dashed lines correspond to the two-sided 90\% Anderson-Rubin confidence sets robust to weak instruments. The F-statistics (upper-right) are computed using the method presented in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and \textit{average} unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets.}
+		\annote{Phillips multiplier estimations using the trilemma IV as an instrument, using a matched sample of 477 quarterly observations between 1995q1 and 2019q4, and controlling for two lags of unemployment and wage inflation, country fixed effects, and world GDP growth as explained in Equation \eqref{EQ:MULT}. For the multiplier (upper-left), the shaded area corresponds to the 90\% confidence interval implied by the normal limiting distribution of the 2SLS estimator, while the dashed lines correspond to the two-sided 90\% Anderson-Rubin confidence sets robust to weak instruments. The F-statistics (upper-right) are computed using the method presented in \cite{Olea2013}. The impulse responses (bottom panels) for \textit{average} wage inflation and \textit{average} unemployment are obtained from the OLS regressions \eqref{EQ:IRF} and display 90\% confidence sets.}
 	
 \end{figure}
 
@@ -805,7 +805,7 @@ These results add a new perspective to the current debate about the existence of
     \caption{Sample composition for state-dependent quarterly Phillips Multiplier estimation}
     \includegraphics[scale=0.55]{../Output/Figures/history_Sample_SD_quarter}
     \annote{\footnotesize This figure displays which year-country observations are being used when estimating the state-dependent Phillips Multiplier in periods of high (blue) versus low (red) inflation.}
-    \label{F:Sample_SD}
+    \label{F:SampleQ_SD}
 \end{figure}
 
 %\begin{figure}[h]
