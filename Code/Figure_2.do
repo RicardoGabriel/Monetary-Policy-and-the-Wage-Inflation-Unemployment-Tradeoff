@@ -229,7 +229,7 @@ local nwindow = -`window'
 rangerun mypanel, interval (year `nwindow' high) verbose
 
 ********************************************************************************
-* Figure A.? - produce graphism
+* Figure A.4 - produce graphism
 ********************************************************************************
 
 * create variables to highlight different historical periods (max and min of slope estimate)
@@ -269,6 +269,9 @@ preserve
 * Estimates OLS rolling window - with population weights and 10 year rolling window - referee report
 ********************************************************************************
 
+*choose size of rolling window (number of years - 1)
+local window = 9
+
 *Data Management - prepare to also have the 10-year CPI mean weighted
 xtset id year
 forvalues y = 1900(1)2021{
@@ -298,8 +301,8 @@ program mypanel
     gen obs = e(N)
     foreach v in unemp ldlcpi{
         gen b_`v' = _b[`v']
-		gen up_`v' = _b[`v'] + invnormal(1-0.10/2)*_se[`v']
-		gen low_`v' = _b[`v'] - invnormal(1-0.10/2)*_se[`v']
+		gen up_`v' = _b[`v'] + invnormal(1-0.10)*_se[`v']
+		gen low_`v' = _b[`v'] - invnormal(1-0.10)*_se[`v']
     }
 	cap noi reghdfe dlwage unemp ldlcpi expectation [aw = pop], vce(cluster id) absorb(id) nocons
     if _rc exit
@@ -328,7 +331,7 @@ gen zero=0
 * Figure for paper
 twoway (rarea t tt year if (year>=1900 & year<=1913), color(gs15*0.95)) (rarea t tt year if (year>=1946 & year<=1971), color(gs15*0.95)) ///
 	(rarea t tt year if (year>=1995), color(gs15*0.95)) (rarea up_unemp low_unemp year if year>=1900 & year <=2020, color(gs12)) ///
-	(line avgdp year if year>=1900 & year <=2020 & id==1, color(gs1) lpattern("-") lwidth(thick) yaxis(2) ytitle("CPI Inflation", axis(2)) ylabel(-2 " " 0 " 0%" 0.5 " 5%" 1 "10%", notick axis(2) angle(0))) ///
+	(line avgdp year if year>=1900 & year <=2020 & id==1, color(gs1) lpattern("-") lwidth(thick) yaxis(2) ytitle("CPI Inflation", axis(2)) ylabel(-2 " " 0 " 0%" 0.5 " 5%" 1 "10%"1.5 "15%", notick axis(2) angle(0))) ///
 	(line zero year if year>=1900 & year <=2020, xlabel(1900(20)2020) lcolor(gs1)) (line b_unemp year if year>=1900 & year <=2020, lpattern(solid) lwidth(thick) /*name(TR1)*/ yaxis(1) xsize(6) ysize(3) /// 
 	legend( order(7 "CPI inflation" 6 "Slope") ring(0) position(4) ) scale(1.5) ylabel(, angle(0)) ytitle("Slope") xtitle("") lcolor(olive))
 graph export `"$Fig\RW_dwn_OLS_w_10.pdf"', replace
