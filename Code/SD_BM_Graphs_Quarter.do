@@ -91,7 +91,7 @@ foreach x of local impulse {
 		preserve
 		keep if Years>=0 & Years<=`hh'
 		twoway (rarea up`k'_`y'`x'_`p`j'' dn`k'_`y'`x'_`p`j''  Years, ///
-		fcolor(gs15) lcolor(gs15) lw(none)  lpattern(solid)) ///
+		fcolor(gs13) lcolor(gs13) lw(none)  lpattern(solid)) ///
 		(line b`k'_`y'`x'_`p`j'' Years, lcolor(olive) ///
 		lpattern(solid) lwidth(thick)) /// 
 		(line b`k'_`y'_`a1'`j' Years, lcolor(dkgreen) ///
@@ -114,7 +114,7 @@ foreach x of local impulse {
 		preserve
 		keep if Years>=0 & Years<=`hh'
 		twoway (rarea up`k'_`y'`x'_`p`j'' dn`k'_`y'`x'_`p`j''  Years, ///
-		fcolor(gs15) lcolor(gs15) lw(none)  lpattern(solid)) ///
+		fcolor(gs13) lcolor(gs13) lw(none)  lpattern(solid)) ///
 		(line b`k'_`y'`x'_`p`j'' Years, lcolor(olive) ///
 		lpattern(solid) lwidth(thick)) /// 
 		(line b`k'_`y'_`a1'`j' Years, lcolor(dkgreen) ///
@@ -139,8 +139,10 @@ foreach x in lunemp {
 		forvalues k=2/2 {
 		
 		preserve
-		twoway (rarea up`k'_`y'`x'_`p`j'' dn`k'_`y'`x'_`p`j''  Years if Years>12,  ///
-		fcolor(gs15) lcolor(gs15) lw(none) lpattern(solid))  ///
+		twoway (rarea up`k'_`y'`x'_`a1'`j' dn`k'_`y'`x'_`a1'`j'  Years if Years>12,  ///
+		fcolor(gs13) lcolor(gs13) lw(none) lpattern(solid))  ///
+		(rarea up`k'_`y'`x'_`a2'`j' dn`k'_`y'`x'_`a2'`j'  Years if Years>12,  ///
+		fcolor(gs13) lcolor(gs13) lw(none) lpattern(solid))  ///
 		(line b`k'_`y'`x'_`p`j'' Years if Years>12, lcolor(olive) ///
 		lpattern(solid) lwidth(thick)) ///
 		(line b`k'_`y'`x'_`a1'`j' Years if Years>12, lcolor(dkgreen) ///

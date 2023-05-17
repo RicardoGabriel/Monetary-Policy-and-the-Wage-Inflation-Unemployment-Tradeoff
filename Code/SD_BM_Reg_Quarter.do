@@ -430,6 +430,22 @@ foreach y of local response {
 }
 }
 
+* compute confidence bands
+forvalues j=1/`jj'{
+foreach x of local impulse {
+	foreach y of local response {
+		forvalues k=2/`kk' {
+
+gen up`k'_`y'`x'_`a1'`j' = b`k'_`y'`x'_`a1'`j' + 1*se`k'_`y'`x'_`a1'`j' if _n <= `hh'
+gen dn`k'_`y'`x'_`a1'`j' = b`k'_`y'`x'_`a1'`j' - 1*se`k'_`y'`x'_`a1'`j' if _n <= `hh'
+
+gen up`k'_`y'`x'_`a2'`j' = b`k'_`y'`x'_`a2'`j' + 1*se`k'_`y'`x'_`a2'`j' if _n <= `hh'
+gen dn`k'_`y'`x'_`a2'`j' = b`k'_`y'`x'_`a2'`j' - 1*se`k'_`y'`x'_`a2'`j' if _n <= `hh'
+			
+		}
+	}
+}
+}
 
 ********************************************************************************
 * Produce Figure 3 b) - Phillips Multiplier
