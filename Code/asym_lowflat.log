@@ -2,7 +2,7 @@
       name:  <unnamed>
        log:  C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Code\asym_lowflat.log
   log type:  text
- opened on:  17 May 2023, 13:17:20
+ opened on:  17 May 2023, 14:03:08
 
 . 
 . 
@@ -57365,10 +57365,10 @@ end of do-file
  32.                 forvalues k=2/2 {
  33.                 
 .                 preserve
- 34.                 twoway (rarea up`k'_`y'`x'_`a1'`j' dn`k'_`y'`x'_`a1'`j'  Years if Years>2,  ///
->                 fcolor(gs15) lcolor(gs15) lw(none) lpattern(solid))  ///
->                 (rarea up`k'_`y'`x'_`a2'`j' dn`k'_`y'`x'_`a2'`j'  Years if Years>2,  ///
->                 fcolor(gs15) lcolor(gs15) lw(none) lpattern(solid))  ///
+ 34.                 twoway (rarea up`k'_`y'`x'_`a1'`j' dn`k'_`y'`x'_`a1'`j'  Years if Years>12,  ///
+>                 fcolor(gs13) lcolor(gs13) lw(none) lpattern(solid))  ///
+>                 (rarea up`k'_`y'`x'_`a2'`j' dn`k'_`y'`x'_`a2'`j'  Years if Years>12,  ///
+>                 fcolor(gs13) lcolor(gs13) lw(none) lpattern(solid))  ///
 >                 (line b`k'_`y'`x'_`p`j'' Years if Years>12, lcolor(olive) ///
 >                 lpattern(solid) lwidth(thick)) ///
 >                 (line b`k'_`y'`x'_`a1'`j' Years if Years>12, lcolor(dkgreen) ///

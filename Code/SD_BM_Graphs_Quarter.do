@@ -72,8 +72,8 @@ forvalues j=1/`jj'{
 	local a1 $a1
 	local a2 $a2
 
-local ylablwage 	"ylab(-0.2(0.2)0.2)"
-local ylablunemp  	"ylab(-1(1)3)"
+local ylablwage 	"ylab(-0.5(0.5)2.5)"
+local ylablunemp  	"ylab(-0.5(0.5)2.5)"
 local ylablwage2	"ylab(-0.2(0.1)0.2)"
 
 
@@ -153,7 +153,7 @@ foreach x in lunemp {
 		ytitle("", size()) xtitle("", size()) ///
 		graphregion(fcolor(white)) plotregion(color(white)) ///
 		legend(off) /*legend( region(ls(none)) size(vsmall) col(1) order(3 4 5) label(3 "Baseline") label(4 "`ta1'") label(5 "`ta2'") )*/ ///
-		scale(2) ysize(1.5) xsize(3) `ylab`y'2' 	
+		scale(2.1) ysize(1.5) xsize(3) `ylab`y'2' 	
 		graph export "$Fig\fig_`p`j''_SDPMBM_LPIV`horizon2'_`k'_asym`what'_Quarter.pdf", replace
 
 		restore

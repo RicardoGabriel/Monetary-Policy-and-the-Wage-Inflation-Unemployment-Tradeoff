@@ -4,8 +4,8 @@
 * Project: Monetary Policy and the Wage-Inflation Unemployment Trade-off
 * Author: Ricardo Duque Gabriel
 * First Date: 06/30/2019
-* Last Update: 04/03/2023
-* Predicted running time: 10 minutes
+* Last Update: 05/17/2023
+* Predicted running time: 20 minutes
 * to run a faster specification change global grid to 50
 *
 * Some commands necessary to run/install before running this code:
@@ -77,7 +77,7 @@ global slides	= 0
 global state 	= "lowflat"
 ********************************************************************************
 
-/*
+
 * Prepare Data with all observations
 global wage_out = 0
 do Data_Management
@@ -137,7 +137,7 @@ do SD_BM
 * Robustness Test of adding monetary policy regimes
 * run SD_BM and add dummies for MP regimes
 * comment line 105 and uncomment line 109
-*/
+
 
 
 
