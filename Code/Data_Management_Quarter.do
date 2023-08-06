@@ -7,9 +7,6 @@
 
 *quietly{
 
-
-
-/*
 ********************************************************************************
 * 								   Wages
 * Hourly Earnings: Private Sector (LCEA)
@@ -178,7 +175,7 @@ drop daten datestr seasonal_* country series_id
 
 * save FRED data
 save "$hp\Data\FRED_Imported.dta", replace
-*/
+
 
 use "$hp\Data\FRED_Imported.dta", clear
 

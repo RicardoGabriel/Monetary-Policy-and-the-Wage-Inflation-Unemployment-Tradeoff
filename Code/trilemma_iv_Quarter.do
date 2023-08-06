@@ -5,7 +5,7 @@ Here, I follow the code from Jordà, Schularick, and Taylor (2020) JME
 to re-construct the trilemma instrument until 2020.
 */ 
 
-*quietly{
+quietly{
 
 **************************************************************************
 * CONSTRUCT THE INSTRUMENTAL VARIABLE 
@@ -152,5 +152,4 @@ label var peg_base "Peg base: GBR, USA, or DEU"
 sort iso dateq
 save  ../Data/JSTtrilemmaIV2_Quarter.dta , replace
 restore
-
-*}
+}

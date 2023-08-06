@@ -1,15 +1,3 @@
-/*
-Effects of Monetary Policy - Monetary Policy and the Wage-Inflation Unemployment Trade-off
-
-IRFs with discounted dependent variable as Barnichon and Mesters (2020) [BM 2020]
-
-Author: Ricardo Duque Gabriel
-First Date: 08/11/2020
-Last Update: 15/01/2021
-
-Produce Figure 2 c)
-*/
-
 clear all
 *Upload data
 use "$hp\Data\Data_MScThesis_Analysis.dta", clear
@@ -229,7 +217,7 @@ graph combine lunemp`k'`j'`horizon2' lwage`k'`j'`horizon2', ///
 	rows(1) cols(2) ysize(1) xsize(3) imargin(tiny) iscale(0.9) scale(2)
 
 graph display, ysize(1) xsize(3)
-
-graph export "$Fig\fig_`p`j''_LPIVBM`horizon2'_`k'.pdf", replace
+graph export "$Fig\Figure_3c.pdf", replace
+*graph export "$Fig\fig_`p`j''_LPIVBM`horizon2'_`k'.pdf", replace
 }
 }

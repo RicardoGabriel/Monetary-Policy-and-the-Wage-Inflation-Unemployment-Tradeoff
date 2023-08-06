@@ -15,7 +15,6 @@ global hp = "C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Infl
 cd "C:\Users\Ricardo\Documents\GitHub\Monetary-Policy-and-the-Wage-Inflation-Unemployment-Tradeoff\Code\"
 }
 
-
 global Fig = "$hp\Output\Figures"
 global Tab = "$hp\Output\Tables"
-
+global Log = "$hp\Output\Logs"

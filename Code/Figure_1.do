@@ -59,7 +59,7 @@ twoway (rarea t tt year if (year>=1870 & year<=1913), color(gs15*0.95)) (rarea t
 	(rarea t tt year if (year>=1995), color(gs15*0.95)) (line b_dlwage year, lcolor(olive) lwidth(thick)) (line b_unemp year, lcolor(gs4) lpa("-") lwidth(thick)), ytitle("Percent (%)") ///
 legend( c(1) order(4 "Wage Inflation" 5 "Unemployment") ring(0) position(4) ) ylabel(0(3)12) ///
 xlabel(1880(20)2020) xtitle("") xsize(6) ysize(3) scale(1.3)
-graph export "$Fig\Median_dwn_unemp_paper.pdf", replace
+graph export "$Fig\Figure_1.pdf", replace
 }
 
 restore
@@ -108,7 +108,7 @@ rangerun mypanel, interval (year `nwindow' high) verbose
 
 
 ********************************************************************************
-* Figure 1 - produce graphism
+* Figure A.1 - produce graphism
 ********************************************************************************
 
 * Figure for paper

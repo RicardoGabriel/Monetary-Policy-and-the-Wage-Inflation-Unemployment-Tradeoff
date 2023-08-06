@@ -5,12 +5,6 @@ SD Phillips Multiplier and IRFs close to Barnichon and Mesters (2020):
 Adding two lags of unemployment and wage inflation but also country 
 fixed effects and global gdp growth.
 
-Author: Ricardo Duque Gabriel
-First Date: 15/11/2020
-Last Update: 04/05/2022
-
-Calls SD_BM_Reg.do and Sd_BM_Graphs.do to produce Figures 3 and A.3 and table A.4
-according to different specifications as called in Master.do file
 */
 
 clear all
@@ -23,7 +17,7 @@ local s1 $state
 
 * Log from here
 cap log close
-log using "asym_`s1'.log" , replace
+log using "$Log\asym_`s1'.log" , replace
 
 
 ********************************************************************************
@@ -128,7 +122,7 @@ tabulate id, gen(id)
 local varlist JSTtrilemmaIV_R unemp1 unemp2 dlwage1 dlwage2 dlsumgdp dlrcon1 ///
 			  dlrcon2 dlrgdp1 dlrgdp2 dlcpi1 dlcpi2 dstir1 dstir2 dltrate1 ///
 			  dltrate2 id1 id2 id3 id4 id5 id6 id7 id8 id9 id10 id11 id12 ///
-			  id13 id14 id15 id16 id17 id18 p1 p2 p3 p4 p5
+			  id13 id14 id15 id16 id17 id18
 	foreach var in `varlist'{
 		gen `var'_s1 = `var' * state
 		gen `var'_s2 = `var' * (1 - state)

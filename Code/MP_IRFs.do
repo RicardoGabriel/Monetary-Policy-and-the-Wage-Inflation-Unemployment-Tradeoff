@@ -1,13 +1,3 @@
-/*
-Effects of Monetary Policy - Monetary Policy and the Wage-Inflation Unemployment Trade-off
-
-Author: Ricardo Duque Gabriel
-First Date: 08/11/2020
-Last Update: 04/05/2021
-
-Produce Figure A.2
-*/
-
 clear all
 
 *Upload data
@@ -236,7 +226,7 @@ graph combine lunemp`k'`j'`horizon2' lwage`k'`j'`horizon2', ///
 
 graph display, ysize(1.5) xsize(3)
 
-*graph save   "$hp\Output\Figures\fig_`p`j''_LPIV10_`k'.gph", replace
-graph export "$Fig\fig_`p`j''_LPIV`horizon2'_`k'.pdf", replace
+graph export "$Fig\Figure_A5.pdf", replace
+*graph export "$Fig\fig_`p`j''_LPIV`horizon2'_`k'.pdf", replace
 }
 }

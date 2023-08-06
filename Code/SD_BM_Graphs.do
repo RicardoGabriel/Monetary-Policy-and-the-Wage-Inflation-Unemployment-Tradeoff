@@ -1,18 +1,4 @@
-/*
-State Dependencies Graphs - Historical Wage Phillips Curves
-
-SD Phillips Multiplier and IRFs close to Barnichon and Mesters (2020):
-Adding two lags of unemployment and wage inflation but also country 
-fixed effects and global gdp growth.
-
-Author: Ricardo Duque Gabriel
-First Date: 15/11/2020
-Last Update: 30/11/2020
-
-Produce Figures 3 a) and 3 c) and Table A.4
-*/
-
-********************************************************************************
+*******************************************************************************
 * Setup - locals
 ********************************************************************************
 
@@ -157,7 +143,17 @@ foreach x in lunemp {
 		graphregion(fcolor(white)) plotregion(color(white)) ///
 		legend(off) /*legend( region(ls(none)) size(vsmall) col(1) order(3 4 5) label(3 "Baseline") label(4 "`ta1'") label(5 "`ta2'") )*/ ///
 		scale(2) ysize(1.5) xsize(3) `ylab`y'2' 	
+		
+		if ($hf)==10 {
+		graph export "$Fig\Figure_4a.pdf", replace
+		}
+		else if ($hf)==15 {
+		graph export "$Fig\Figure_A8a.pdf", replace
+		}
+		else {
 		graph export "$Fig\fig_`p`j''_SDPMBM_LPIV`horizon2'_`k'_asym`what'.pdf", replace
+		}
+		
 
 		restore
 		
@@ -176,8 +172,15 @@ graph combine lunemp21 lwage21, ///
 	rows(1) cols(2) ysize(1) xsize(3) imargin(tiny) iscale(0.9) scale(2)
 
 graph display, ysize(1) xsize(3)
-
-graph export "$Fig\fig_`p`j''_SDLPIVBM`horizon2'_`k'_asym`what'.pdf", replace
+		if ($hf)==10 {
+		graph export "$Fig\Figure_4c.pdf", replace
+		}
+		else if ($hf)==15 {
+		graph export "$Fig\Figure_A8c.pdf", replace
+		}
+		else {
+		graph export "$Fig\fig_`p`j''_SDLPIVBM`horizon2'_`k'_asym`what'.pdf", replace
+		}
 }
 }
 }
@@ -196,14 +199,14 @@ twoway  (bar arph_lwage Years if Years>2 & arph_lwage > 0.1, color(gray)) ///
 		graphregion(fcolor(white)) plotregion(color(white)) ///
 		legend(off) /*legend( region(ls(none)) size(vsmall) col(1) order(3 4 5) label(3 "Baseline") label(4 "`ta1'") label(5 "`ta2'") )*/ ///
 		scale(2) ysize(1.5) xsize(3) ylab(0(0.2)1) 	
-		graph export "$Fig\fig_`p1'_SDPMBM_LPIV`horizon2'_2_asym`what'_arph.pdf", replace
+		*graph export "$Fig\fig_`p1'_SDPMBM_LPIV`horizon2'_2_asym`what'_arph.pdf", replace
 
 drop pvalue
 
 
 
 ********************************************************************************
-* Produce Table A.4 - State Dependent Phillips Multiplier
+* Produce Tables - State Dependent Phillips Multiplier
 ********************************************************************************
 
 * time variable	
@@ -213,7 +216,16 @@ list periods b2_lwagelunemp_full b2_lwagelunemp_`a1'1 b2_lwagelunemp_`a2'1 arph_
 quietly{		
 * open log file
 cap log cl
-log using "$Tab\Table_asym`what'_`horizon2'_`match'.tex", t replace
+if ($hf)==10 {
+	log using "$Tab\Table_A7.tex", t replace
+}
+else if ($hf)==15 {
+	log using "$Tab\Table_A8.tex", t replace
+}
+else {
+	log using "$Tab\Table_asym`what'_`horizon2'_`match'.tex", t replace
+}
+
 set linesize 255
 
 * start writing the Table in LaTeX

@@ -154,7 +154,8 @@ foreach x in lunemp {
 		graphregion(fcolor(white)) plotregion(color(white)) ///
 		legend(off) /*legend( region(ls(none)) size(vsmall) col(1) order(3 4 5) label(3 "Baseline") label(4 "`ta1'") label(5 "`ta2'") )*/ ///
 		scale(2.1) ysize(1.5) xsize(3) `ylab`y'2' 	
-		graph export "$Fig\fig_`p`j''_SDPMBM_LPIV`horizon2'_`k'_asym`what'_Quarter.pdf", replace
+		graph export "$Fig\Figure_5a.pdf", replace
+		*graph export "$Fig\fig_`p`j''_SDPMBM_LPIV`horizon2'_`k'_asym`what'_Quarter.pdf", replace
 
 		restore
 		
@@ -164,7 +165,7 @@ foreach x in lunemp {
 }
 }
 
-* combine to produce figure 3 c)
+* combine graphs
 forvalues j=1/`jj'{
 foreach x of local impulse {
 forvalues k=2/2{
@@ -173,8 +174,8 @@ graph combine lunemp21 lwage21, ///
 	rows(1) cols(2) ysize(1) xsize(3) imargin(tiny) iscale(0.9) scale(2)
 
 graph display, ysize(1) xsize(3)
-
-graph export "$Fig\fig_`p`j''_SDLPIVBM`horizon2'_`k'_asym`what'_Quarter.pdf", replace
+graph export "$Fig\Figure_5c.pdf", replace
+*graph export "$Fig\fig_`p`j''_SDLPIVBM`horizon2'_`k'_asym`what'_Quarter.pdf", replace
 }
 }
 }
@@ -191,7 +192,7 @@ list periods b2_lwagelunemp_full b2_lwagelunemp_`a1'1 b2_lwagelunemp_`a2'1 arph_
 quietly{		
 * open log file
 cap log cl
-log using "$Tab\Table_asym`what'_`horizon2'_`match'_Quarter.tex", t replace
+log using "$Tab\Table_A10.tex", t replace
 set linesize 255
 
 * start writing the Table in LaTeX

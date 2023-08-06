@@ -1,7 +1,5 @@
 /*
 Table Descriptives 
-
-Produce Tables 1, A.2, and A.3
 */
 
 quietly{

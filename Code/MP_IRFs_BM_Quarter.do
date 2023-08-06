@@ -219,7 +219,8 @@ graph combine lunemp`k'`j'`horizon2' lwage`k'`j'`horizon2', ///
 	rows(1) cols(2) ysize(1) xsize(3) imargin(tiny) iscale(0.9) scale(2)
 
 graph display, ysize(1) xsize(3)
+graph export "$Fig\Figure_A9c.pdf", replace
 
-graph export "$Fig\fig_`p`j''_LPIVBM`horizon2'_`k'_Quarter.pdf", replace
+*graph export "$Fig\fig_`p`j''_LPIVBM`horizon2'_`k'_Quarter.pdf", replace
 }
 }

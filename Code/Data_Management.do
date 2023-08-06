@@ -8,7 +8,7 @@ use "$hp\Data\JSTdataset_v100.dta", clear
 merge 1:1 iso year using "$hp\Data\OECD_Expectations.dta"
 drop _merge
 
-* remove Covid-19 years from the sample (referee request)
+* remove Covid-19 years from the sample (referee request) 
 drop if year > 2019
 							
 

@@ -1,9 +1,5 @@
 /*
 State Dependencies Regressions - Monetary Policy and the Wage-Inflation Unemployment Trade-off
-
-Author: Ricardo Duque Gabriel
-First Date: 15/11/2020
-Last Update: 30/01/2021
 */
 
 
@@ -465,7 +461,8 @@ foreach x in lunemp {
 		ytitle("", size()) xtitle("", size()) ///
 		graphregion(fcolor(white)) plotregion(color(white)) ylabel(0(5)15) ///
 		legend(off) ysize(1) xsize(2) scale(2.5)
-		graph export "$Fig\fig_`p`j''_PMBM_F_LPIV`horizon2'_`k'_asym`what'_Quarter.pdf", replace
+		graph export "$Fig\Figure_5b.pdf", replace
+		*graph export "$Fig\fig_`p`j''_PMBM_F_LPIV`horizon2'_`k'_asym`what'_Quarter.pdf", replace
 		}
 	}
 }
@@ -547,5 +544,5 @@ heatplot metric iso dateq if `subsample'  ///
 	xsize(10) ysize(6) scale(2) ///
 	note(`note') ///
 	name(histor_`=subinstr("`metric'",".","",.)',replace)
-graph export "$Fig\history_Sample_SD_quarter.pdf", replace
+graph export "$Fig\Figure_A10.pdf", replace
 

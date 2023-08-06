@@ -3,11 +3,6 @@ First Stage Results - Monetary Policy and the Wage-Inflation Unemployment Trade-
 
 Part of this code comes from Jordà, Schularick, and Taylor (2020) JME
 
-Author: Ricardo Duque Gabriel
-First Date: 07/11/2020
-Last Update: 04/05/2022
-
-Produces Table 3
 */
 quietly{
 * upload data
@@ -43,7 +38,7 @@ global Tstat_2 = round(_b[JSTtrilemmaIV_R]/_se[JSTtrilemmaIV_R],.01)
 
 
 * save values
-texdoc init "$Tab\First_Stage_Quarter.tex", replace force
+texdoc init "$Tab\Table_A6.tex", replace force
 tex \begin{tabular}{lccc}
 tex \toprule
 tex Dependent & \multicolumn{1}{c}{No controls} && \multicolumn{1}{c}{With controls} \\

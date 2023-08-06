@@ -224,8 +224,8 @@ gen dn2`k'_`y'`x'_`p`j'' = b`k'_`y'`x'_`p`j'' - 1*se`k'_`y'`x'_`p`j'' if _n <= `
 }
 }
 
-list Years b2_lwagelunemp_full se2_lwagelunemp_full up2_lwagelunemp_full dn2_lwagelunemp_full arcib arcit if Years<=`hh'
-outsheet Years b2_lwagelunemp_full se2_lwagelunemp_full up2_lwagelunemp_full dn2_lwagelunemp_full arcib arcit using junk.csv if Years<=`hh', comma replace
+*list Years b2_lwagelunemp_full se2_lwagelunemp_full up2_lwagelunemp_full dn2_lwagelunemp_full arcib arcit if Years<=`hh'
+*outsheet Years b2_lwagelunemp_full se2_lwagelunemp_full up2_lwagelunemp_full dn2_lwagelunemp_full arcib arcit using junk.csv if Years<=`hh', comma replace
 
 
 * Produce Figures
@@ -239,7 +239,8 @@ foreach x of local impulse {
 		ytitle("", size()) xtitle("Quarter", size()) ///
 		graphregion(fcolor(white)) plotregion(color(white)) ylabel(0(5)15, nogrid) ///
 		legend(off) ysize(1) xsize(2) scale(2.5)
-		graph export "$Fig\fig_`p`j''_PMBM_F_LPIV`horizon2'_`k'_Quarter.pdf", replace
+		graph export "$Fig\Figure_A9b.pdf", replace
+		*graph export "$Fig\fig_`p`j''_PMBM_F_LPIV`horizon2'_`k'_Quarter.pdf", replace
 
 		
 		twoway (rarea up`k'_`y'`x'_`p`j'' dn`k'_`y'`x'_`p`j''  Years if Years>5,  ///
@@ -254,7 +255,8 @@ foreach x of local impulse {
 		ytitle("`ylab_`y''", size()) xtitle("Quarter", size()) ///
 		graphregion(fcolor(white)) plotregion(color(white)) ylabel(-0.2(0.1)0.2, nogrid) ///
 		/*name(`y'`k'`j'`horizon2', replace)*/ legend(off) scale(2.5) ysize(1.5) xsize(3)
-		graph export "$Fig\fig_`p`j''_PMBM_LPIV`horizon2'_`k'_Quarter.pdf", replace
+		graph export "$Fig\Figure_A9a.pdf", replace
+		*graph export "$Fig\fig_`p`j''_PMBM_LPIV`horizon2'_`k'_Quarter.pdf", replace
 
 		
 		* add 68% confidence bands: (rarea up2`k'_`y'`x'_`p`j'' dn2`k'_`y'`x'_`p`j''  Years if Years>2,  fcolor(gs15) lcolor(gs15) lw(none) lpattern(solid))  ///

@@ -3,12 +3,6 @@ Phillips Multiplier - Monetary Policy and the Wage-Inflation Unemployment Trade-
 
 Phillips Multiplier close to Barnichon and Mesters (2020) JME
 Adding two lags of unemployment and wage inflation but also country fixed effects and global gdp growth
-
-Author: Ricardo Duque Gabriel
-First Date: 08/11/2020
-Last Update: 04/05/2022
-
-Produce Figures 3 a) and 3 b)
 */
 
 
@@ -234,8 +228,8 @@ gen dn2`k'_`y'`x'_`p`j'' = b`k'_`y'`x'_`p`j'' - 1*se`k'_`y'`x'_`p`j'' if _n <= `
 }
 }
 
-list Years b2_lwagelunemp_full se2_lwagelunemp_full up2_lwagelunemp_full dn2_lwagelunemp_full arcibh2 arcith2 if Years<=`hh'
-outsheet Years b2_lwagelunemp_full se2_lwagelunemp_full up2_lwagelunemp_full dn2_lwagelunemp_full arcibh2 arcith2 using junk.csv if Years<=`hh', comma replace
+*list Years b2_lwagelunemp_full se2_lwagelunemp_full up2_lwagelunemp_full dn2_lwagelunemp_full arcibh2 arcith2 if Years<=`hh'
+*outsheet Years b2_lwagelunemp_full se2_lwagelunemp_full up2_lwagelunemp_full dn2_lwagelunemp_full arcibh2 arcith2 using junk.csv if Years<=`hh', comma replace
 
 
 * Produce Figures
@@ -249,7 +243,8 @@ foreach x of local impulse {
 		ytitle("", size()) xtitle("Year", size()) ///
 		graphregion(fcolor(white)) plotregion(color(white)) ylabel(0(5)15, nogrid) ///
 		legend(off) ysize(1) xsize(2) scale(2)
-		graph export "$Fig\fig_`p`j''_PMBM_F_LPIV`horizon2'_`k'.pdf", replace
+		graph export  "$Fig\Figure_3b.pdf", replace
+		*graph export "$Fig\fig_`p`j''_PMBM_F_LPIV`horizon2'_`k'.pdf", replace
 
 		
 		twoway (rarea up`k'_`y'`x'_`p`j'' dn`k'_`y'`x'_`p`j''  Years if Years>2,  ///
@@ -264,8 +259,9 @@ foreach x of local impulse {
 		ytitle("`ylab_`y''", size()) xtitle("Year", size()) ///
 		graphregion(fcolor(white)) plotregion(color(white)) ylabel(-2(1)1, nogrid) ///
 		/*name(`y'`k'`j'`horizon2', replace)*/ legend(off) scale(2) ysize(1.5) xsize(3)
-		graph export "$Fig\fig_`p`j''_PMBM_LPIV`horizon2'_`k'.pdf", replace
-
+		graph export  "$Fig\Figure_3a.pdf", replace
+		*graph export "$Fig\fig_`p`j''_PMBM_LPIV`horizon2'_`k'.pdf", replace
+	
 		
 		* add 68% confidence bands: (rarea up2`k'_`y'`x'_`p`j'' dn2`k'_`y'`x'_`p`j''  Years if Years>2,  fcolor(gs15) lcolor(gs15) lw(none) lpattern(solid))  ///
 
@@ -348,4 +344,4 @@ heatplot metric country year if `subsample'  ///
 	xsize(10) ysize(6) scale(2) ///
 	note(`note') ///
 	name(histor_`=subinstr("`metric'",".","",.)',replace)
-graph export "$Fig\history_Sample.pdf", replace
+graph export "$Fig\Figure_A6.pdf", replace

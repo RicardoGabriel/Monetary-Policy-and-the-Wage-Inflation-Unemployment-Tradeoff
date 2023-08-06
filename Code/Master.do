@@ -4,8 +4,9 @@
 * Project: Monetary Policy and the Wage-Inflation Unemployment Trade-off
 * Author: Ricardo Duque Gabriel
 * First Date: 06/30/2019
-* Last Update: 05/17/2023
-* Predicted running time: 10 minutes
+* Last Update: 08/06/2023
+* Predicted running time: 20 minutes
+* Software used: Stata 15
 * to run a faster specification change global grid to 50
 *
 * Some commands necessary to run/install before running this code:
@@ -29,7 +30,7 @@ timer on 1
 do paths
 
 capture log close
-log using HWPC, text replace
+log using "$Log\HWPC", text replace
 clear all
 set more off
 set scheme s1color
@@ -73,7 +74,7 @@ global slides	= 0
 	* negpos 	-	negative vs positive change in short run interest rate 
 	* tradeoc 	-	degree of trade openess (more vs less) measured by having more than 40% of (imports+exports) / gdp (40% is close to mean and median)
 	* capitaloc	-	degree of capital openess (open vs close) measured as in Quinn et al. (2011)
-	* postwar   -   d
+	
 global state 	= "lowflat"
 ********************************************************************************
 
@@ -83,11 +84,12 @@ global wage_out = 0
 do Data_Management
 
 * Produce descriptive statistics
-** Table 1 + Table A.2 + Table A.3
+** Table 1 + Table A.2 + Table A.3 + Table A.4
 do Descriptives
 
-** Figure 1
+** Figure 1 and Figure A.1
 do Figure_1
+
 
 *** Main Analysis
 
@@ -95,50 +97,44 @@ do Figure_1
 global wage_out = 1
 do Data_Management
 
-
-
-*Produce heat plots
-do explore_history
+*Produce heat plots 
+*do explore_history
 
 *Produce Rolling Window graphs
-* Figure 2 (and remaining robustness figures based on Philips curve estimation)
+* Figures 2; A2; A3; A4
 do Figure_2
 
 * First Stage Results of Monetary Policy Shocks (Trilemma Instrumental Variable)
-** Table 3
+** Table A5
 do First_Stage			
 
-
 * Phillips Multiplier
-** Figures 3 a) and 3 b)
+** Figures 3.a, 3.b, and A6
 do PM_BM
 
-
-** Figure 3 c)
+** Figure 3.c
 do MP_IRFs_BM
 
-** Figure A.1
+** Figure A5
 * Effects of Monetary Policy (as in JST 2020)
 do MP_IRFs
 
 * State Dependent Phillips Multipliers
-* Figure 5 and Table A.7
+* Figures 4 and A7 and Tables A.7 (matched 10 year sample)
 do SD_BM
+
+* State Dependent Phillips Multipliers with Monetary Policy Dummies
+* Table A.9 (matched 10 year sample)
+do SD_BM_Rob
+
 
 
 *** Other Figures in Appendix 
-* Figure A.8 and Table A.8 (unmatched 15 years)
+* Figure A8 and Table A.8 (unmatched 15 years)
 global hf = 15
 global match = 0
 global state 	= "lowflat"
 do SD_BM
-
-
-* Robustness Test of adding monetary policy regimes
-* run SD_BM and add dummies for MP regimes
-* comment line 105 and uncomment line 109
-
-
 
 
 *******************************************************************************
@@ -152,29 +148,14 @@ do Data_Management_Quarter
 do First_Stage_Quarter
 
 * Phillips Multiplier Quarterly Data
-** Figures 5 a) and 3 b)
+** Figures A.9 a) and A.9 b)
 do PM_BM_Quarter
 
-** Figure 5 c)
+** Figure A.9 c)
 do MP_IRFs_BM_Quarter
 
 
 * State Dependent Phillips Multipliers
-* Figure 6 and Table ??
+* Figures 5 and A.10 and Table A.10
 global state 	= "lowflat"
 do SD_BM_Quarter
-
-
-
-
-
-
-
-
-
-/*
-
-* Graveyard
-* Figure 4
-global state 	= "postwar"
-do SD_BM

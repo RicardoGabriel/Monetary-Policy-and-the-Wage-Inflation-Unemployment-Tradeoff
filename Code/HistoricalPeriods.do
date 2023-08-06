@@ -1,6 +1,6 @@
 /*
 Historical Periods
-
+ 
 Here, I construct the historical peridos used in the Descriptives section.
 This classification is based on Table B.1. in the Appendix of the paper.
 */
