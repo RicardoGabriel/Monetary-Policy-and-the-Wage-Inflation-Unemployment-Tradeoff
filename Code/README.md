@@ -44,6 +44,6 @@ Then, for the quarterly analysis:
 
 	5. SD_BM_Quarter creates Figures 5 and A.10 and Table A.10
 
-Then, for Appendix B:
+Then, for Appendix C:
 	
-	1. NKWPC_slope.m produces the estimated micro founded NKWPC model
+	1. NKWPC_slope.m produces the estimated micro founded NKWPC model and Figure C.1
